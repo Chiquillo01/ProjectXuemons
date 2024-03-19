@@ -6,7 +6,7 @@ use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
-class ChuchesSeeder extends Seeder
+class ChuchesSeeder Extends Seeder
 {
     /**
      * Run the database seeds.
@@ -23,10 +23,10 @@ class ChuchesSeeder extends Seeder
 
             DB::table('chuches')->insert([
                 'id' => 0,
-                'nombre' => $nombres[$i],
+                'name' => $nombres[$i],
                 'modificador' => 5,
                 'dinero' => 100,
-                'archivo' => strtolower($nombres[$i]) . '.png',
+                'archive' => strtolower($nombres[$i]) . '.png',
             ]);
         }
     }

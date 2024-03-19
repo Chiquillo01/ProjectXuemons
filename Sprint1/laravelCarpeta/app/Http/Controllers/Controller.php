@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\DB;
 use Mockery\Exception;
 
-abstract class Controller
+class Controller extends BaseController
 {
     use AuthorizesRequests, ValidatesRequests;
 
