@@ -3,7 +3,6 @@ import { RouterModule, Routes } from '@angular/router';
 // import { AngularFireAuthGuard } from '@angular/fire/auth-guard';
 // Importamos las rutas de nuestros componentes //
 import { LoginComponent } from './login/login.component';
-import { RegistroComponent } from './registro/registro.component';
 
 const routes: Routes = [
   {
@@ -11,17 +10,10 @@ const routes: Routes = [
     component: LoginComponent,
     //canActivate: const [AngularFireAuthGuard]
   },
-
-  { 
-    path: 'registro',
-    component: RegistroComponent
-    //canActivate: const [AngularFireAuthGuard]
-  },
-
   {
     path: 'home',
-    loadChildren: () => import('./main/main.module').then((m) => m.MainModule),
-    // canActivate: const [AngularFireAuthGuard]
+    loadChildren: () => import('./main//main.module').then((m) => m.MainModule),
+    //canActivate: const [AngularFireAuthGuard]
   },
   {
     path: '**',
