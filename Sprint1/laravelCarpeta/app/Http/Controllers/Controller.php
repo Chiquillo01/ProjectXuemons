@@ -56,7 +56,7 @@ class Controller extends BaseController
             // Devuelve un 200 (OK) para confirmar al usuario //
             return response()->json(['message' => 'Usuario registrado correctamente'], 200);
         } catch (\Exception $e) {
-
+            
             // Si hay algun fallo, hace un rollback //
             DB::rollBack();
 

@@ -13,11 +13,11 @@ return new class extends Migration
     {
         Schema::create('xuxemons', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 20);
-            $table->string('type', 50);
+            $table->string('nombre', 20);
+            $table->string('tipo', 50);
             $table->integer('tamano');
             $table->integer('vida');
-            $table->string('archive');
+            $table->string('archivo');
             $table->timestamps();
         });
     }

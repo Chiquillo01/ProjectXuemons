@@ -13,9 +13,9 @@ return new class extends Migration
     {
         Schema::create('xuxemons_users', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('name', 20);
-            $table->string('type', 50);
-            $table->string('archive');
+            $table->string('nombre', 20);
+            $table->string('tipo', 50);
+            $table->string('archivo');
             $table->unsignedBigInteger('idUser');
             $table->timestamps();
 

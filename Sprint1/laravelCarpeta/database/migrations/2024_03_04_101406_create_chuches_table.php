@@ -13,10 +13,10 @@ return new class extends Migration
     {
         Schema::create('chuches', function (Blueprint $table) {
             $table->id();
-            $table->string('name', 20);
+            $table->string('nombre', 15);
             $table->integer('dinero');
             $table->integer('modificador');
-            $table->string('archive');
+            $table->string('archivo');
             $table->timestamps();
         });
     }
@@ -26,6 +26,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('xuxemons');
+        Schema::dropIfExists('chuches');
     }
 };

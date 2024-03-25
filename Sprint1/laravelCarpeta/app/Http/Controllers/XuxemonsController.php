@@ -119,9 +119,9 @@ class XuxemonsController extends Controller
         try {
             // Valida los datos //
             $validados = $request->validate([
-                'name' => 'required|string',
-                'type' => 'required|string',
-                'archive' => 'required|string',
+                'nombre' => 'required|string',
+                'tipo' => 'required|string',
+                'archivo' => 'required|string',
             ]);
 
             DB::transaction(function () use ($validados) {

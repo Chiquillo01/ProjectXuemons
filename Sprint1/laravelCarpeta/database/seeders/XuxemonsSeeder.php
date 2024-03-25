@@ -34,11 +34,11 @@ class XuxemonsSeeder extends Seeder
 
             DB::table('xuxemons')->insert([
                 'id' => 0,
-                'name' => $nombres[$i],
-                'type' => $tipo[$i],
+                'nombre' => $nombres[$i],
+                'tipo' => $tipo[$i],
                 'tamano' => 1,
                 'vida' => 100,
-                'archive' => strtolower($nombres[$i]) . '.png',
+                'archivo' => strtolower($nombres[$i]) . '.png',
             ]);
         }
     }

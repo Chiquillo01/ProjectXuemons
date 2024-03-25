@@ -23,44 +23,48 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
     return $request->user();
 });
 
+// Usuario // 
 // Registar //
 Route::post('/register', [Controller::class, 'register']);
+
 // Loguearse //
 Route::post('/login', [Controller::class, 'login']);
+
+// Logout //
+Route::post('/logout', [Controller::class, 'logout']);
+// ---------------------- //
+
+// Xuxemons // 
+// Crear xuxemon //
+Route::post('/xuxemons', [XuxemonsController::class, 'store']);
+
+// Crear xuxemon aleatorios //
+Route::post('/xuxemons/users/random', [XuxemonsController::class, 'debug']);
+
+// Actualizar xuxemon //
+Route::put('/xuxemons/{xuxemons}', [XuxemonsController::class, 'update']);
+
+// Eliminar un xuxeFmon //
+Route::delete('/xuxemons/{xuxemons}', [XuxemonsController::class, 'destroy']);
+
+// Mostrar todos los xuxemons //
+Route::get('/xuxemons', [XuxemonsController::class, 'show']);
+
+// Mostrar un xuxemon //
+Route::get('/xuxemons/{xuxemons}', [XuxemonsController::class, 'showOne']);
+// ---------------------- //
+
+// Roles //
+// Usuario normal //
+Route::middleware('CheckRole:user')->group(function () {
+});
 
 // Middleware para verificar que el usuario esta logueado //
 //Route::middleware('auth:sanctum')->group(function () {
 
 // Usuario admin //
 //Route::middleware('CheckRole:1')->group(function () {
-
-    // Crear xuxemon //
-    Route::post('/xuxemons', [XuxemonsController::class, 'store']);
-
-    // Actualizar xuxemon //
-    Route::put('/xuxemons/{xuxemons}', [XuxemonsController::class, 'update']);
-
-    // Eliminar un xuxeFmon //
-    Route::delete('/xuxemons/{xuxemons}', [XuxemonsController::class, 'destroy']);
-
-    // Crear xuxemon aleatorios //
-    Route::post('/xuxemons/users/random', [XuxemonsController::class, 'debug']);
-//});
-
-// Usuario normal //
-Route::middleware('CheckRole:user')->group(function () {
-});
-
-// Logout //
-Route::post('/logout', [Controller::class, 'logout']);
-
-// Mostrar todos los xuxemons //
-Route::get('/xuxemons', [XuxemonsController::class, 'show']);
-
 // Mostrar todos las chuches //
-Route::get('/chuches', [ChuchesController::class, 'show']);
-
-// Mostrar un xuxemon //
-Route::get('/xuxemons/{xuxemons}', [XuxemonsController::class, 'showOne']);
+//Route::get('/chuches', [ChuchesController::class, 'show']);
    // });
 //});

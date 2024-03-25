@@ -9,9 +9,9 @@ class Chuches extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'name',
+        'nombre',
         'dinero',
         'modificador',
-        'archive',
+        'archivo',
     ];
 }
