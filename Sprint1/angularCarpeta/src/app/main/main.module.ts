@@ -8,6 +8,8 @@ import { HospitalComponent } from './hospital/hospital.component';
 import { InventarioComponent } from './inventario/inventario.component';
 import { TiendaComponent } from './tienda/tienda.component';
 import { XuxemonsComponent } from './xuxemons/xuxemons.component';
+import { XuxedexComponent } from './xuxemons/xuxedex/xuxedex.component';
+import { CajaComponent } from './xuxemons/caja/caja.component';
 
 const routes: Routes = [
   {
@@ -32,5 +34,9 @@ const routes: Routes = [
 @NgModule({
   imports: [RouterModule.forChild(routes)],
   exports: [RouterModule],
+  declarations: [
+    XuxedexComponent,
+    CajaComponent
+  ],
 })
 export class MainModule {}
