@@ -9,7 +9,7 @@ import { Router } from '@angular/router';
   templateUrl: './registro.component.html',
   styleUrls: ['./registro.component.css']
 })
-export class RegistroComponent implements OnInit{
+export class RegisterComponent implements OnInit{
   // Valores y validadores del formulario //
   RegisterForm: FormGroup = new FormGroup({
     nick: new FormControl('', [Validators.required]),
