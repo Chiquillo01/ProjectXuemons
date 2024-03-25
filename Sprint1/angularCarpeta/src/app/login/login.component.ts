@@ -29,7 +29,7 @@ export class LoginComponent implements OnInit {
   Login() {
     this.usersService.Login(this.LoginForm.value).subscribe({
       next: (data: any) => {
-        this.router.navigate(['/home']);
+        this.router.navigate(['/home/home']);
         const token = data.access_token;
         this.tokenService.setToken(data);
         //alert('Sesion iniciada correctamente.');
