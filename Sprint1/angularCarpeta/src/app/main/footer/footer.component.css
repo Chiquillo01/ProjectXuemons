@@ -1,0 +1,42 @@
+/* Footer */
+footer {
+    background-color: rgb(32, 32, 32);
+  }
+  footer > div {
+    padding: 20px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 15px;
+    font-family:'Times New Roman', Times, serif;
+  }
+  footer * {
+    position: relative;
+    text-align: center;
+    font-size: 18px;
+    color: #b4b4b4;
+    font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  }
+  footer a {
+    transition: all 140ms ease-in-out;
+  }
+  footer a:hover {
+    color: #ffffff;
+  }
+  footer .icons {
+    width: fit-content;
+    background-color: rgba(255, 255, 255, 0);
+    display: flex;
+    flex-direction: row;
+    position: relative;
+  }
+  footer .publi {
+    margin-top: 10px;
+  }
+  footer .lastSources span:first-child {
+    margin-right: 10px;
+  }
+  /* --------------------- */
+  /* --------------------- */
+  
