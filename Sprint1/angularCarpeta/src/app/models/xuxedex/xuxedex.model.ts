@@ -1,10 +1,10 @@
 export interface Xuxemons {
   id?: number;
-  name: string;
-  type: string;
+  nombre: string;
+  tipo: string;
   tamano: number;
   vida: number;
-  archive: string;
+  archivo: string;
   created_at?: string;
   updated_at?: string;
 }

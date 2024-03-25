@@ -1,9 +1,9 @@
 export interface Chuches {
   id?: number;
-  name: string;
+  nombre: string;
   modificador: number;
   dinero: string; 
-  archive: string;
+  archivo: string;
   created_at?: string;
   updated_at?: string;
 }

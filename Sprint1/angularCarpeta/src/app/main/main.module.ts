@@ -10,6 +10,7 @@ import { TiendaComponent } from './tienda/tienda.component';
 import { XuxemonsComponent } from './xuxemons/xuxemons.component';
 import { XuxedexComponent } from './xuxemons/xuxedex/xuxedex.component';
 import { CajaComponent } from './xuxemons/caja/caja.component';
+import { CommonModule } from '@angular/common';
 
 const routes: Routes = [
   {
@@ -19,10 +20,11 @@ const routes: Routes = [
       { path: 'footer', component: FooterComponent },
       { path: 'header', component: HeaderComponent },
       { path: 'home', component: HomeComponent },
-      { path: 'hospital', component: HospitalComponent },
-      { path: 'inventario', component: InventarioComponent },
-      { path: 'tienda', component: TiendaComponent },
-      { path: 'xuxemons', component: XuxemonsComponent },
+      { path: 'home/hospital', component: HospitalComponent },
+      { path: 'home/inventario', component: InventarioComponent },
+      { path: 'home/tienda', component: TiendaComponent },
+      { path: 'home/xuxemons', component: XuxemonsComponent },
+      { path: 'xuxemons/xuxedex', component: XuxedexComponent },
     ],
   },
   {
@@ -32,11 +34,11 @@ const routes: Routes = [
 ];
 
 @NgModule({
-  imports: [RouterModule.forChild(routes)],
+  imports: [RouterModule.forChild(routes),CommonModule,],
   exports: [RouterModule],
   declarations: [
     XuxedexComponent,
-    CajaComponent
+    CajaComponent,
   ],
 })
 export class MainModule {}
