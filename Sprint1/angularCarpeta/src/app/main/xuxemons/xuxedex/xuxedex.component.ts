@@ -68,7 +68,7 @@ export class XuxedexComponent implements OnInit {
 
   // Función crar que envia al usuario a la vista para crear Xuxemons //
   crear() {
-    this.router.navigate(['crear']);
+    this.router.navigate(['home/home/xuxemons/xuxedex/crear']);
   }
 
   // Función para editar el Xuxemon seleccionado //

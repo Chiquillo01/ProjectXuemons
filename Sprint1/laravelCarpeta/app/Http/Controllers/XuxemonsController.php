@@ -20,6 +20,8 @@ class XuxemonsController extends Controller
             $validados = $request->validate([
                 'nombre' => 'required|string',
                 'tipo' => 'required|string',
+                'tamano' => 'required|numeric',
+                'vida' => 'required|numeric',
                 'archivo' => 'required|string',
             ]);
 
