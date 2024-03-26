@@ -72,9 +72,9 @@ class XuxemonsController extends Controller
         try {
             // Valida los datos
             $validados = $request->validate([
-                'name' => ['required', 'max:20', 'unique:xuxemons,name,' . $xuxemons->id],
-                'type' => ['required', 'in:Tierra,Aire,Agua'],
-                'archive' => ['required', 'unique:xuxemons,archive,' . $xuxemons->id],
+                'nombre' => ['required', 'max:20', 'unique:xuxemons,nombre,' . $xuxemons->id],
+                'tipo' => ['required', 'in:Tierra,Aire,Agua'],
+                'archivo' => ['required', 'unique:xuxemons,archivo,' . $xuxemons->id],
             ]);
 
             // Hace el update dentro de una transaccion

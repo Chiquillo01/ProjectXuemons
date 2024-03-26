@@ -11,6 +11,8 @@ import { XuxemonsComponent } from './xuxemons/xuxemons.component';
 import { XuxedexComponent } from './xuxemons/xuxedex/xuxedex.component';
 import { CajaComponent } from './xuxemons/caja/caja.component';
 import { CommonModule } from '@angular/common';
+import { CrearComponent } from './xuxemons/xuxedex/crear/crear.component';
+import { EditarComponent } from './xuxemons/xuxedex/editar/editar.component';
 
 const routes: Routes = [
   {
@@ -25,6 +27,8 @@ const routes: Routes = [
       { path: 'home/tienda', component: TiendaComponent },
       { path: 'home/xuxemons', component: XuxemonsComponent },
       { path: 'home/xuxemons/xuxedex', component: XuxedexComponent },
+      { path: 'home/xuxemons/xuxedex/crear', component: CrearComponent },
+      { path: 'home/xuxemons/xuxedex/editar', component: EditarComponent },
     ],
   },
   {
