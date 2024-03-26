@@ -24,7 +24,7 @@ const routes: Routes = [
       { path: 'home/inventario', component: InventarioComponent },
       { path: 'home/tienda', component: TiendaComponent },
       { path: 'home/xuxemons', component: XuxemonsComponent },
-      { path: 'xuxemons/xuxedex', component: XuxedexComponent },
+      { path: 'home/xuxemons/xuxedex', component: XuxedexComponent },
     ],
   },
   {
