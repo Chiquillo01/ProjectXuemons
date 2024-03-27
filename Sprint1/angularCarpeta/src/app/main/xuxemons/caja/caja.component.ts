@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 // Imports de los modelos necesarios //
+import { Xuxemons } from '../../../models/xuxedex/xuxedex.model';
 import { XuxemonsUsers } from '../../../models/xuxemons/xuxemons.model';
 // Imports de los servicios //
 import { UsersService } from '../../../services/users.service';
@@ -14,6 +15,7 @@ import { TokenService } from '../../../services/token.service';
 })
 
 export class CajaComponent implements OnInit {
+  xuxemons: Xuxemons[] = [];
   xuxemonsUsers: XuxemonsUsers[] = [];
   // Variables para saber si el usuario tiene al xuxemon y para saber el rol del usuario //
   xuxemonsView: boolean = false;
@@ -68,8 +70,8 @@ export class CajaComponent implements OnInit {
 
   // Función para el botón de debug //
   debug() {
-    const randomIndex = Math.floor(Math.random() * this.xuxemonsUsers.length);
-    const randomXuxemon = this.xuxemonsUsers[randomIndex];
+    const randomIndex = Math.floor(Math.random() * this.xuxemons.length);
+    const randomXuxemon = this.xuxemons[randomIndex];
     // const reference = TokenService;
     const token = TokenService.getToken();
     console.log(token);
