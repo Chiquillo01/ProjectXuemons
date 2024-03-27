@@ -53,44 +53,44 @@ export class ChuchesComponent {
     );
   }
 
-  // Función crar que envia al usuario a la vista para crear Chuches //
-  crear() {
-    this.router.navigate(['/chuches/crear']);
-  }
+  // // Función crar que envia al usuario a la vista para crear Chuches //
+  // crear() {
+  //   this.router.navigate(['/chuches/crear']);
+  // }
 
-  // Función para editar el Xuxemon seleccionado //
-  editar(xuxe: any) {
-    const navigationExtras: NavigationExtras = {
-      queryParams: {
-        id: xuxe.id,
-        name: xuxe.name,
-        type: xuxe.type,
-        archive: xuxe.archive,
-      },
-    };
-    // Envia al usuario a la ruta de edición //
-    this.router.navigate(['/chuches/editar'], navigationExtras);
-  }
+  // // Función para editar el Xuxemon seleccionado //
+  // editar(chuche: any) {
+  //   const navigationExtras: NavigationExtras = {
+  //     queryParams: {
+  //       id: chuche.id,
+  //       nombre: chuche.nombre,
+  //       tipo: chuche.tipo,
+  //       archivo: chuche.archivo,
+  //     },
+  //   };
+  //   // Envia al usuario a la ruta de edición //
+  //   this.router.navigate(['/chuches/editar'], navigationExtras);
+  // }
 
-  // Función para eliminar el xuxemon seleccionado //
-  eliminar($id: any) {
-    // Se subscribe para recibir la información de la función a la que hace referencia en users.service //
-    this.ChuchesService.ChuchesDelete($id).subscribe(
-      // Aceptada //
-      (data: any) => {
-        // Redirije al usuario y le da un mensaje //
-        this.router.navigate(['/chuches']);
-        alert('Chuches eliminadas con exito.');
-      },
-      // Rechazada //
-      (error) => {
-        console.log(error);
-        // Avisa de que algo salió mal //
-        alert('Ha fallado algo, la Chuche no pudo ser eliminado');
-        throw new Error(error);
-      }
-    );
-  }
+  // // Función para eliminar el xuxemon seleccionado //
+  // eliminar($id: any) {
+  //   // Se subscribe para recibir la información de la función a la que hace referencia en users.service //
+  //   this.ChuchesService.ChuchesDelete($id).subscribe(
+  //     // Aceptada //
+  //     (data: any) => {
+  //       // Redirije al usuario y le da un mensaje //
+  //       this.router.navigate(['/chuches']);
+  //       alert('Chuches eliminadas con exito.');
+  //     },
+  //     // Rechazada //
+  //     (error) => {
+  //       console.log(error);
+  //       // Avisa de que algo salió mal //
+  //       alert('Ha fallado algo, la Chuche no pudo ser eliminado');
+  //       throw new Error(error);
+  //     }
+  //   );
+  // }
 
   // Función para el botón de debug //
   debug() {
@@ -101,11 +101,11 @@ export class ChuchesComponent {
     // console.log(token);
 
     const chuchesData = {
-      name: randomChuches.nombre,
+      nombre: randomChuches.nombre,
       // type: randomXuxemon.type,
-      modificado: randomChuches.modificador,
+      modificador: randomChuches.modificador,
       dinero: randomChuches.dinero,
-      archive: randomChuches.archivo,
+      archivo: randomChuches.archivo,
     };
 
     this.ChuchesService.createChuchesAleatorios(chuchesData).subscribe(

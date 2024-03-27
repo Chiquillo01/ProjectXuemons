@@ -15,15 +15,15 @@
         </button> -->
       </div>
       <div class="list-container">
-        <div class="card-flex" *ngFor="let card of Chuches">
+        <div class="card-flex" *ngFor="let chuche of Chuches">
           <h3 class="card-title">
-            {{card.name}}
+            {{chuche.name}}
           </h3>
   
-          <img [src]="'../assets/home/' + card.archive" alt="{{ card.name }}">
+          <img [src]="'../../../../assets/home/' + chuche.archivo" alt="{{ chuche.nombre }}">
   
           <h4 class="card-title">
-            {{card.dinero}}
+            {{chuche.dinero}}
           </h4>
           <!-- <h4 class="card-title">
             {{card.vida}}
