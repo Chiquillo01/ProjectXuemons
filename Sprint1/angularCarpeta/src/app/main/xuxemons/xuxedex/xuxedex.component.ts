@@ -2,7 +2,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 // Imports de los modelos necesarios //
 import { Xuxemons } from '../../../models/xuxedex/xuxedex.model';
-
+import { XuxemonsUsers } from '../../../models/xuxemons/xuxemons.model';
 // Imports de los servicios //
 import { UsersService } from '../../../services/users.service';
 import { XuxemonsService } from 'src/app/services/xuxemons.service';
@@ -15,6 +15,7 @@ import { TokenService } from '../../../services/token.service';
 })
 export class XuxedexComponent implements OnInit {
   xuxemons: Xuxemons[] = [];
+  xuxemonsUsers: XuxemonsUsers[] = [];
   // Variables para saber si el usuario tiene al xuxemon y para saber el rol del usuario //
   xuxemonsView: boolean = false;
   userRole: Number | null;
@@ -82,7 +83,10 @@ export class XuxedexComponent implements OnInit {
       },
     };
     // Envia al usuario a la ruta de edición //
-    this.router.navigate(['/home/home/xuxemons/xuxedex/editar'], navigationExtras);
+    this.router.navigate(
+      ['/home/home/xuxemons/xuxedex/editar'],
+      navigationExtras
+    );
   }
 
   // Función para eliminar el xuxemon seleccionado //

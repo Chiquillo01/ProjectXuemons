@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Route;
 // Controladores //
 use \App\Http\Controllers\Controller;
 use \App\Http\Controllers\XuxemonsController;
+use \App\Http\Controllers\XuxemonsUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ Route::post('/logout', [Controller::class, 'logout']);
 Route::post('/xuxemons', [XuxemonsController::class, 'store']);
 
 // Crear xuxemon aleatorios //
-Route::post('/xuxemons/users/random', [XuxemonsController::class, 'debug']);
+Route::post('/xuxemons/users/random', [XuxemonsUserController::class, 'debug']);
 
 // Actualizar xuxemon //
 Route::put('/xuxemons/{xuxemons}', [XuxemonsController::class, 'update']);
@@ -49,6 +50,9 @@ Route::delete('/xuxemons/{xuxemons}', [XuxemonsController::class, 'destroy']);
 
 // Mostrar todos los xuxemons //
 Route::get('/xuxemons', [XuxemonsController::class, 'show']);
+
+// Mostrar todos los xuxemons //
+Route::get('/xuxemonsUser', [XuxemonsUserController::class, 'show']);
 
 // Mostrar un xuxemon //
 Route::get('/xuxemons/{xuxemons}', [XuxemonsController::class, 'showOne']);

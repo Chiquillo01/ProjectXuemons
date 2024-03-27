@@ -12,6 +12,8 @@ class XuxemonsUser extends Model
         'nombre',
         'tipo',
         'archivo',
+        'tamano',
+        'vida',
         'idUser',
     ];
 }

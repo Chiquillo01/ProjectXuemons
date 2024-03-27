@@ -15,6 +15,8 @@ return new class extends Migration
             $table->bigIncrements('id');
             $table->string('nombre', 20);
             $table->string('tipo', 50);
+            $table->integer('tamano');
+            $table->integer('vida');
             $table->string('archivo');
             $table->unsignedBigInteger('idUser');
             $table->timestamps();

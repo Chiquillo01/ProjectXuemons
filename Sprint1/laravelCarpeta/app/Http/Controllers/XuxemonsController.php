@@ -112,30 +112,4 @@ class XuxemonsController extends Controller
             return response()->json(['message' => 'Ha ocurrido un error al eliminar: ' . $e->getMessage()], 500);
         }
     }
-
-    /**
-     * Create a random Xuxemon from JSON data.
-     */
-    public function debug(Request $request)
-    {
-        try {
-            // Valida los datos //
-            $validados = $request->validate([
-                'nombre' => 'required|string',
-                'tipo' => 'required|string',
-                'archivo' => 'required|string',
-            ]);
-
-            DB::transaction(function () use ($validados) {
-                // Crea los datos en una transaccion //
-                XuxemonsUser::create($validados);
-            });
-
-            // Devuelve un 200 (OK) para confirmar al usuario //
-            return response()->json(['message' => 'Xuxemon creado aleatoriamente con exito'], 200);
-        } catch (\Exception $e) {
-            // Y devuelve un mensaje de error //
-            return response()->json(['message' => 'Ha ocurrido un error al crear el Xuxemon aleatorio: ' . $e->getMessage()], 500);
-        }
-    }
 }

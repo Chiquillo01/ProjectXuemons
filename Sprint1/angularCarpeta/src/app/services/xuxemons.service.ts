@@ -3,6 +3,7 @@ import { Observable } from 'rxjs';
 import { TokenService } from '../services/token.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Xuxemons } from '../models/xuxedex/xuxedex.model';
+import { XuxemonsUsers } from '../models/xuxemons/xuxemons.model';
 
 @Injectable({
   providedIn: 'root',
@@ -13,6 +14,11 @@ export class XuxemonsService {
   getAllXuxemons(): Observable<Xuxemons[]> {
     // Realizar la solicitud HTTP GET para obtener todos los Xuxemons
     return this.http.get<Xuxemons[]>('http://127.0.0.1:8000/api/xuxemons/');
+  }
+
+  getAllXuxemonsUser(): Observable<XuxemonsUsers[]> {
+    // Realizar la solicitud HTTP GET para obtener todos los Xuxemons
+    return this.http.get<XuxemonsUsers[]>('http://127.0.0.1:8000/api/xuxemonsUser/');
   }
 
   // Método para crear un nuevo xuxemon //

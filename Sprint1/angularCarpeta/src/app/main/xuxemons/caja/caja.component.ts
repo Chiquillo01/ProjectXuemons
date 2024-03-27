@@ -2,7 +2,6 @@ import { Component, Input, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 // Imports de los modelos necesarios //
 import { XuxemonsUsers } from '../../../models/xuxemons/xuxemons.model';
-
 // Imports de los servicios //
 import { UsersService } from '../../../services/users.service';
 import { XuxemonsService } from 'src/app/services/xuxemons.service';
@@ -15,7 +14,7 @@ import { TokenService } from '../../../services/token.service';
 })
 
 export class CajaComponent implements OnInit {
-  xuxemons: XuxemonsUsers[] = [];
+  xuxemonsUsers: XuxemonsUsers[] = [];
   // Variables para saber si el usuario tiene al xuxemon y para saber el rol del usuario //
   xuxemonsView: boolean = false;
   userRole: Number | null;
@@ -57,9 +56,9 @@ export class CajaComponent implements OnInit {
   }
 
   updateXuxemons() {
-    this.xuxemonsService.getAllXuxemons().subscribe({
+    this.xuxemonsService.getAllXuxemonsUser().subscribe({
       next: (value: any) => {
-        this.xuxemons = value[0];
+        this.xuxemonsUsers = value[0];
       },
       error: (error) => {
         console.error('Error fetching Xuxemons:', error);
@@ -67,41 +66,30 @@ export class CajaComponent implements OnInit {
     });
   }
 
-  // Función crar que envia al usuario a la vista para crear Xuxemons //
-  crear() {
-    this.router.navigate(['home/home/xuxemons/xuxedex/crear']);
-  }
+  // Función para el botón de debug //
+  debug() {
+    const randomIndex = Math.floor(Math.random() * this.xuxemonsUsers.length);
+    const randomXuxemon = this.xuxemonsUsers[randomIndex];
+    // const reference = TokenService;
+    const token = TokenService.getToken();
+    console.log(token);
 
-  // Función para editar el Xuxemon seleccionado //
-  editar(xuxe: any) {
-    const navigationExtras: NavigationExtras = {
-      queryParams: {
-        id: xuxe.id,
-        nombre: xuxe.nombre,
-        tipo: xuxe.tipo,
-        archivo: xuxe.archivo,
-      },
+    const xuxemonData = {
+      nombre: randomXuxemon.nombre,
+      tipo: randomXuxemon.tipo,
+      tamano: randomXuxemon.tamano,
+      vida: randomXuxemon.vida,
+      archivo: randomXuxemon.archivo,
+      idUser: 1,
     };
-    // Envia al usuario a la ruta de edición //
-    this.router.navigate(['/home/home/xuxemons/xuxedex/editar'], navigationExtras);
-  }
 
-  // Función para eliminar el xuxemon seleccionado //
-  eliminar($id: any) {
-    // Se subscribe para recibir la información de la función a la que hace referencia en users.service //
-    this.xuxemonsService.XuxeDelete($id).subscribe({
-      // Aceptada //
-      next: (data: any) => {
-        // Redirije al usuario y le da un mensaje //
-        this.router.navigate(['/home/home/xuxemons/xuxedex']);
-        alert('Xuxemon eliminado con exito.');
+    this.xuxemonsService.createXuxemonAleatorios(xuxemonData).subscribe({
+      next: () => {
+        alert('Xuxemon creado aleatoriamente con éxito');
       },
-      // Rechazada //
       error: (error) => {
-        console.log(error);
-        // Avisa de que algo salió mal //
-        alert('Ha fallado algo, el Xuxemon no pudo ser eliminado');
-        throw new Error(error);
+        console.error('Error al crear el Xuxemon:', error);
+        alert('Ocurrió un error al crear el Xuxemon aleatorio');
       },
     });
   }
