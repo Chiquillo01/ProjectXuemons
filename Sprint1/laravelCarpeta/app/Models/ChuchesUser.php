@@ -13,5 +13,6 @@ class ChuchesUser extends Model
         'dinero',
         'modificador',
         'archivo',
+        'idUser'
     ];
 }

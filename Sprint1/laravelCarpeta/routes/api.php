@@ -1,12 +1,13 @@
 <?php
 
-use App\Http\Controllers\ChuchesController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 // Controladores //
 use \App\Http\Controllers\Controller;
 use \App\Http\Controllers\XuxemonsController;
 use \App\Http\Controllers\XuxemonsUserController;
+use App\Http\Controllers\ChuchesController;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -27,38 +28,34 @@ Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
 // Usuario // 
 // Registar //
 Route::post('/register', [Controller::class, 'register']);
-
 // Loguearse //
 Route::post('/login', [Controller::class, 'login']);
-
 // Logout //
 Route::post('/logout', [Controller::class, 'logout']);
 // ---------------------- //
 
-// Xuxemons // 
+// Rutas para los Xuxemons // 
 // Crear xuxemon //
 Route::post('/xuxemons', [XuxemonsController::class, 'store']);
-
 // Crear xuxemon aleatorios //
 Route::post('/xuxemons/users/random', [XuxemonsUserController::class, 'debug']);
-
 // Actualizar xuxemon //
 Route::put('/xuxemons/{xuxemons}', [XuxemonsController::class, 'update']);
-
 // Eliminar un xuxemon //
 Route::delete('/xuxemons/{xuxemons}', [XuxemonsController::class, 'destroy']);
-
 // Mostrar todos los xuxemons //
 Route::get('/xuxemons', [XuxemonsController::class, 'show']);
-
-// Mostrar todos los xuxemons //
-Route::get('/chuches', [ChuchesController::class, 'show']);
-
-// Mostrar todos los xuxemons //
+// Mostrar todos los xuxemons del usuario //
 Route::get('/xuxemonsUser', [XuxemonsUserController::class, 'show']);
+// ---------------------- //
+// ---------------------- //
 
-// Mostrar un xuxemon //
-Route::get('/xuxemons/{xuxemons}', [XuxemonsController::class, 'showOne']);
+// Rutas para las chuches //
+// Mostrar todas las xuxes del usuario //
+Route::get('/chuches', [ChuchesController::class, 'show']);
+// Crear chuches aleatorias //
+Route::post('/chuches/random', [ChuchesController::class, 'debug']);
+// ---------------------- //
 // ---------------------- //
 
 // Roles //

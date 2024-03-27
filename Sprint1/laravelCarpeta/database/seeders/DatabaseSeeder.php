@@ -17,6 +17,7 @@ class DatabaseSeeder extends Seeder
         $this->call(XuxemonsSeeder::class);
         $this->call(XuxemonsUserSeeder::class);
         $this->call(ChuchesSeeder::class);
+        $this->call(ChuchesUserSeeder::class);
 
     }
 }

@@ -13,7 +13,6 @@ import { TokenService } from '../../../services/token.service';
   templateUrl: './caja.component.html',
   styleUrls: ['./caja.component.css'],
 })
-
 export class CajaComponent implements OnInit {
   xuxemons: Xuxemons[] = [];
   xuxemonsUsers: XuxemonsUsers[] = [];

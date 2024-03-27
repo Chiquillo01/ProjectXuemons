@@ -4,7 +4,6 @@ namespace App\Http\Controllers;
 
 // Imports //
 use App\Models\Xuxemons;
-use App\Models\XuxemonsUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 

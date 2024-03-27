@@ -6,6 +6,7 @@ import { HeaderComponent } from './header/header.component';
 import { HomeComponent } from './home/home.component';
 import { HospitalComponent } from './hospital/hospital.component';
 import { InventarioComponent } from './inventario/inventario.component';
+import { ChuchesComponent } from './inventario/chuches/chuches.component';
 import { TiendaComponent } from './tienda/tienda.component';
 import { XuxemonsComponent } from './xuxemons/xuxemons.component';
 import { XuxedexComponent } from './xuxemons/xuxedex/xuxedex.component';
@@ -13,7 +14,6 @@ import { CajaComponent } from './xuxemons/caja/caja.component';
 import { CommonModule } from '@angular/common';
 import { CrearComponent } from './xuxemons/xuxedex/crear/crear.component';
 import { EditarComponent } from './xuxemons/xuxedex/editar/editar.component';
-import { ChuchesComponent } from './inventario/chuches/chuches.component';
 
 const routes: Routes = [
   {
@@ -26,6 +26,7 @@ const routes: Routes = [
       { path: 'home/hospital', component: HospitalComponent },
       { path: 'home/inventario', component: InventarioComponent },
       { path: 'home/inventario/chuches', component: ChuchesComponent },
+      //{ path: 'home/inventario/objetos', component: ObjetosComponent },
       { path: 'home/tienda', component: TiendaComponent },
       { path: 'home/xuxemons', component: XuxemonsComponent },
       { path: 'home/xuxemons/xuxedex', component: XuxedexComponent },
@@ -45,6 +46,7 @@ const routes: Routes = [
   exports: [RouterModule],
   declarations: [
     XuxedexComponent,
+    ChuchesComponent,
     CajaComponent,
   ],
 })
