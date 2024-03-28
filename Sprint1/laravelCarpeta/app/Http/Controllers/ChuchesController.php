@@ -35,8 +35,8 @@ class ChuchesController extends Controller
             // Valida los datos //
             $validados = $request->validate([
                 'nombre' => 'required|string',
-                'dinero' => 'required|number',
-                'modificador' => 'required|number',
+                'dinero' => 'required|numeric',
+                'modificador' => 'required|numeric',
                 'archivo' => 'required|string',
                 'idUser' => 'required|numeric',
             ]);
@@ -46,7 +46,7 @@ class ChuchesController extends Controller
                 $chuchesAleatorio = Chuches::inRandomOrder()->first();
 
                 // Asigna la ID 1 al xuxemon aleatorio seleccionado //
-                $validados['chuches_id'] = $chuchesAleatorio->id;
+                $validados['idUser'] = $chuchesAleatorio->id;
 
                 // Crea los datos en una transacción //
                 ChuchesUser::create($validados);

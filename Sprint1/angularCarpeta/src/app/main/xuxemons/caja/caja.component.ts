@@ -19,6 +19,7 @@ export class CajaComponent implements OnInit {
   // Variables para saber si el usuario tiene al xuxemon y para saber el rol del usuario //
   xuxemonsView: boolean = false;
   userRole: Number | null;
+  repetido: boolean = false;
 
   constructor(
     public userService: UsersService,
@@ -54,12 +55,24 @@ export class CajaComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateXuxemons();
+    this.getXuxemons();
   }
 
   updateXuxemons() {
     this.xuxemonsService.getAllXuxemonsUser().subscribe({
       next: (value: any) => {
         this.xuxemonsUsers = value[0];
+      },
+      error: (error) => {
+        console.error('Error fetching XuxemonsUsers:', error);
+      },
+    });
+  }
+
+  getXuxemons() {
+    this.xuxemonsService.getAllXuxemons().subscribe({
+      next: (value: any) => {
+        this.xuxemons = value[0];
       },
       error: (error) => {
         console.error('Error fetching Xuxemons:', error);
@@ -69,11 +82,13 @@ export class CajaComponent implements OnInit {
 
   // Función para el botón de debug //
   debug() {
-    const randomIndex = Math.floor(Math.random() * this.xuxemons.length);
+    const randomIndex =  Math.floor(Math.random() * this.xuxemons.length);
     const randomXuxemon = this.xuxemons[randomIndex];
+    console.log('randomIndex:' + randomIndex);
+    console.log('Numero de Xuxemons: ' + this.xuxemons.length);
     // const reference = TokenService;
-    const token = TokenService.getToken();
-    console.log(token);
+    // const token = TokenService.getToken();
+    // console.log(token);
 
     const xuxemonData = {
       nombre: randomXuxemon.nombre,
@@ -84,14 +99,34 @@ export class CajaComponent implements OnInit {
       idUser: 1,
     };
 
-    this.xuxemonsService.createXuxemonAleatorios(xuxemonData).subscribe({
-      next: () => {
-        alert('Xuxemon creado aleatoriamente con éxito');
-      },
-      error: (error) => {
-        console.error('Error al crear el Xuxemon:', error);
-        alert('Ocurrió un error al crear el Xuxemon aleatorio');
-      },
+    console.log(xuxemonData);
+    // console.log(xuxemonsArray);
+
+    this.xuxemonsUsers.forEach((xuxemonUser) => {
+      if (
+        xuxemonUser.tamano === randomXuxemon.tamano &&
+        xuxemonUser.nombre === randomXuxemon.nombre
+      ) {
+        this.repetido = true;
+      }
     });
+
+    console.log(this.repetido);
+
+    if (!this.repetido) {
+      this.xuxemonsService.createXuxemonAleatorios(xuxemonData).subscribe({
+        next: () => {
+          alert('Xuxemon creado aleatoriamente con éxito');
+        },
+        error: (error) => {
+          console.error('Error al crear el Xuxemon:', error);
+          alert('Ocurrió un error al crear el Xuxemon aleatorio');
+        },
+      });
+    }else{
+      console.warn('Error, ya tienes el Xuxemon con el mismo tamaño');
+      alert('Ya tienes el Xuxemon con el mismo tamaño');
+      this.repetido = false;
+    }
   }
 }
