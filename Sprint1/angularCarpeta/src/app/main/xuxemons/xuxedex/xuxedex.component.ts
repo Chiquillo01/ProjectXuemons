@@ -98,6 +98,7 @@ export class XuxedexComponent implements OnInit {
         // Redirije al usuario y le da un mensaje //
         this.router.navigate(['/home/home/xuxemons/xuxedex']);
         alert('Xuxemon eliminado con exito.');
+        window.location.reload();
       },
       // Rechazada //
       error: (error) => {

@@ -63,6 +63,7 @@ export class ChuchesComponent implements OnInit{
     this.ChuchesService.createChuchesAleatorios(chuchesData).subscribe({
       next: () => {
         alert('Chuches creado aleatoriamente con éxito');
+        window.location.reload();
       },
       error: (error) => {
         console.error('Error al crear la Chuches:', error);

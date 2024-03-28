@@ -65,6 +65,7 @@ export class EditarComponent {
           // Redirije al usuario y le da un mensaje //
           this.router.navigate(['xuxedex']);
           alert('Xuxemon modificado con exito.');
+          this.router.navigate(['home/home/xuxemons/xuxedex']);
         },
         // Rechazada //
         error: (error) => {

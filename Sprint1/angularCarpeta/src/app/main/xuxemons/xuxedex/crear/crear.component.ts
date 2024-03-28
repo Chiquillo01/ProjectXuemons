@@ -57,6 +57,7 @@ export class CrearComponent {
           // Redirije a la xuxedex y le da un mensaje //
           this.router.navigate(['home/home/xuxemons/xuxedex']);
           alert('Xuxemon creado con exito.');
+          this.router.navigate(['home/home/xuxemons/xuxedex']);
         },
         // Rechazada //
         error: (error) => {

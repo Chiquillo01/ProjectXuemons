@@ -44,4 +44,11 @@ export class TokenService {
       return false;
     }
   }
+  
+  // recargarPagina(router): void {
+  //   router.navigateByUrl('/', { skipLocationChange: true }).then(() => {
+  //     router.navigate([router.url]);
+  //   });
+  // }
+
 }

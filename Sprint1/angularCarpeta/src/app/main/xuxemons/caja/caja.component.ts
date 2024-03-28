@@ -117,6 +117,8 @@ export class CajaComponent implements OnInit {
       this.xuxemonsService.createXuxemonAleatorios(xuxemonData).subscribe({
         next: () => {
           alert('Xuxemon creado aleatoriamente con éxito');
+          window.location.reload();
+          // this.tokenService.recargarPagina;
         },
         error: (error) => {
           console.error('Error al crear el Xuxemon:', error);
