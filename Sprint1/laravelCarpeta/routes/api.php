@@ -7,7 +7,7 @@ use \App\Http\Controllers\Controller;
 use \App\Http\Controllers\XuxemonsController;
 use \App\Http\Controllers\XuxemonsUserController;
 use App\Http\Controllers\ChuchesController;
-
+use App\Http\Controllers\ChuchesUserController;
 
 /*
 |--------------------------------------------------------------------------
@@ -53,8 +53,10 @@ Route::get('/xuxemonsUser', [XuxemonsUserController::class, 'show']);
 // Rutas para las chuches //
 // Mostrar todas las xuxes del usuario //
 Route::get('/chuches', [ChuchesController::class, 'show']);
+// Mostrar todas las xuxes del usuario //
+Route::get('/chuchesUser', [ChuchesUserController::class, 'show']);
 // Crear chuches aleatorias //
-Route::post('/chuches/random', [ChuchesController::class, 'debug']);
+Route::post('/chuches/random', [ChuchesUserController::class, 'debug']);
 // ---------------------- //
 // ---------------------- //
 

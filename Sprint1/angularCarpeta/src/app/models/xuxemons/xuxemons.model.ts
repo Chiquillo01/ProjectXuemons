@@ -3,6 +3,7 @@ export interface XuxemonsUsers {
   nombre: string;
   tipo: string;
   tamano: number;
+  comida: number;
   vida: number;
   archivo: string;
   idUser?: number;

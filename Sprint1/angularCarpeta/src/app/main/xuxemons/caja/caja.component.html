@@ -27,6 +27,20 @@
         <h4 class="card-title">
           {{card.tipo}} {{card.vida}}
         </h4>
+
+        <div>
+          <!-- [(ngModel)]="selectedChuche" -->
+          <select name="Chuche" (change)="onChucheChange($event, card.id)">
+            <option *ngFor="let chuche of Chuches" [value]="chuche">{{ chuche.nombre }}</option>
+          </select>
+
+          <!-- (click)="alimentar(chuche.nombre)" -->
+          <button (click)="alimentar()">
+            Alimientar
+          </button>
+        </div>
+       
+
       </div>
     </div>
   </div>
