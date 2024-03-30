@@ -37,6 +37,7 @@ class XuxemonsSeeder extends Seeder
                 'nombre' => $nombres[$i],
                 'tipo' => $tipo[$i],
                 'tamano' => 1,
+                'comida' => 0,
                 'vida' => 100,
                 'archivo' => strtolower($nombres[$i]) . '.png',
             ]);

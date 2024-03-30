@@ -169,6 +169,7 @@ export class CajaComponent implements OnInit {
       nombre: randomXuxemon.nombre,
       tipo: randomXuxemon.tipo,
       tamano: randomXuxemon.tamano,
+      comida: randomXuxemon.comida,
       vida: randomXuxemon.vida,
       archivo: randomXuxemon.archivo,
       idUser: 1,

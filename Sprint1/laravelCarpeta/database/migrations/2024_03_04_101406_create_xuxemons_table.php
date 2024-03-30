@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre', 20);
             $table->string('tipo', 50);
             $table->integer('tamano');
+            $table->integer('comida');
             $table->integer('vida');
             $table->string('archivo');
             $table->timestamps();

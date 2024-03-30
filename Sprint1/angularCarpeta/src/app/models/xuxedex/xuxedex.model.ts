@@ -3,6 +3,7 @@ export interface Xuxemons {
   nombre: string;
   tipo: string;
   tamano: number;
+  comida: number;
   vida: number;
   archivo: string;
   created_at?: string;

@@ -7,6 +7,7 @@ use App\Models\Xuxemons;
 use App\Models\XuxemonsUser;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+
 class XuxemonsUserController extends Controller
 {
     /**
@@ -29,28 +30,29 @@ class XuxemonsUserController extends Controller
      * Create a random Xuxemon from JSON data.
      */
     public function debug(Request $request)
-    {
-        try {
-            // Valida los datos //
-            $validados = $request->validate([
-                'nombre' => 'required|string',
-                'tipo' => 'required|string',
-                'tamano' => 'required|numeric',
-                'vida' => 'required|numeric',
-                'archivo' => 'required|string',
-                'idUser' => 'required|numeric',
-            ]);
+{
+    try {
+        // Valida los datos //
+        $validados = $request->validate([
+            'nombre' => 'required|string',
+            'tipo' => 'required|string',
+            'tamano' => 'required|numeric',
+            'comida' => 'required|numeric',
+            'vida' => 'required|numeric',
+            'archivo' => 'required|string',
+            'idUser' => 'required|numeric',
+        ]);
 
-            DB::transaction(function () use ($validados) {
-                // Crea los datos en una transaccion //
-                XuxemonsUser::create($validados);
-            });
+        DB::transaction(function () use ($validados) {
+            // Crea los datos en una transaccion //
+            XuxemonsUser::create($validados);
+        });
 
-            // Devuelve un 200 (OK) para confirmar al usuario //
-            return response()->json(['message' => 'Xuxemon creado aleatoriamente con exito'], 200);
-        } catch (\Exception $e) {
-            // Y devuelve un mensaje de error //
-            return response()->json(['message' => 'Ha ocurrido un error al crear el Xuxemon aleatorio: ' . $e->getMessage()], 500);
-        }
+        // Devuelve un 200 (OK) para confirmar al usuario //
+        return response()->json(['message' => 'Xuxemon creado aleatoriamente con exito'], 200);
+    } catch (\Exception $e) {
+        // Y devuelve un mensaje de error //
+        return response()->json(['message' => 'Ha ocurrido un error al crear el Xuxemon aleatorio: ' . $e->getMessage()], 500);
     }
+}
 }
