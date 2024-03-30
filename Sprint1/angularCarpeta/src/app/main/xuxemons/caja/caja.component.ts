@@ -175,6 +175,7 @@ export class CajaComponent implements OnInit {
       idUser: 1,
     };
 
+    console.log('XuxemonData: ');
     console.log(xuxemonData);
     // console.log(xuxemonsArray);
 
@@ -187,7 +188,7 @@ export class CajaComponent implements OnInit {
       }
     });
 
-    console.log(this.repetido);
+    console.log('Repetido ? ' + this.repetido);
 
     if (!this.repetido) {
       this.xuxemonsService.createXuxemonAleatorios(xuxemonData).subscribe({

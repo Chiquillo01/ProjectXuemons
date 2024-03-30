@@ -16,13 +16,13 @@ return new class extends Migration
             $table->string('nombre', 20);
             $table->string('tipo', 50);
             $table->integer('tamano');
-            $table->integer('comida');
+            $table->integer('comida')->default(0); // Campo 'comida' con valor predeterminado de 0
             $table->integer('vida');
             $table->string('archivo');
             $table->unsignedBigInteger('idUser');
             $table->timestamps();
 
-           $table->foreign('idUser')->references('id')->on('users');
+            $table->foreign('idUser')->references('id')->on('users');
         });
     }
 

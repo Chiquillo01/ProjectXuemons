@@ -20,7 +20,7 @@ class XuxemonsController extends Controller
                 'nombre' => 'required|string',
                 'tipo' => 'required|string',
                 'tamano' => 'required|numeric',
-                'comida' => 'required|numeric',
+                'comida' => 'numeric',
                 'vida' => 'required|numeric',
                 'archivo' => 'required|string',
             ]);
