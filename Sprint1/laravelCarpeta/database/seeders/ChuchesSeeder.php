@@ -29,7 +29,7 @@ class ChuchesSeeder Extends Seeder
             DB::table('chuches')->insert([
                 'id' => 0,
                 'nombre' => $nombres[$i],
-                'modificador' => 5,
+                'modificador' => rand(0, 3),
                 'dinero' => $precio[$i],
                 'archivo' => strtolower($nombres[$i]) . '.png',
             ]);

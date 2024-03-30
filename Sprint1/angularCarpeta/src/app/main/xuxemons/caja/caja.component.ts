@@ -23,7 +23,8 @@ export class CajaComponent implements OnInit {
   xuxemonsView: boolean = false;
   userRole: Number | null;
   repetido: boolean = false;
-  selectedChuche: any[] = [];
+  selectedChuche: any;
+  XuxeId: any;
 
   constructor(
     public userService: UsersService,
@@ -66,61 +67,74 @@ export class CajaComponent implements OnInit {
 
   // alimentar a los xuxemons
   alimentar() {
+    const XuxemonAlimentado = this.xuxemonsUsers[this.XuxeId];
+    const ChucheInfo = this.Chuches[this.selectedChuche];
+    let Comida = 0;
 
-    const XuxemonAlimentado = this.xuxemonsUsers[this.selectedChuche[2]];
-    const ChucheInfo = this.Chuches[this.selectedChuche[1]];
+    // esto se puede ca,biar para que cambie depende de la dificultad
+    if (XuxemonAlimentado.comida <= 3) {
+      Comida = XuxemonAlimentado.comida + ChucheInfo.modificador;
+    }
 
-    const XuxemonEditado =
-    {
+    const XuxemonEditado = {
       nombre: XuxemonAlimentado.nombre,
       tipo: XuxemonAlimentado.tipo,
       tamano: XuxemonAlimentado.tamano,
-      comida: XuxemonAlimentado.comida + ChucheInfo.modificador,
+      comida: Comida,
       vida: XuxemonAlimentado.vida,
       idUser: XuxemonAlimentado.idUser,
     };
 
-    if(XuxemonAlimentado.comida < 3){
-
-      this.xuxemonsService.XuxeUpdate(XuxemonEditado, this.selectedChuche[2].subscribe({
-        // Aceptada //
-        next: (data: any) => {
-          // Redirije al usuario y le da un mensaje //
-          this.router.navigate(['xuxedex']);
-          alert('Xuxemon modificado con exito.');
-          this.router.navigate(['home/home/xuxemons/xuxedex']);
-        },
-        // Rechazada //
-        error: (error: string | undefined) => {
-          console.log(error);
-          // Avisa de que algo salió mal //
-          alert('No se pudo editar el Xuxemon');
-          throw new Error(error);
-        },
-      }));
+    // tiene que meter el numeor del modificador en la bd
+    if (XuxemonAlimentado.comida < 3) {
+      this.xuxemonsService
+        .XuxeUpdate(XuxemonEditado, this.XuxeId)
+        .subscribe({
+          // Aceptada //
+          next: (data: any) => {
+            // Redirije al usuario y le da un mensaje //
+            this.router.navigate(['xuxedex']);
+            alert('Xuxemon modificado con exito.');
+            this.router.navigate(['home/home/xuxemons/xuxedex']);
+          },
+          // Rechazada //
+          error: (error: string | undefined) => {
+            console.log(error);
+            // Avisa de que algo salió mal //
+            alert('No se pudo editar el Xuxemon');
+            throw new Error(error);
+          },
+        });
     }
+  }
+  //  if (this.selectedChuche) {
+  //   const XuxeEdit = this.xuxemonsUsers;
+  //   // this.xuxemonsService.XuxeUpdate(this.xuxemonForm.value, this.xuxeData.id);
+  //   // Aquí puedes enviar la chuche seleccionada, por ejemplo, a través de una función o servicio
+  //   console.log('Chuche seleccionada:', this.selectedChuche);
+  //   // Lógica para enviar la chuche seleccionada
+  // } else {
+  //   console.log('Por favor, selecciona una chuche antes de alimentar');
+  // }
 
-    //  if (this.selectedChuche) {
-    //   const XuxeEdit = this.xuxemonsUsers;
-    //   // this.xuxemonsService.XuxeUpdate(this.xuxemonForm.value, this.xuxeData.id);
-    //   // Aquí puedes enviar la chuche seleccionada, por ejemplo, a través de una función o servicio
-    //   console.log('Chuche seleccionada:', this.selectedChuche);
-    //   // Lógica para enviar la chuche seleccionada
-    // } else {
-    //   console.log('Por favor, selecciona una chuche antes de alimentar');
-    // }
+  // dice que chuche le da
+  onChucheChange(event: any, id: number | undefined) {
+    const selectedIndex = event.target.selectedIndex;
+    if (selectedIndex !== undefined) {
+      this.selectedChuche = selectedIndex;
+      this.XuxeId = id;
+    } else {
+      console.log('No se pudo obtener la chuche seleccionada');
+    }
   }
 
-
-// dice que chuche le da
-  onChucheChange(event: any, id: number|undefined) {
-    if (event.target && event.target.value) {
-    this.selectedChuche[1] = event.target.id;
-    this.selectedChuche[2] = id;
-  } else {
-    console.log('No se pudo obtener la chuche seleccionada');
-  }
-  }
+  // const selectedIndex = event.target.selectedIndex;
+  //   if (selectedIndex !== undefined) {
+  //     this.selectedChuche[1] = event.target.options[selectedIndex].value;
+  //     this.selectedChuche[2] = id;
+  //   } else {
+  //     console.log('No se pudo obtener la chuche seleccionada');
+  //   }
 
   updateXuxemons() {
     this.xuxemonsService.getAllXuxemonsUser().subscribe({
@@ -133,7 +147,7 @@ export class CajaComponent implements OnInit {
     });
   }
 
-  getChuches(){
+  getChuches() {
     this.chuchesService.getAllChuches().subscribe({
       next: (value: any) => {
         this.Chuches = value[0];
