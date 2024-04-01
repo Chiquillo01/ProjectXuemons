@@ -7,25 +7,16 @@
 <form [formGroup]="configTam" (ngSubmit)="editarTamanoDef()">
     <h2>Editar Tamaño por defecto</h2>
     <select formControlName="tamano">
-        <option value="1">Pequeño</option>
-        <option value="2">Mediano</option>
-        <option value="3">Grande</option>
+        <option value=1>Pequeño</option>
+        <option value=2>Mediano</option>
+        <option value=3>Grande</option>
     </select>
-    <button class="boton" type="submit" [disabled]="!configTam.valid">Guardar</button>
-    <a class="atras" href="home/home">Volver</a>
+    <button class="boton" type="submit" [disabled]="!configTam.valid">Actualizar Valores</button>
 </form>
 
 <form [formGroup]="configChuches" (ngSubmit)="editarChuches()">
     <h2>Editar Xuxemon</h2>
-    <input formControlName="nombre" type="text" placeholder="Nombre"><br>
-
-    <select formControlName="tipo">
-        <option value="Tierra">Tierra</option>
-        <option value="Aire">Aire</option>
-        <option value="Agua">Agua</option>
-    </select>
-
-    <input formControlName="archivo" type="text" placeholder="Nombre del archivo"><br>
-    <button class="boton" type="submit" [disabled]="!configChuches.valid">Guardar</button>
-    <a class="atras" href="home/home">Volver</a>
+    <input formControlName="evo1" type="number" placeholder="Evolución 1"><br>
+    <input formControlName="evo2" type="number" placeholder="Evolución 1"><br>
+    <button class="boton" type="submit" [disabled]="!configChuches.valid">Actualizar Valores</button>
 </form>

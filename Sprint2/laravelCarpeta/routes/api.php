@@ -43,6 +43,8 @@ Route::post('/xuxemons/users/random', [XuxemonsUserController::class, 'debug']);
 Route::put('/xuxemons/{xuxemons}', [XuxemonsController::class, 'update']);
 // Actualizar tamaño xuxemons //
 Route::put('/xuxemons/tamano', [XuxemonsController::class, 'updateTam']);
+// Actualizar evoluciones xuxemons //
+Route::put('/xuxemons/evos', [XuxemonsUserController::class, 'updateEvos']);
 // Eliminar un xuxemon //
 Route::delete('/xuxemons/{xuxemons}', [XuxemonsController::class, 'destroy']);
 // Mostrar todos los xuxemons //

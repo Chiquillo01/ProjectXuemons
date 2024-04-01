@@ -96,27 +96,21 @@ class XuxemonsController extends Controller
     /**
      * Update the specified resource in storage.
      */
-    public function updateTam(Request $request)
+    public function updateTam(Request $request, Xuxemons $xuxemons)
     {
         try {
-            // Valida los datos
+            // Valida los datos recibidos
             $request->validate([
-                'tamano' => ['required'],
+                'tamano' => 'required', // Validación simple, puedes ajustarla según tus necesidades
             ]);
 
-            // Obtiene el nuevo tamaño
+            // Obtiene el nuevo tamaño del formulario
             $nuevoTamano = $request->input('tamano');
 
-            // Registra el valor del tamaño en el registro de la aplicación
-            info('Valor del tamaño del Xuxemon recibido:', ['tamano' => $nuevoTamano]);
-
-            // Hace el update dentro de una transaccion
+            // Hace el update dentro de una transacción
             DB::transaction(function () use ($nuevoTamano) {
-                // Actualiza todos los Xuxemons con el nuevo tamaño
-                Xuxemons::all()->each(function ($xuxemon) use ($nuevoTamano) {
-                    $xuxemon->tamano = $nuevoTamano;
-                    $xuxemon->save();
-                });
+                // Actualiza el tamaño de todos los Xuxemons
+                Xuxemons::query()->update(['tamano' => $nuevoTamano]);
             });
 
             // Retorna actualizado de forma satisfactoria

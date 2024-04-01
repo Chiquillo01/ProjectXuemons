@@ -73,4 +73,18 @@ export class XuxemonsService {
       headers,
     });
   }
+
+  // Función para actualizar tamaño del Xuxemon //
+  ChuchesConfig(evos: any): Observable<any> {
+    // Token de sesion //
+    const authToken = this.tokenService.getToken();
+    // Header con el token //
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+    // Peticion con headers de actualizacion //
+    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/evos`, evos, {
+      headers,
+    });
+  }
 }
