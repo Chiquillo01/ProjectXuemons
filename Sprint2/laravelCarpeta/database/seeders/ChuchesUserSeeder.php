@@ -14,13 +14,13 @@ class ChuchesUserSeeder extends Seeder
     public function run(): void
     {
         $nombres = [
-            'candies', 'candies1'
+            'candies', 'candies1', 'candy'
         ];
         $modificador = [
-            '1', '1'
+            '1', '1', '2'
         ];
         $precio = [
-            '50', '100'
+            '50', '100', '150'
         ];
 
         for ($i = 0; $i < count($nombres); $i++) {
