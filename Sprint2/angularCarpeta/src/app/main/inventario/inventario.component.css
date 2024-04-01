@@ -1,0 +1,39 @@
+.cuerpoHome {
+    height: auto;
+    display: flex;
+    flex-flow: row wrap;
+    justify-content: space-around;
+    padding: 20px;
+    background: linear-gradient(to top, #ca95ff, #ffccff);
+  }
+  
+  .homeCards {
+      display: flex;
+      flex-direction: column;
+      align-items: center; /* Centra los elementos horizontalmente */
+      justify-content: center; /* Centra los elementos verticalmente */
+      border-radius: 10px;
+      border: 2px solid #000;
+      margin: 10px;
+      width: 24%;
+      background-color: rgb(162, 255, 255);
+  }
+  
+  .homeCards > a {
+      width: 100%; /* Hacer el enlace del 100% del contenedor */
+      display: flex;
+      justify-content: center; /* Centrar la imagen horizontalmente */
+  }
+  
+  .homeImg {
+      height: 100px;
+      width: 100px;
+      margin-top: 10px;
+  }
+  
+  .homeText {
+      margin-top: 5px; /* Establecer margen superior entre la imagen y el texto */
+      text-align: center; /* Centrar el texto horizontalmente */
+      margin-top: 10px;
+  }
+  

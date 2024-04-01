@@ -15,8 +15,7 @@ return new class extends Migration
             $table->id();
             $table->string('nombre', 20);
             $table->string('tipo', 50);
-            $table->integer('tamano');
-            $table->integer('comida')->default(0); // Campo 'comida' con valor predeterminado de 0
+            $table->integer('tamano')->default(1);
             $table->integer('vida');
             $table->string('archivo');
             $table->timestamps();
