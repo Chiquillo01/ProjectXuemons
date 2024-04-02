@@ -45,7 +45,7 @@ class ChuchesUserController extends Controller
                 $chuchesAleatorio = Chuches::inRandomOrder()->first();
 
                 // Asigna la ID 1 al xuxemon aleatorio seleccionado //
-                $validados['idUser'] = $chuchesAleatorio->id;
+                // $validados['idUser'] = $chuchesAleatorio->id;
 
                 // Crea los datos en una transacción //
                 ChuchesUser::create($validados);
