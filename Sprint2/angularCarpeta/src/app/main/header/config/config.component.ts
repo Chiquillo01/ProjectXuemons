@@ -5,6 +5,7 @@ import { Xuxemons } from '../../../models/xuxedex/xuxedex.model';
 import { UsersService } from 'src/app/services/users.service';
 import { XuxemonsService } from 'src/app/services/xuxemons.service';
 import { Router } from '@angular/router';
+import { ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-config',
@@ -16,15 +17,31 @@ export class ConfigComponent {
   configTam!: FormGroup;
   configChuches!: FormGroup;
   xuxemons: Xuxemons[] = [];
+  xuxeData: any;
+
+  ngOnInit(): void {
+    // Especificamos los parametros que queremos que nos de el servidor //
+    this.route.queryParams.subscribe((params: { [x: string]: any; }) => {
+      this.xuxeData = {
+        id: params['id'],
+        nombre: params['nombre'],
+        tipo: params['tipo'],
+        archivo: params['archivo'],
+      };
+    });
+
+    // Seteamos los valores //
+    this.configTam.setValue({
+      tamano: this.xuxeData.tamano || '',
+    });
+  }
 
   constructor(
     private fb: FormBuilder,
     public userService: UsersService,
     public xuxemonsService: XuxemonsService,
-    private router: Router
-  ) {}
-
-  ngOnInit(): void {
+    private route: ActivatedRoute
+  ) {
     this.configTam = this.fb.group({
       tamano: ['', [Validators.required]],
     });

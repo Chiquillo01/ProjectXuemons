@@ -45,7 +45,7 @@ export class ChuchesService {
   //   });
   // }
 
-  chucheUpdate(card: any, id: any): Observable<any> {
+  chucheUpdate(stack: any, id: any): Observable<any> {
     // Token de sesion //
     const authToken = this.tokenService.getToken();
     // Header con el token //
@@ -53,7 +53,7 @@ export class ChuchesService {
       Authorization: `Bearer ${authToken}`,
     });
     // Peticion con headers de actualizacion //
-    return this.http.put(`http://127.0.0.1:8000/api/chuches/${id}`, { stack: card.stack }, {
+    return this.http.put(`http://127.0.0.1:8000/api/chuches/${id.id}`, { stack: stack.stack }, {
       headers,
     });
   }

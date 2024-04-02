@@ -6,11 +6,12 @@
 <!-- Formulario de edición -->
 <form [formGroup]="configTam" (ngSubmit)="editarTamanoDef()">
     <h2>Editar Tamaño por defecto</h2>
-    <select formControlName="tamano">
+    <input formControlName="tamano" type="number" placeholder="Tamaño por defect"><br>
+    <!-- <select formControlName="tamano">
         <option value=1>Pequeño</option>
         <option value=2>Mediano</option>
         <option value=3>Grande</option>
-    </select>
+    </select> -->
     <button class="boton" type="submit" [disabled]="!configTam.valid">Actualizar Valores</button>
 </form>
 
