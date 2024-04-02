@@ -100,17 +100,13 @@ class XuxemonsController extends Controller
     {
         try {
             // Valida los datos recibidos
-            $request->validate([
+            $validados = $request->validate([
                 'tamano' => 'required', // Validación simple, puedes ajustarla según tus necesidades
             ]);
 
-            // Obtiene el nuevo tamaño del formulario
-            $nuevoTamano = $request->input('tamano');
-
             // Hace el update dentro de una transacción
-            DB::transaction(function () use ($nuevoTamano) {
-                // Actualiza el tamaño de todos los Xuxemons
-                Xuxemons::query()->update(['tamano' => $nuevoTamano]);
+            DB::transaction(function () use ($validados, $xuxemons) {
+                $xuxemons->update($validados);
             });
 
             // Retorna actualizado de forma satisfactoria

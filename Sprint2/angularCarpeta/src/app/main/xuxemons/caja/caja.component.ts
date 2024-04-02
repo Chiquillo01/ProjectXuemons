@@ -71,21 +71,22 @@ export class CajaComponent implements OnInit {
     const ChucheInfo = this.Chuches[this.selectedChuche];
     let Comida = 0;
 
-    // esto se puede ca,biar para que cambie depende de la dificultad
+    /* esto se puede cambiar para que cambie depende de la dificultad
     if (XuxemonAlimentado.comida <= 3) {
       Comida = XuxemonAlimentado.comida + ChucheInfo.modificador;
-    }
+    }*/
 
     const XuxemonEditado = {
       nombre: XuxemonAlimentado.nombre,
       tipo: XuxemonAlimentado.tipo,
       tamano: XuxemonAlimentado.tamano,
-      comida: Comida,
+      evo1:XuxemonAlimentado.evo1,
+      evo2:XuxemonAlimentado.evo2,
       vida: XuxemonAlimentado.vida,
       idUser: XuxemonAlimentado.idUser,
     };
 
-    // tiene que meter el numeor del modificador en la bd
+    /* tiene que meter el numeor del modificador en la bd
     if (XuxemonAlimentado.comida < 3) {
       this.xuxemonsService
         .XuxeUpdate(XuxemonEditado, this.XuxeId)
@@ -105,7 +106,7 @@ export class CajaComponent implements OnInit {
             throw new Error(error);
           },
         });
-    }
+    }*/
   }
   //  if (this.selectedChuche) {
   //   const XuxeEdit = this.xuxemonsUsers;
@@ -183,7 +184,8 @@ export class CajaComponent implements OnInit {
       nombre: randomXuxemon.nombre,
       tipo: randomXuxemon.tipo,
       tamano: randomXuxemon.tamano,
-      comida: randomXuxemon.comida,
+      //evo1:randomXuxemon.evo1,
+      //evo2:randomXuxemon.evo2,
       vida: randomXuxemon.vida,
       archivo: randomXuxemon.archivo,
       idUser: 1,
