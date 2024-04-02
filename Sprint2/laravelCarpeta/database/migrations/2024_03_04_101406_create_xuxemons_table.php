@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre', 20);
             $table->string('tipo', 50);
             $table->integer('tamano')->nullable()->default(1);
+            $table->integer('vida')->default(100);
             $table->string('archivo');
             $table->timestamps();
         });

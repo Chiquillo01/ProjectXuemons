@@ -184,12 +184,22 @@ export class CajaComponent implements OnInit {
       nombre: randomXuxemon.nombre,
       tipo: randomXuxemon.tipo,
       tamano: randomXuxemon.tamano,
-      //evo1:randomXuxemon.evo1,
-      //evo2:randomXuxemon.evo2,
+      evo1:0,
+      evo2:0,
       vida: randomXuxemon.vida,
       archivo: randomXuxemon.archivo,
       idUser: 1,
     };
+
+  // id?: number;
+  // nombre: string;
+  // tipo: string;
+  // tamano?: number;
+  // evo1?: number;
+  // evo2?: number;
+  // vida?: number;
+  // archivo: string;
+  // idUser?: number;
 
     console.log('XuxemonData: ');
     console.log(xuxemonData);

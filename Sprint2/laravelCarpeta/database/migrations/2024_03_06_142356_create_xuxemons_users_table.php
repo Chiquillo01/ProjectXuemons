@@ -18,7 +18,7 @@ return new class extends Migration
             $table->integer('tamano')->nullable()->default(1);
             $table->integer('evo1')->nullable()->default(3);
             $table->integer('evo2')->nullable()->default(5);
-            $table->integer('vida')->nullable();
+            $table->integer('vida')->nullable()->default(100);
             $table->string('archivo');
             $table->unsignedBigInteger('idUser');
             $table->timestamps();

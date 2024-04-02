@@ -68,8 +68,8 @@ export class ChuchesComponent implements OnInit{
 
     const chuchesData = {
       nombre: randomChuches.nombre,
-      modificador: randomChuches.modificador,
       dinero: randomChuches.dinero,
+      modificador: randomChuches.modificador,
       archivo: randomChuches.archivo,
       idUser: 1,
     };
