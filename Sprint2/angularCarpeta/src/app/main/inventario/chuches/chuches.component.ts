@@ -88,47 +88,69 @@ export class ChuchesComponent implements OnInit {
       }
     });
 
-    if (!editar) {
-      const chuchesData = {
-        nombre: randomChuches.nombre,
-        dinero: randomChuches.dinero,
-        modificador: randomChuches.modificador,
-        archivo: randomChuches.archivo,
-        idUser: 1,
-      };
+    const chuchesData = {
+      nombre: randomChuches.nombre,
+      dinero: randomChuches.dinero,
+      modificador: randomChuches.modificador,
+      archivo: randomChuches.archivo,
+      idUser: 1,
+    };
 
-      this.ChuchesService.createChuchesAleatorios(chuchesData).subscribe({
-        next: () => {
-          alert('Chuches creado aleatoriamente con éxito');
-          // window.location.reload();
-        },
-        error: (error) => {
-          console.log(chuchesData.idUser);
-          console.log('Error al crear la Chuches:', error);
-          console.log(chuchesData);
-          alert('Ocurrió un error al crear la Chuche aleatoria');
-        },
-      });
-    } else {
-      this.ChuchesService
-      .chucheUpdate(ChucheStack, id)
-      .subscribe({
-        // Aceptada //
-        next: (data: any) => {
-          // Redirije al usuario y le da un mensaje //
-          // this.router.navigate(['xuxedex']);
-          alert('chuche modificado con exito.');
-          console.log(ChucheStack);
-          // window.location.reload();
-        },
-        // Rechazada //
-        error: (error) => {
-          console.log(error);
-          // Avisa de que algo salió mal //
-          alert('No se pudo editar la chuche');
-          throw new Error(error);
-        },
-      });
-    }
+    this.ChuchesService.createChuchesAleatorios(chuchesData).subscribe({
+      next: () => {
+        alert('Chuches creado aleatoriamente con éxito');
+        window.location.reload();
+      },
+      error: (error) => {
+        console.log(chuchesData.idUser);
+        console.log('Error al crear la Chuches:', error);
+        console.log(chuchesData);
+        alert('Ocurrió un error al crear la Chuche aleatoria');
+      },
+    });
+
+
+    // if (!editar) {
+    //   const chuchesData = {
+    //     nombre: randomChuches.nombre,
+    //     dinero: randomChuches.dinero,
+    //     modificador: randomChuches.modificador,
+    //     archivo: randomChuches.archivo,
+    //     idUser: 1,
+    //   };
+
+    //   this.ChuchesService.createChuchesAleatorios(chuchesData).subscribe({
+    //     next: () => {
+    //       alert('Chuches creado aleatoriamente con éxito');
+    //       // window.location.reload();
+    //     },
+    //     error: (error) => {
+    //       console.log(chuchesData.idUser);
+    //       console.log('Error al crear la Chuches:', error);
+    //       console.log(chuchesData);
+    //       alert('Ocurrió un error al crear la Chuche aleatoria');
+    //     },
+    //   });
+    // } else {
+    //   this.ChuchesService
+    //   .chucheUpdate(ChucheStack, id)
+    //   .subscribe({
+    //     // Aceptada //
+    //     next: (data: any) => {
+    //       // Redirije al usuario y le da un mensaje //
+    //       // this.router.navigate(['xuxedex']);
+    //       alert('chuche modificado con exito.');
+    //       console.log(ChucheStack);
+    //       // window.location.reload();
+    //     },
+    //     // Rechazada //
+    //     error: (error) => {
+    //       console.log(error);
+    //       // Avisa de que algo salió mal //
+    //       alert('No se pudo editar la chuche');
+    //       throw new Error(error);
+    //     },
+    //   });
+    // }
   }
 }

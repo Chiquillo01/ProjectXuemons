@@ -31,7 +31,20 @@ export class ChuchesService {
     );
   }
 
-  // Función para editar la chuche //
+  // // Función para editar la chuche //
+  // chucheUpdate(card: any, id: any): Observable<any> {
+  //   // Token de sesion //
+  //   const authToken = this.tokenService.getToken();
+  //   // Header con el token //
+  //   const headers = new HttpHeaders({
+  //     Authorization: `Bearer ${authToken}`,
+  //   });
+  //   // Peticion con headers de actualizacion //
+  //   return this.http.put(`http://127.0.0.1:8000/api/chuches/${id}`, card.stack, {
+  //     headers,
+  //   });
+  // }
+
   chucheUpdate(card: any, id: any): Observable<any> {
     // Token de sesion //
     const authToken = this.tokenService.getToken();
@@ -40,8 +53,22 @@ export class ChuchesService {
       Authorization: `Bearer ${authToken}`,
     });
     // Peticion con headers de actualizacion //
-    return this.http.put(`http://127.0.0.1:8000/api/chuches/${id}`, card.stack, {
+    return this.http.put(`http://127.0.0.1:8000/api/chuches/${id}`, { stack: card.stack }, {
       headers,
     });
   }
+  
+  // chucheUpdate(stack: number, id: any): Observable<any> {
+  //   // Token de sesion //
+  //   const authToken = this.tokenService.getToken();
+  //   // Header con el token //
+  //   const headers = new HttpHeaders({
+  //     Authorization: `Bearer ${authToken}`,
+  //   });
+  //   // Peticion con headers de actualizacion //
+  //   return this.http.put(`http://127.0.0.1:8000/api/chuches/${id}`, { stack: stack }, {
+  //     headers,
+  //   });
+  // }
+
 }

@@ -71,42 +71,43 @@ export class CajaComponent implements OnInit {
     const ChucheInfo = this.Chuches[this.selectedChuche];
     let Comida = 0;
 
-    /* esto se puede cambiar para que cambie depende de la dificultad
+    // esto se puede cambiar para que cambie depende de la dificultad
     if (XuxemonAlimentado.comida <= 3) {
       Comida = XuxemonAlimentado.comida + ChucheInfo.modificador;
-    }*/
+    }
 
     const XuxemonEditado = {
       nombre: XuxemonAlimentado.nombre,
       tipo: XuxemonAlimentado.tipo,
       tamano: XuxemonAlimentado.tamano,
+      Comida: XuxemonAlimentado.comida + 1,
       evo1:XuxemonAlimentado.evo1,
       evo2:XuxemonAlimentado.evo2,
       vida: XuxemonAlimentado.vida,
       idUser: XuxemonAlimentado.idUser,
     };
 
-    /* tiene que meter el numeor del modificador en la bd
+    // tiene que meter el numeor del modificador en la bd
     if (XuxemonAlimentado.comida < 3) {
       this.xuxemonsService
         .XuxeUpdate(XuxemonEditado, this.XuxeId)
         .subscribe({
-          // Aceptada //
+         // Aceptada //
           next: (data: any) => {
-            // Redirije al usuario y le da un mensaje //
+            //Redirije al usuario y le da un mensaje //
             this.router.navigate(['xuxedex']);
             alert('Xuxemon modificado con exito.');
             this.router.navigate(['home/home/xuxemons/xuxedex']);
           },
-          // Rechazada //
+          //Rechazada //
           error: (error: string | undefined) => {
             console.log(error);
-            // Avisa de que algo salió mal //
+           // Avisa de que algo salió mal //
             alert('No se pudo editar el Xuxemon');
             throw new Error(error);
           },
         });
-    }*/
+    }
   }
 
   // dice que chuche le da
