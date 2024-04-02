@@ -58,5 +58,28 @@ class ChuchesUserController extends Controller
             return response()->json(['message' => 'Ha ocurrido un error al crear la chuche aleatorio: ' . $e->getMessage()], 500);
         }
     }
+
+    public function updateStack(Request $request, ChuchesUser $chuches)
+    {
+        try {
+            // Valida los datos recibidos
+            $validados = $request->validate([
+                'stack' => 'required', // Validación simple, puedes ajustarla según tus necesidades
+            ]);
+
+            // Hace el update dentro de una transacción
+            DB::transaction(function () use ($validados, $chuches) {
+                $chuches->update($validados);
+            });
+
+            // Retorna actualizado de forma satisfactoria
+            return response()->json(['message' => 'Se ha actualizado de forma correcta'], 200);
+        } catch (\Exception $e) {
+
+            // Retorna error
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar las chuches: ' . $e->getMessage()], 500);
+        }
+    }
+
 }
 

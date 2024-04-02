@@ -3,6 +3,7 @@ import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 // Imports de los modelos necesarios //
 import { Chuches } from '../../../models/chuches/chuches.model';
+import { ChuchesUser } from '../../../models/chuches/chuchesUser.model';
 
 // Imports de los servicios //
 import { UsersService } from '../../../services/users.service';
@@ -14,9 +15,9 @@ import { TokenService } from '../../../services/token.service';
   templateUrl: './chuches.component.html',
   styleUrls: ['./chuches.component.css'],
 })
-export class ChuchesComponent implements OnInit{
+export class ChuchesComponent implements OnInit {
   Chuches: Chuches[] = [];
-  ChuchesUser: Chuches[] = [];
+  ChuchesUser: ChuchesUser[] = [];
   // Variables para saber si el usuario tiene al xuxemon y para saber el rol del usuario //
   ChuchesView: boolean = false;
   userRole: Number | null;
@@ -59,32 +60,75 @@ export class ChuchesComponent implements OnInit{
 
   // Función para el botón de debug //
   debug() {
-    console.log(this.Chuches.length)
+    console.log(this.Chuches.length);
     const randomIndex = Math.floor(Math.random() * this.Chuches.length);
     const randomChuches = this.Chuches[randomIndex];
+    let editar = false;
+    let ChucheStack: any
+    let id: number | undefined;
+    // let chuchesUserData: any = {};
+    // const chuchesUser = this.ChuchesUser;
     // const reference = TokenService;
     // const token = TokenService.getToken();
     // console.log(token);
 
-    const chuchesData = {
-      nombre: randomChuches.nombre,
-      dinero: randomChuches.dinero,
-      modificador: randomChuches.modificador,
-      archivo: randomChuches.archivo,
-      idUser: 1,
-    };
-
-    this.ChuchesService.createChuchesAleatorios(chuchesData).subscribe({
-      next: () => {
-        alert('Chuches creado aleatoriamente con éxito');
-        // window.location.reload();
-      },
-      error: (error) => {
-        console.log(chuchesData.idUser);
-        console.log('Error al crear la Chuches:', error);
-        console.log(chuchesData);
-        alert('Ocurrió un error al crear la Chuche aleatoria');
-      },
+    this.ChuchesUser.forEach((chucheUser) => {
+      if (randomChuches.nombre == chucheUser.nombre) {
+        ChucheStack = +chucheUser.stack + 1;
+        // chuchesUserData = {
+        //   nombre: chucheUser.nombre,
+        //   dinero: chucheUser.dinero,
+        //   modificador: chucheUser.modificador,
+        //   archivo: chucheUser.archivo,
+        //   stack: ChucheStack + 1,
+        //   idUser: 1,
+        // };
+        id = chucheUser.id;
+        editar = true;
+      }
     });
+
+    if (!editar) {
+      const chuchesData = {
+        nombre: randomChuches.nombre,
+        dinero: randomChuches.dinero,
+        modificador: randomChuches.modificador,
+        archivo: randomChuches.archivo,
+        idUser: 1,
+      };
+
+      this.ChuchesService.createChuchesAleatorios(chuchesData).subscribe({
+        next: () => {
+          alert('Chuches creado aleatoriamente con éxito');
+          // window.location.reload();
+        },
+        error: (error) => {
+          console.log(chuchesData.idUser);
+          console.log('Error al crear la Chuches:', error);
+          console.log(chuchesData);
+          alert('Ocurrió un error al crear la Chuche aleatoria');
+        },
+      });
+    } else {
+      this.ChuchesService
+      .chucheUpdate(ChucheStack, id)
+      .subscribe({
+        // Aceptada //
+        next: (data: any) => {
+          // Redirije al usuario y le da un mensaje //
+          // this.router.navigate(['xuxedex']);
+          alert('chuche modificado con exito.');
+          console.log(ChucheStack);
+          // window.location.reload();
+        },
+        // Rechazada //
+        error: (error) => {
+          console.log(error);
+          // Avisa de que algo salió mal //
+          alert('No se pudo editar la chuche');
+          throw new Error(error);
+        },
+      });
+    }
   }
 }

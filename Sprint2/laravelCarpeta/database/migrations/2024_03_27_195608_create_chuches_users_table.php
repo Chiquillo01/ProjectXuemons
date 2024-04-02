@@ -17,6 +17,7 @@ return new class extends Migration
             $table->integer('dinero');
             $table->integer('modificador');
             $table->string('archivo');
+            $table->string('stack')->default(1);
             $table->unsignedBigInteger('idUser');
             $table->timestamps();
 

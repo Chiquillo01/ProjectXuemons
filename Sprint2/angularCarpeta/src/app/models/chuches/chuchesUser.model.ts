@@ -4,6 +4,7 @@ export interface ChuchesUser {
   modificador: number;
   dinero: string; 
   archivo: string;
+  stack: number;
   idUser: number;
   created_at?: string;
   updated_at?: string;

@@ -108,15 +108,6 @@ export class CajaComponent implements OnInit {
         });
     }*/
   }
-  //  if (this.selectedChuche) {
-  //   const XuxeEdit = this.xuxemonsUsers;
-  //   // this.xuxemonsService.XuxeUpdate(this.xuxemonForm.value, this.xuxeData.id);
-  //   // Aquí puedes enviar la chuche seleccionada, por ejemplo, a través de una función o servicio
-  //   console.log('Chuche seleccionada:', this.selectedChuche);
-  //   // Lógica para enviar la chuche seleccionada
-  // } else {
-  //   console.log('Por favor, selecciona una chuche antes de alimentar');
-  // }
 
   // dice que chuche le da
   onChucheChange(event: any, id: number | undefined) {
@@ -128,14 +119,6 @@ export class CajaComponent implements OnInit {
       console.log('No se pudo obtener la chuche seleccionada');
     }
   }
-
-  // const selectedIndex = event.target.selectedIndex;
-  //   if (selectedIndex !== undefined) {
-  //     this.selectedChuche[1] = event.target.options[selectedIndex].value;
-  //     this.selectedChuche[2] = id;
-  //   } else {
-  //     console.log('No se pudo obtener la chuche seleccionada');
-  //   }
 
   updateXuxemons() {
     this.xuxemonsService.getAllXuxemonsUser().subscribe({
@@ -190,16 +173,6 @@ export class CajaComponent implements OnInit {
       archivo: randomXuxemon.archivo,
       idUser: 1,
     };
-
-  // id?: number;
-  // nombre: string;
-  // tipo: string;
-  // tamano?: number;
-  // evo1?: number;
-  // evo2?: number;
-  // vida?: number;
-  // archivo: string;
-  // idUser?: number;
 
     console.log('XuxemonData: ');
     console.log(xuxemonData);

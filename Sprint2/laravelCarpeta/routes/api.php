@@ -61,6 +61,8 @@ Route::get('/chuches', [ChuchesController::class, 'show']);
 Route::get('/chuchesUser', [ChuchesUserController::class, 'show']);
 // Crear chuches aleatorias //
 Route::post('/chuches/random', [ChuchesUserController::class, 'debug']);
+// Actualizar chuche //
+Route::put('/chuches/{chuches}', [ChuchesUserController::class, 'updateStack']);
 // ---------------------- //
 // ---------------------- //
 

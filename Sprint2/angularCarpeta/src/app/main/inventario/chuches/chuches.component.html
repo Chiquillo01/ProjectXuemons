@@ -15,9 +15,19 @@
 
     <div class="list-container">
       <div class="card-flex" *ngFor="let chuche of ChuchesUser">
-        <h3 class="card-title">
-          {{chuche.nombre}}
-        </h3>
+        <div class="title">
+
+          <h1 *ngIf="chuche.stack > 1" class="stack">
+            {{chuche.stack}}
+          </h1>
+
+          <h3 class="card-title">
+            {{chuche.nombre}}
+          </h3>
+
+        </div>
+
+
 
         <img [src]="'../../../../assets/home/' + chuche.archivo" alt="{{ chuche.nombre }}">
 
