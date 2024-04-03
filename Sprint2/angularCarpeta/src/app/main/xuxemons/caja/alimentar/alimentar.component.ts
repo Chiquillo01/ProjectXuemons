@@ -8,15 +8,12 @@ import { XuxemonsService } from 'src/app/services/xuxemons.service';
 import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
-  selector: 'app-editar',
-  standalone: true,
-  imports: [ReactiveFormsModule],
-  templateUrl: './editar.component.html',
-  styleUrls: ['./editar.component.css'],
+  selector: 'app-alimentar',
+  templateUrl: './alimentar.component.html',
+  styleUrls: ['./alimentar.component.css']
 })
-export class EditarComponent {
-  // Variables especificas //
-  xuxemonForm: FormGroup;
+export class AlimentarComponent {
+  alimentarForm: FormGroup;
   xuxeData: any;
 
   ngOnInit(): void {
@@ -26,6 +23,7 @@ export class EditarComponent {
         nombre: params['nombre'],
         tipo: params['tipo'],
         tamano: params['tamano'],
+        comida: params['comida'],
         evo1: params['evo1'],
         evo2: params['evo2'],
         archivo: params['archivo'],
@@ -33,12 +31,9 @@ export class EditarComponent {
     });
 
     // Seteamos los valores //
-    this.xuxemonForm.setValue({
+    this.alimentarForm.setValue({
       nombre: this.xuxeData.nombre || '',
       tipo: this.xuxeData.tipo || '',
-      tamano: this.xuxeData.tamano || '',
-      evo1: this.xuxeData.evo1 || '',
-      evo2: this.xuxeData.evo2 || '',
       archivo: this.xuxeData.archivo || '',
     });
   }
@@ -51,33 +46,30 @@ export class EditarComponent {
     private route: ActivatedRoute
   ) {
     // Restricciones que se espera que tenga el FormGroup //
-    this.xuxemonForm = this.fb.group({
+    this.alimentarForm = this.fb.group({
       nombre: ['', [Validators.required]],
       tipo: ['', [Validators.required]],
-      tamano: ['', [Validators.required]],
-      evo1: ['', [Validators.required]],
-      evo2: ['', [Validators.required]],
       archivo: ['', [Validators.required]],
     });
   }
 
   // Función para editar el Xuxemon //
-  editarXuxemon() {
+  alimentarXuxemon() {
     // Se subscribe para recibir la información de la función a la que hace referencia en users.service //
     this.xuxemonsService
-      .XuxeUpdate(this.xuxemonForm.value, this.xuxeData.id)
+      .XuxeComer(this.alimentarForm.value, this.xuxeData.id)
       .subscribe({
         // Aceptada //
         next: (data: any) => {
           // Redirije al usuario y le da un mensaje //
-          alert('Xuxemon modificado con exito.');
-          this.router.navigate(['home/home/xuxemons/xuxedex']);
+          alert('Xuxemon alimentado con exito.');
+          this.router.navigate(['home/home/caja/alimentar']);
         },
         // Rechazada //
         error: (error) => {
           console.log(error);
           // Avisa de que algo salió mal //
-          alert('No se pudo editar el Xuxemon');
+          alert('No se pudo alimantar al Xuxemon');
           throw new Error(error);
         },
       });

@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
 // Imports de los modelos necesarios //
-import { Xuxemons } from '../../../models/xuxedex/xuxedex.model';
+//import { Xuxemons } from '../../../models/xuxedex/xuxedex.model';
 import { XuxemonsUsers } from '../../../models/xuxemons/xuxemons.model';
 import { Chuches } from 'src/app/models/chuches/chuches.model';
 // Imports de los servicios //
@@ -16,20 +16,22 @@ import { TokenService } from '../../../services/token.service';
   styleUrls: ['./caja.component.css'],
 })
 export class CajaComponent implements OnInit {
-  xuxemons: Xuxemons[] = [];
   xuxemonsUsers: XuxemonsUsers[] = [];
-  Chuches: Chuches[] = [];
-  // Variables para saber si el usuario tiene al xuxemon y para saber el rol del usuario //
-  xuxemonsView: boolean = false;
   userRole: Number | null;
-  repetido: boolean = false;
-  selectedChuche: any;
-  XuxeId: any;
+  //xuxemons: Xuxemons[] = [];
+
+  //Chuches: Chuches[] = [];
+  // Variables para saber si el usuario tiene al xuxemon y para saber el rol del usuario //
+  //xuxemonsView: boolean = false;
+
+  // repetido: boolean = false;
+  // selectedChuche: any;
+  // XuxeId: any;
 
   constructor(
     public userService: UsersService,
     public xuxemonsService: XuxemonsService,
-    public chuchesService: ChuchesService,
+    //public chuchesService: ChuchesService,
     private router: Router,
     public tokenService: TokenService
   ) {
@@ -61,64 +63,8 @@ export class CajaComponent implements OnInit {
 
   ngOnInit(): void {
     this.updateXuxemons();
-    this.getXuxemons();
-    this.getChuches();
-  }
-
-  // alimentar a los xuxemons
-  alimentar() {
-    const XuxemonAlimentado = this.xuxemonsUsers[this.XuxeId];
-    const ChucheInfo = this.Chuches[this.selectedChuche];
-    let Comida = 0;
-
-    // esto se puede cambiar para que cambie depende de la dificultad
-    if (XuxemonAlimentado.comida <= 3) {
-      Comida = XuxemonAlimentado.comida + ChucheInfo.modificador;
-    }
-
-    const XuxemonEditado = {
-      nombre: XuxemonAlimentado.nombre,
-      tipo: XuxemonAlimentado.tipo,
-      tamano: XuxemonAlimentado.tamano,
-      comida: Comida,
-      evo1:XuxemonAlimentado.evo1,
-      evo2:XuxemonAlimentado.evo2,
-      vida: XuxemonAlimentado.vida,
-      idUser: XuxemonAlimentado.idUser,
-    };
-
-    // tiene que meter el numeor del modificador en la bd
-    if (XuxemonAlimentado.comida < 3) {
-      this.xuxemonsService
-        .XuxeComer(XuxemonEditado, this.XuxeId)
-        .subscribe({
-         // Aceptada //
-          next: (data: any) => {
-            //Redirije al usuario y le da un mensaje //
-            //this.router.navigate(['xuxedex']);
-            alert('Xuxemon modificado con exito.');
-            this.router.navigate(['home/home/xuxemons/xuxedex']);
-          },
-          //Rechazada //
-          error: (error: string | undefined) => {
-            console.log(error);
-           // Avisa de que algo salió mal //
-            alert('No se pudo editar el Xuxemon');
-            throw new Error(error);
-          },
-        });
-    }
-  }
-
-  // dice que chuche le da
-  onChucheChange(event: any, id: number | undefined) {
-    const selectedIndex = event.target.selectedIndex;
-    if (selectedIndex !== undefined) {
-      this.selectedChuche = selectedIndex;
-      this.XuxeId = id! - 1;
-    } else {
-      console.log('No se pudo obtener la chuche seleccionada');
-    }
+    //this.getXuxemons();
+    //this.getChuches();
   }
 
   updateXuxemons() {
@@ -132,80 +78,152 @@ export class CajaComponent implements OnInit {
     });
   }
 
-  getChuches() {
-    this.chuchesService.getAllChuches().subscribe({
-      next: (value: any) => {
-        this.Chuches = value[0];
+  // alimentar a los xuxemons
+  alimentar(xuxe: any) {
+    const navigationExtras: NavigationExtras = {
+      queryParams: {
+        id: xuxe.id,
+        nombre: xuxe.nombre,
+        tipo: xuxe.tipo,
+        tamano: xuxe.tamano,
+        comida: xuxe.comida,
+        evo1: xuxe.evo1,
+        evo2: xuxe.evo2,
+        archivo: xuxe.archivo,
       },
-      error: (error) => {
-        console.error('Error fetching Chuches:', error);
-      },
-    });
+    };
+    // Envia al usuario a la ruta de edición //
+    this.router.navigate(
+      ['/home/home/xuxemons/caja/alimentar'],
+      navigationExtras
+    );
+    // const XuxemonAlimentado = this.xuxemonsUsers[this.XuxeId];
+    // const ChucheInfo = this.Chuches[this.selectedChuche];
+    // let Comida = 0;
+    // // esto se puede cambiar para que cambie depende de la dificultad
+    // if (XuxemonAlimentado.comida <= 3) {
+    //   Comida = XuxemonAlimentado.comida + ChucheInfo.modificador;
+    // }
+    // const XuxemonEditado = {
+    //   nombre: XuxemonAlimentado.nombre,
+    //   tipo: XuxemonAlimentado.tipo,
+    //   tamano: XuxemonAlimentado.tamano,
+    //   comida: Comida,
+    //   evo1:XuxemonAlimentado.evo1,
+    //   evo2:XuxemonAlimentado.evo2,
+    //   vida: XuxemonAlimentado.vida,
+    //   idUser: XuxemonAlimentado.idUser,
+    // };
+    // // tiene que meter el numeor del modificador en la bd
+    // if (XuxemonAlimentado.comida < 3) {
+    //   this.xuxemonsService
+    //     .XuxeComer(XuxemonEditado, this.XuxeId)
+    //     .subscribe({
+    //      // Aceptada //
+    //       next: (data: any) => {
+    //         //Redirije al usuario y le da un mensaje //
+    //         //this.router.navigate(['xuxedex']);
+    //         alert('Xuxemon modificado con exito.');
+    //         this.router.navigate(['home/home/xuxemons/xuxedex']);
+    //       },
+    //       //Rechazada //
+    //       error: (error: string | undefined) => {
+    //         console.log(error);
+    //        // Avisa de que algo salió mal //
+    //         alert('No se pudo editar el Xuxemon');
+    //         throw new Error(error);
+    //       },
+    //     });
+    // }
   }
 
-  getXuxemons() {
-    this.xuxemonsService.getAllXuxemons().subscribe({
-      next: (value: any) => {
-        this.xuxemons = value[0];
-      },
-      error: (error) => {
-        console.error('Error fetching Xuxemons:', error);
-      },
-    });
-  }
+  // Función para eliminar el xuxemon seleccionado //
+  eliminar($id: any) {}
+
+  // // dice que chuche le da
+  // onChucheChange(event: any, id: number | undefined) {
+  //   const selectedIndex = event.target.selectedIndex;
+  //   if (selectedIndex !== undefined) {
+  //     this.selectedChuche = selectedIndex;
+  //     this.XuxeId = id! - 1;
+  //   } else {
+  //     console.log('No se pudo obtener la chuche seleccionada');
+  //   }
+  // }
+
+  // getChuches() {
+  //   this.chuchesService.getAllChuches().subscribe({
+  //     next: (value: any) => {
+  //       this.Chuches = value[0];
+  //     },
+  //     error: (error) => {
+  //       console.error('Error fetching Chuches:', error);
+  //     },
+  //   });
+  // }
+
+  // getXuxemons() {
+  //   this.xuxemonsService.getAllXuxemons().subscribe({
+  //     next: (value: any) => {
+  //       this.xuxemons = value[0];
+  //     },
+  //     error: (error) => {
+  //       console.error('Error fetching Xuxemons:', error);
+  //     },
+  //   });
+  // }
 
   // Función para el botón de debug //
   debug() {
-    const randomIndex = Math.floor(Math.random() * this.xuxemons.length);
-    const randomXuxemon = this.xuxemons[randomIndex];
-    console.log('randomIndex:' + randomIndex);
-    console.log('Numero de Xuxemons: ' + this.xuxemons.length);
-    // const reference = TokenService;
-    // const token = TokenService.getToken();
-    // console.log(token);
-
-    const xuxemonData = {
-      nombre: randomXuxemon.nombre,
-      tipo: randomXuxemon.tipo,
-      tamano: randomXuxemon.tamano,
-      evo1:0,
-      evo2:0,
-      vida: randomXuxemon.vida,
-      archivo: randomXuxemon.archivo,
-      idUser: 1,
-    };
-
-    console.log('XuxemonData: ');
-    console.log(xuxemonData);
-    // console.log(xuxemonsArray);
-
-    this.xuxemonsUsers.forEach((xuxemonUser) => {
-      if (
-        xuxemonUser.tamano === randomXuxemon.tamano &&
-        xuxemonUser.nombre === randomXuxemon.nombre
-      ) {
-        this.repetido = true;
-      }
-    });
-
-    console.log('Repetido ? ' + this.repetido);
-
-    if (!this.repetido) {
-      this.xuxemonsService.createXuxemonAleatorios(xuxemonData).subscribe({
-        next: () => {
-          alert('Xuxemon creado aleatoriamente con éxito');
-          window.location.reload();
-          // this.tokenService.recargarPagina;
-        },
-        error: (error) => {
-          console.error('Error al crear el Xuxemon:', error);
-          alert('Ocurrió un error al crear el Xuxemon aleatorio');
-        },
-      });
-    } else {
-      console.warn('Error, ya tienes el Xuxemon con el mismo tamaño');
-      alert('Ya tienes el Xuxemon con el mismo tamaño');
-      this.repetido = false;
-    }
+    //   const randomIndex = Math.floor(Math.random() * this.xuxemons.length);
+    //   const randomXuxemon = this.xuxemons[randomIndex];
+    //   console.log('randomIndex:' + randomIndex);
+    //   console.log('Numero de Xuxemons: ' + this.xuxemons.length);
+    //   // const reference = TokenService;
+    //   // const token = TokenService.getToken();
+    //   // console.log(token);
+    //   const xuxemonData = {
+    //     nombre: randomXuxemon.nombre,
+    //     tipo: randomXuxemon.tipo,
+    //     tamano: randomXuxemon.tamano,
+    //     evo1:0,
+    //     evo2:0,
+    //     vida: randomXuxemon.vida,
+    //     archivo: randomXuxemon.archivo,
+    //     idUser: 1,
   }
+
+  //   console.log('XuxemonData: ');
+  //   console.log(xuxemonData);
+  //   // console.log(xuxemonsArray);
+
+  //   this.xuxemonsUsers.forEach((xuxemonUser) => {
+  //     if (
+  //       xuxemonUser.tamano === randomXuxemon.tamano &&
+  //       xuxemonUser.nombre === randomXuxemon.nombre
+  //     ) {
+  //       this.repetido = true;
+  //     }
+  //   });
+
+  //   console.log('Repetido ? ' + this.repetido);
+
+  //   if (!this.repetido) {
+  //     this.xuxemonsService.createXuxemonAleatorios(xuxemonData).subscribe({
+  //       next: () => {
+  //         alert('Xuxemon creado aleatoriamente con éxito');
+  //         window.location.reload();
+  //         // this.tokenService.recargarPagina;
+  //       },
+  //       error: (error) => {
+  //         console.error('Error al crear el Xuxemon:', error);
+  //         alert('Ocurrió un error al crear el Xuxemon aleatorio');
+  //       },
+  //     });
+  //   } else {
+  //     console.warn('Error, ya tienes el Xuxemon con el mismo tamaño');
+  //     alert('Ya tienes el Xuxemon con el mismo tamaño');
+  //     this.repetido = false;
+  //   }
+  // }
 }
