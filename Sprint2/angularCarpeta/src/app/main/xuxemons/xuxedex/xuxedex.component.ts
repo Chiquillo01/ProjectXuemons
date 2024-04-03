@@ -79,6 +79,9 @@ export class XuxedexComponent implements OnInit {
         id: xuxe.id,
         nombre: xuxe.nombre,
         tipo: xuxe.tipo,
+        tamano: xuxe.tamano,
+        evo1: xuxe.evo1,
+        evo2: xuxe.evo2,
         archivo: xuxe.archivo,
       },
     };

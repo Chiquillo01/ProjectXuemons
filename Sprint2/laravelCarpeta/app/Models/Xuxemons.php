@@ -12,6 +12,9 @@ class Xuxemons extends Model
         'nombre',
         'tipo',
         'tamano',
+        'evo1',
+        'evo2',
+        'vida',
         'archivo',
     ];
 }

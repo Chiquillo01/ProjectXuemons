@@ -19,8 +19,10 @@ class XuxemonsController extends Controller
             $validados = $request->validate([
                 'nombre' => 'required|string',
                 'tipo' => 'required|string',
-                'tamano' => 'required|numeric',
-                'comida' => 'numeric',
+                'tamano' => 'nullable|numeric',
+                'evo1' => 'nullable|numeric',
+                'evo2' => 'nullable|numeric',
+                //'comida' => 'numeric',
                 'vida' => 'required|numeric',
                 'archivo' => 'required|string',
             ]);
@@ -76,6 +78,9 @@ class XuxemonsController extends Controller
             $validados = $request->validate([
                 'nombre' => ['required', 'max:20', 'unique:xuxemons,nombre,' . $xuxemons->id],
                 'tipo' => ['required', 'in:Tierra,Aire,Agua'],
+                'tamano' => ['required'],
+                'evo1' => ['required'],
+                'evo2' => ['required'],
                 'archivo' => ['required', 'unique:xuxemons,archivo,' . $xuxemons->id],
             ]);
 

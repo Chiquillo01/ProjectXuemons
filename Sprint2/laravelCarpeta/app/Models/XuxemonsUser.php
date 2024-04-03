@@ -13,6 +13,7 @@ class XuxemonsUser extends Model
         'tipo',
         'archivo',
         'tamano',
+        'comida',
         'evo1',
         'evo2',
         'vida',

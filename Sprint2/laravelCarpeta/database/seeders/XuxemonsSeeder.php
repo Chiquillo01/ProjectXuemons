@@ -36,7 +36,6 @@ class XuxemonsSeeder extends Seeder
                 'id' => 0,
                 'nombre' => $nombres[$i],
                 'tipo' => $tipo[$i],
-                'tamano' => 1,
                 'archivo' => strtolower($nombres[$i]) . '.png',
             ]);
         }

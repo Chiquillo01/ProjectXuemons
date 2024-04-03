@@ -14,6 +14,15 @@
         <option value="Agua">Agua</option>
     </select>
 
+    <select formControlName="tamano">
+        <option value=1>Paqueño</option>
+        <option value=2>Mediano</option>
+        <option value=3>Grande</option>
+    </select>
+
+    <input formControlName="evo1" type="nomber"><br>
+    <input formControlName="evo2" type="nomber"><br>
+
     <input formControlName="archivo" type="text" placeholder="Nombre del archivo"><br>
     <button class="boton" type="submit" [disabled]="!xuxemonForm.valid">Guardar</button>
     <a class="atras" href="home/home/xuxemons/xuxedex">Volver</a>

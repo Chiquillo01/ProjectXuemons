@@ -43,6 +43,10 @@ export class XuxemonsService {
 
   // Función para actualizar datos del Xuxemon //
   XuxeUpdate(card: any, id: any): Observable<any> {
+    card.tamano = parseInt(card.tamano);
+    card.evo1 = parseInt(card.evo1);
+    card.evo2 = parseInt(card.evo2);
+    console.log('Datos del Xuxemon a actualizar:', card);
     // Token de sesion //
     const authToken = this.tokenService.getToken();
     // Header con el token //
@@ -61,7 +65,7 @@ export class XuxemonsService {
   }
 
   // Función para actualizar tamaño del Xuxemon //
-  XuxeConfig(tamano: any): Observable<any> {
+  XuxeConfig(tamano: any, id: any): Observable<any> {
     // Token de sesion //
     const authToken = this.tokenService.getToken();
     // Header con el token //
@@ -69,13 +73,13 @@ export class XuxemonsService {
       Authorization: `Bearer ${authToken}`,
     });
     // Peticion con headers de actualizacion //
-    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/tamano`, tamano, {
+    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/${id}`, tamano, {
       headers,
     });
   }
 
   // Función para actualizar tamaño del Xuxemon //
-  ChuchesConfig(evos: any): Observable<any> {
+  ChuchesConfig(evos: any, id: any): Observable<any> {
     // Token de sesion //
     const authToken = this.tokenService.getToken();
     // Header con el token //
@@ -83,7 +87,7 @@ export class XuxemonsService {
       Authorization: `Bearer ${authToken}`,
     });
     // Peticion con headers de actualizacion //
-    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/evos`, evos, {
+    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/${id}`, evos, {
       headers,
     });
   }

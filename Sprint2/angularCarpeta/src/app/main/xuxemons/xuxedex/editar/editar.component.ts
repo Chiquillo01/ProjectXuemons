@@ -5,8 +5,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 import { UsersService } from 'src/app/services/users.service';
 import { XuxemonsService } from 'src/app/services/xuxemons.service';
 // Imports de las rutas //
-import { Router } from '@angular/router';
-import { ActivatedRoute } from '@angular/router';
+import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-editar',
@@ -27,6 +26,9 @@ export class EditarComponent {
         id: params['id'],
         nombre: params['nombre'],
         tipo: params['tipo'],
+        tamano: params['tamano'],
+        evo1: params['evo1'],
+        evo2: params['evo2'],
         archivo: params['archivo'],
       };
     });
@@ -35,6 +37,9 @@ export class EditarComponent {
     this.xuxemonForm.setValue({
       nombre: this.xuxeData.nombre || '',
       tipo: this.xuxeData.tipo || '',
+      tamano: this.xuxeData.tamano || '',
+      evo1: this.xuxeData.evo1 || '',
+      evo2: this.xuxeData.evo2 || '',
       archivo: this.xuxeData.archivo || '',
     });
   }
@@ -50,6 +55,9 @@ export class EditarComponent {
     this.xuxemonForm = this.fb.group({
       nombre: ['', [Validators.required]],
       tipo: ['', [Validators.required]],
+      tamano: ['', [Validators.required]],
+      evo1: ['', [Validators.required]],
+      evo2: ['', [Validators.required]],
       archivo: ['', [Validators.required]],
     });
   }
@@ -63,7 +71,6 @@ export class EditarComponent {
         // Aceptada //
         next: (data: any) => {
           // Redirije al usuario y le da un mensaje //
-          this.router.navigate(['xuxedex']);
           alert('Xuxemon modificado con exito.');
           this.router.navigate(['home/home/xuxemons/xuxedex']);
         },
