@@ -73,6 +73,8 @@ class XuxemonsUserController extends Controller
                 $xuxemonsUser->update($validados);
             });
 
+            dump($xuxemonsUser);
+
             // Retorna actualizado de forma satisfactoria
             return response()->json(['message' => 'Se ha actualizado de forma correcta'], 200);
         } catch (\Exception $e) {

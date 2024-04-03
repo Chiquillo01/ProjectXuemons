@@ -4,7 +4,7 @@
 </head>
 
 <!-- Formulario de edición -->
-<form [formGroup]="alimentarForm" (ngSubmit)="alimentarXuxemon()">
+<!-- <form [formGroup]="alimentarForm" (ngSubmit)="alimentarXuxemon()">
     <h1>Editar Xuxemon</h1>
     <input formControlName="nombre" type="text" placeholder="Nombre"><br>
 
@@ -17,4 +17,51 @@
     <input formControlName="archivo" type="text" placeholder="Nombre del archivo"><br>
     <button class="boton" type="submit" [disabled]="!alimentarForm.valid">Guardar</button>
     <a class="atras" href="home/home/xuxemons/xuxedex">Volver</a>
-</form>
+</form> -->
+
+<div>
+    <div class="container">
+        <div class="list-container">
+            <div class="card-flex" *ngFor="let chuche of ChuchesUser">
+                <div class="title">
+
+                    <h1 *ngIf="chuche.stack > 1" class="stack">
+                        {{chuche.stack}}
+                    </h1>
+
+                    <h3 class="card-title">
+                        {{chuche.nombre}}
+                    </h3>
+
+                </div>
+
+                <img [src]="'../../../../assets/home/' + chuche.archivo" alt="{{ chuche.nombre }}">
+
+                <div>
+                    <!-- resta el numero del imput -->
+                    <button class="editar-btn" *ngIf="chuche.id !== undefined" (click)="restar(chuche.id)">
+                        -
+                    </button>
+                    <!-- aqui se ve el numero que hay en el imput -->
+                    <input type="number" [(ngModel)]="chucheSeleccionada.numero" name="numero">
+                    <!-- suma el numero del imput -->
+                    <button class="eliminar-btn" *ngIf="chuche.id !== undefined" (click)="sumar(chuche.id)">
+                        +
+                    </button>
+
+                </div>
+
+
+                <div>
+                    <!-- al guardar tiene que actualizar la comida -->
+                    <button class="editar-btn" (click)="ObtenerId(chuche.nombre); alimentarXuxemon(chuche.id!)">
+                        Dar
+                    </button>
+                    <!-- si se cambia el alimentarXuxemon por el guardar se ve en la consola la info -->
+                    <!-- (click)="guardar()" -->
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>

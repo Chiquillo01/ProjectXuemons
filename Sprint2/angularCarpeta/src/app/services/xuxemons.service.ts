@@ -66,7 +66,7 @@ export class XuxemonsService {
 
   // Función para actualizar datos del Xuxemon //
   XuxeComer(card: any, id: any): Observable<any> {
-    console.log('Datos del Xuxemon a actualizar:', card);
+    console.log('Datos del Xuxemon a actualizar la comida:', card);
     // Token de sesion //
     const authToken = this.tokenService.getToken();
     // Header con el token //
