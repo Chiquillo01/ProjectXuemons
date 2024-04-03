@@ -80,7 +80,7 @@ export class CajaComponent implements OnInit {
       nombre: XuxemonAlimentado.nombre,
       tipo: XuxemonAlimentado.tipo,
       tamano: XuxemonAlimentado.tamano,
-      Comida: XuxemonAlimentado.comida + 1,
+      comida: Comida,
       evo1:XuxemonAlimentado.evo1,
       evo2:XuxemonAlimentado.evo2,
       vida: XuxemonAlimentado.vida,
@@ -90,12 +90,12 @@ export class CajaComponent implements OnInit {
     // tiene que meter el numeor del modificador en la bd
     if (XuxemonAlimentado.comida < 3) {
       this.xuxemonsService
-        .XuxeUpdate(XuxemonEditado, this.XuxeId)
+        .XuxeComer(XuxemonEditado, this.XuxeId)
         .subscribe({
          // Aceptada //
           next: (data: any) => {
             //Redirije al usuario y le da un mensaje //
-            this.router.navigate(['xuxedex']);
+            //this.router.navigate(['xuxedex']);
             alert('Xuxemon modificado con exito.');
             this.router.navigate(['home/home/xuxemons/xuxedex']);
           },
@@ -115,7 +115,7 @@ export class CajaComponent implements OnInit {
     const selectedIndex = event.target.selectedIndex;
     if (selectedIndex !== undefined) {
       this.selectedChuche = selectedIndex;
-      this.XuxeId = id;
+      this.XuxeId = id! - 1;
     } else {
       console.log('No se pudo obtener la chuche seleccionada');
     }

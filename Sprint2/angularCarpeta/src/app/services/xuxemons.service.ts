@@ -64,6 +64,21 @@ export class XuxemonsService {
     return this.http.post<any>('http://127.0.0.1:8000/api/xuxemons/users/random/', xuxemonData);
   }
 
+  // Función para actualizar datos del Xuxemon //
+  XuxeComer(card: any, id: any): Observable<any> {
+    console.log('Datos del Xuxemon a actualizar:', card);
+    // Token de sesion //
+    const authToken = this.tokenService.getToken();
+    // Header con el token //
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+    // Peticion con headers de actualizacion //
+    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/users/comer/${id}`, card, {
+      headers,
+    });
+  }
+
   // Función para actualizar tamaño del Xuxemon //
   XuxeConfig(tamano: any, id: any): Observable<any> {
     // Token de sesion //

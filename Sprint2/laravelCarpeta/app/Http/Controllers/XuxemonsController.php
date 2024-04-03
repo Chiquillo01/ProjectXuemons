@@ -22,7 +22,6 @@ class XuxemonsController extends Controller
                 'tamano' => 'nullable|numeric',
                 'evo1' => 'nullable|numeric',
                 'evo2' => 'nullable|numeric',
-                //'comida' => 'numeric',
                 'vida' => 'required|numeric',
                 'archivo' => 'required|string',
             ]);

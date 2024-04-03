@@ -59,6 +59,32 @@ class XuxemonsUserController extends Controller
     /**
      * Update the evolutions in storage.
      */
+    public function alimentar(Request $request, XuxemonsUser $xuxemonsUser)
+    {
+
+        try {
+            // Valida los datos //
+            $validados = $request->validate([
+                'comida' => ['required'],
+            ]);
+
+            // Hace el update dentro de una transaccion
+            DB::transaction(function () use ($validados, $xuxemonsUser) {
+                $xuxemonsUser->update($validados);
+            });
+
+            // Retorna actualizado de forma satisfactoria
+            return response()->json(['message' => 'Se ha actualizado de forma correcta'], 200);
+        } catch (\Exception $e) {
+
+            // Retorna error
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar los xuxemons: ' . $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * Update the evolutions in storage.
+     */
     public function updateEvos(Request $request, XuxemonsUser $xuxemonsUser)
     {
 
