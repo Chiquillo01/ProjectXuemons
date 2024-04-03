@@ -1,16 +1,21 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 // Imports de los servicios //
 import { UsersService } from 'src/app/services/users.service';
+import { ChuchesService } from '../../../../services/chuches.service';
 import { XuxemonsService } from 'src/app/services/xuxemons.service';
 // Imports de las rutas //
 import { Router, ActivatedRoute } from '@angular/router';
+import { Chuches } from 'src/app/models/chuches/chuches.model';
+import { ChuchesUser } from 'src/app/models/chuches/chuchesUser.model';
 
 @Component({
   selector: 'app-editar',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  // imports: [CommonModule],
+  imports: [ReactiveFormsModule,CommonModule],
   templateUrl: './editar.component.html',
   styleUrls: ['./editar.component.css'],
 })
@@ -18,6 +23,8 @@ export class EditarComponent {
   // Variables especificas //
   xuxemonForm: FormGroup;
   xuxeData: any;
+  chuches: Chuches[] = [];
+  ChuchesUser: ChuchesUser[] = [];
 
   ngOnInit(): void {
     this.route.queryParams.subscribe((params) => {
@@ -44,6 +51,7 @@ export class EditarComponent {
   }
 
   constructor(
+    public chuchesService: ChuchesService,
     private fb: FormBuilder,
     public userService: UsersService,
     public xuxemonsService: XuxemonsService,
@@ -58,6 +66,28 @@ export class EditarComponent {
       evo1: ['', [Validators.required]],
       evo2: ['', [Validators.required]],
       archivo: ['', [Validators.required]],
+    });
+  }
+
+ getChuches() {
+    this.chuchesService.getAllChuchesUser().subscribe({
+      next: (value: any) => {
+        this.chuches = value[0];
+      },
+      error: (error) => {
+        console.error('Error fetching Chuches:', error);
+      },
+    });
+  }
+
+  updateChuches() {
+    this.chuchesService.getAllChuchesUser().subscribe({
+      next: (value: any) => {
+        this.ChuchesUser = value[0];
+      },
+      error: (error) => {
+        console.error('Error fetching Chuches:', error);
+      },
     });
   }
 

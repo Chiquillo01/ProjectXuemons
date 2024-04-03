@@ -54,7 +54,7 @@ const routes: Routes = [
     ChuchesComponent,
     CajaComponent,
     ConfigComponent,
-    AlimentarComponent,
+    // AlimentarComponent,
   ],
 })
 export class MainModule {}

@@ -9,6 +9,8 @@ import { Router, ActivatedRoute } from '@angular/router';
 
 @Component({
   selector: 'app-alimentar',
+  standalone: true,
+  imports: [ReactiveFormsModule],
   templateUrl: './alimentar.component.html',
   styleUrls: ['./alimentar.component.css']
 })

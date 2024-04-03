@@ -27,3 +27,31 @@
     <button class="boton" type="submit" [disabled]="!xuxemonForm.valid">Guardar</button>
     <a class="atras" href="home/home/xuxemons/xuxedex">Volver</a>
 </form>
+
+<div class="list-container">
+    <div class="card-flex" *ngFor="let chuche of ChuchesUser">
+      <div class="title">
+
+        <h1 *ngIf="chuche.stack > 1" class="stack">
+          {{chuche.stack}}
+        </h1>
+
+        <h3 class="card-title">
+          {{chuche.nombre}}
+        </h3>
+
+      </div>
+
+
+
+      <img [src]="'../../../../assets/home/' + chuche.archivo" alt="{{ chuche.nombre }}">
+
+      <h4 class="card-title">
+        {{chuche.dinero}} {{chuche.modificador}}
+      </h4>
+      <!-- <h4 class="card-title">
+          {{card.vida}}
+        </h4> -->
+
+    </div>
+  </div>
