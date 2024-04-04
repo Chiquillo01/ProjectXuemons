@@ -16,6 +16,7 @@ import { CrearComponent } from './xuxemons/xuxedex/crear/crear.component';
 import { EditarComponent } from './xuxemons/xuxedex/editar/editar.component';
 import { ConfigComponent } from './header/config/config.component';
 import { ReactiveFormsModule } from '@angular/forms';
+import { AlimentarComponent } from './xuxemons/caja/alimentar/alimentar.component';
 
 const routes: Routes = [
   {
@@ -34,6 +35,7 @@ const routes: Routes = [
       { path: 'home/xuxemons', component: XuxemonsComponent },
       { path: 'home/xuxemons/xuxedex', component: XuxedexComponent },
       { path: 'home/xuxemons/caja', component: CajaComponent },
+      { path: 'home/xuxemons/caja/alimentar', component: AlimentarComponent },
       { path: 'home/xuxemons/xuxedex/crear', component: CrearComponent },
       { path: 'home/xuxemons/xuxedex/editar', component: EditarComponent },
     ],
@@ -52,6 +54,7 @@ const routes: Routes = [
     ChuchesComponent,
     CajaComponent,
     ConfigComponent,
+    // AlimentarComponent,
   ],
 })
 export class MainModule {}

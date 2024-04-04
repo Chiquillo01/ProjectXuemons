@@ -16,6 +16,7 @@ return new class extends Migration
             $table->string('nombre', 20);
             $table->string('tipo', 50);
             $table->integer('tamano')->nullable()->default(1);
+            $table->integer('comida')->nullable()->default(0);
             $table->integer('evo1')->nullable()->default(3);
             $table->integer('evo2')->nullable()->default(5);
             $table->integer('vida')->nullable()->default(100);

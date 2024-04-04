@@ -15,10 +15,10 @@ import { TokenService } from '../../../services/token.service';
 })
 export class XuxedexComponent implements OnInit {
   xuxemons: Xuxemons[] = [];
-  xuxemonsUsers: XuxemonsUsers[] = [];
-  // Variables para saber si el usuario tiene al xuxemon y para saber el rol del usuario //
-  xuxemonsView: boolean = false;
   userRole: Number | null;
+  // Variables para saber si el usuario tiene al xuxemon y para saber el rol del usuario //
+  //xuxemonsView: boolean = false;
+  
 
   constructor(
     public userService: UsersService,
@@ -79,6 +79,9 @@ export class XuxedexComponent implements OnInit {
         id: xuxe.id,
         nombre: xuxe.nombre,
         tipo: xuxe.tipo,
+        tamano: xuxe.tamano,
+        evo1: xuxe.evo1,
+        evo2: xuxe.evo2,
         archivo: xuxe.archivo,
       },
     };

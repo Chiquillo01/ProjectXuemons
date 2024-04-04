@@ -29,17 +29,26 @@
         </h4>
 
         <div>
-          <!-- [(ngModel)]="selectedChuche" -->
+          <button class="editar-btn" (click)="alimentar(card)">
+            Alimentar
+          </button>
+          <button class="eliminar-btn" (click)="eliminar(card.id)">
+            Eliminar
+          </button>
+        </div>
+
+         <!-- <div>
+           [(ngModel)]="selectedChuche" 
           <select name="Chuche" (change)="onChucheChange($event, card.id)">
             <option *ngFor="let chuche of Chuches" [value]="chuche">{{ chuche.nombre }}</option>
           </select>
 
-          <!-- (click)="alimentar(chuche.nombre)" -->
+           (click)="alimentar(chuche.nombre)" 
           <button (click)="alimentar()">
             Alimientar
           </button>
-        </div>
-       
+        </div>  -->
+
 
       </div>
     </div>

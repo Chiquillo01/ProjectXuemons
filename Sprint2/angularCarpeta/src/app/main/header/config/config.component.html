@@ -6,6 +6,7 @@
 <!-- Formulario de edición -->
 <form [formGroup]="configTam" (ngSubmit)="editarTamanoDef()">
     <h2>Editar Tamaño por defecto</h2>
+    <input formControlName="nombre" type="text" placeholder="Nombre"><br>
     <select formControlName="tamano">
         <option value=1>Pequeño</option>
         <option value=2>Mediano</option>
@@ -15,7 +16,8 @@
 </form>
 
 <form [formGroup]="configChuches" (ngSubmit)="editarChuches()">
-    <h2>Editar Xuxemon</h2>
+    <h2>Editar Necesidades de Evolución</h2>
+    <input formControlName="nombre" type="text" placeholder="Nombre"><br>
     <input formControlName="evo1" type="number" placeholder="Evolución 1"><br>
     <input formControlName="evo2" type="number" placeholder="Evolución 1"><br>
     <button class="boton" type="submit" [disabled]="!configChuches.valid">Actualizar Valores</button>
