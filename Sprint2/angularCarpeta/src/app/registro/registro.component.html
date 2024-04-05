@@ -3,22 +3,27 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<!-- Formulario del registro -->
-<form [formGroup]="RegisterForm" (ngSubmit)="Registrar()">
-    <img src="../../assets/login/registreImg.png">
-    <label class="nickLabel">Nick name:</label>
-    <input class="imputText" placeholder="Nombre de entrenador" type="text" formControlName="nick">
+<!-- Formulario de registro -->
+<div class="container">
+    <form [formGroup]="registroForm" (ngSubmit)="Registrar()">
+        <img routerLink="landingPage" src="../../assets/login/registreImg.png">
 
-    <label>Email:</label>
-    <input class="imputText" placeholder="Email" type="email" formControlName="email">
+        <label>Nick name:</label>
+        <input placeholder="Nombre de entrenador" type="text" formControlName="nick">
 
-    <label>Contraseña:</label>
-    <input class="imputText" type="password" placeholder="Contraseña" formControlName="password">
-    <input class="imputText" type="password" placeholder="RepetirContraseña" formControlName="password_confirmation">
+        <label>Email:</label>
+        <input placeholder="Correo electrónico" type="email" formControlName="email">
 
-    <label>Admin:</label>
-    <input class="checkbox" type="checkbox" formControlName="rol">
+        <label>Contraseña:</label>
+        <input type="password" placeholder="Contraseña" formControlName="password">
+        <input type="password" placeholder="RepetirContraseña" formControlName="password_confirmation">
 
-    <button type="submit" class="botonRegister">Registrarse</button>
-    <button routerLink="/login" class="botonLogin">Volver al login</button>
-</form>
+        <label class="labelCheck">Admin:</label>
+        <input class="checkbox" type="checkbox" formControlName="rol">
+
+        <div class="flexBotones">
+            <button type="submit" class="boton registrar">Registrarse</button>
+            <button routerLink="/login" class="boton logear">Volver al login</button>
+        </div>
+    </form>
+</div>
