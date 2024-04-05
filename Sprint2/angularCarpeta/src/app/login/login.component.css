@@ -1,73 +1,94 @@
 * {
   margin: 0;
   padding: 0;
+  font-family: Georgia, serif;
 }
 
 form {
+  background-color: rgb(231, 231, 231);
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
-  align-content: space-around;
-  width: 50%;
-  margin-left: 25%;
-  margin-top: 10%;
+  align-content: center;
+  align-items: center;
   border-radius: 20px;
-  background-color: rgb(231, 231, 231);
-  font-family: "Lucida Sans", "Lucida Sans Regular", "Lucida Grande",
-    "Lucida Sans Unicode", Geneva, Verdana, sans-serif;
+  border-style: dashed solid dashed solid;
+  border-width: 2px;
+  border-color: aquamarine pink aquamarine pink;
+  width: 50%;
+  height: auto;
+  margin-left: 25%;
+  margin-top: 4em;
 }
 
 img {
   width: 100px;
   height: 100px;
   margin: 4% 0 2% 40%;
-  border: 1px solid black;
-  border-radius: 10px;
+}
+
+img:hover {
+  cursor: pointer;
 }
 
 label {
-  width: 80%;
-  margin-left: 6%;
-  margin-bottom: 10px;
+  width: 90%;
+  margin-left: 12px;
+  margin-bottom: 4px;
+  font-weight: bold;
 }
 
 input {
-  width: 85%;
-  margin-left: 6%;
-  margin-bottom: 10px;
-  border-radius: 5px;
-}
-
-p {
-  width: 30%;
-  margin-left: 6%;
-  margin-top: 14px;
-}
-
-.botonRegistrar {
-  background-color: #008cba;
-  color: white;
-  margin-top: 10px;
+  width: 90%;
+  margin-left: 12px;
   margin-bottom: 20px;
-  padding: 5px 10px;
   border-radius: 5px;
-  text-align: center;
-  text-decoration: none;
+  border: 1px solid rgb(219, 156, 255);
 }
 
-.botonRegistrar:hover {
-  background-color: #005f6b;
+input:hover {
+  border: 2px solid rgb(207, 125, 255);
 }
 
-.botonLogin {
-  background-color: #4caf50;
+.flexBotones {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.boton {
   color: white;
-  margin: 10px 0 20px 85px;
-  padding: 5px 10px;
   border-radius: 5px;
   border: none;
+  padding: 5px 10px;
+
+  text-align: center;
+  width: auto;
 }
 
-.botonLogin:hover {
+.registrar {
+  background-color: #008cba;
+  margin: 0 9% 1em 0;
+}
+
+.registrar:hover {
+  background-color: #005f6b;
+  border: 1px solid #00e1ff;
+}
+
+.logear {
+  background-color: #4caf50;
+  margin: 0 6% 1em 0;
+}
+
+.logear:hover {
   background-color: #348138;
+  border: 1px solid #62ff6a;
+}
+
+p{
+  margin-bottom: 1em;
+  margin-right: 4px;
 }
