@@ -84,6 +84,36 @@ class XuxemonsUserController extends Controller
         }
     }
 
+    public function update(Request $request, XuxemonsUser $xuxemonsUser)
+    {
+        try {
+            // Valida los datos
+            $validados = $request->validate([
+                'nombre' => 'required',
+                'tipo' => 'required',
+                'comida' => 'required',
+                'tamano' => 'required',
+                'evo1' => 'required',
+                'evo2' => 'required',
+                'vida' => 'required',
+                'archivo' => 'required',
+                'idUser' => 'nullable',
+            ]);
+
+            // Hace el update dentro de una transaccion
+            DB::transaction(function () use ($validados, $xuxemonsUser) {
+                $xuxemonsUser->update($validados);
+            });
+
+            // Retorna actualizado de forma satisfactoria
+            return response()->json(['message' => 'Se ha actualizado de forma correcta el tamaño'], 200);
+        } catch (\Exception $e) {
+
+            // Retorna error
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar los xuxemons: ' . $e->getMessage()], 500);
+        }
+    }
+
     /**
      * Update the evolutions in storage.
      */
