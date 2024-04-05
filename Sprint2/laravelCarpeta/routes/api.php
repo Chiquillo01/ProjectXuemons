@@ -51,6 +51,8 @@ Route::delete('/xuxemons/{xuxemons}', [XuxemonsController::class, 'destroy']);
 Route::get('/xuxemons', [XuxemonsController::class, 'show']);
 // Mostrar todos los xuxemons del usuario //
 Route::get('/xuxemonsUser', [XuxemonsUserController::class, 'show']);
+// Mostrar todos los xuxemons del usuario //
+Route::put('/xuxemons_users/{xuxemons_users}', [XuxemonsUserController::class, 'update']);
 // Alimentar xuxemons //
 Route::put('/xuxemons/users/comer/{xuxemons}', [XuxemonsUserController::class, 'alimentar']);
 // ---------------------- //
