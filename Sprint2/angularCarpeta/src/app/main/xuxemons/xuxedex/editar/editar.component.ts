@@ -1,5 +1,4 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { CommonModule } from '@angular/common';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
 // Imports de los servicios //
@@ -27,9 +26,6 @@ export class EditarComponent {
         id: params['id'],
         nombre: params['nombre'],
         tipo: params['tipo'],
-        tamano: params['tamano'],
-        evo1: params['evo1'],
-        evo2: params['evo2'],
         archivo: params['archivo'],
       };
     });
@@ -38,9 +34,6 @@ export class EditarComponent {
     this.xuxemonForm.setValue({
       nombre: this.xuxeData.nombre || '',
       tipo: this.xuxeData.tipo || '',
-      tamano: this.xuxeData.tamano || '',
-      evo1: this.xuxeData.evo1 || '',
-      evo2: this.xuxeData.evo2 || '',
       archivo: this.xuxeData.archivo || '',
     });
   }
@@ -57,9 +50,6 @@ export class EditarComponent {
     this.xuxemonForm = this.fb.group({
       nombre: ['', [Validators.required]],
       tipo: ['', [Validators.required]],
-      tamano: ['', [Validators.required]],
-      evo1: ['', [Validators.required]],
-      evo2: ['', [Validators.required]],
       archivo: ['', [Validators.required]],
     });
   }
@@ -71,7 +61,7 @@ export class EditarComponent {
       .XuxeUpdate(this.xuxemonForm.value, this.xuxeData.id)
       .subscribe({
         // Aceptada //
-        next: (data: any) => {
+        next: () => {
           // Redirije al usuario y le da un mensaje //
           alert('Xuxemon modificado con exito.');
           this.router.navigate(['home/home/xuxemons/xuxedex']);

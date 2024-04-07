@@ -19,22 +19,20 @@ class XuxemonsController extends Controller
             $validados = $request->validate([
                 'nombre' => 'required|string',
                 'tipo' => 'required|string',
-                'tamano' => 'nullable|numeric',
-                'evo1' => 'nullable|numeric',
-                'evo2' => 'nullable|numeric',
-                'vida' => 'required|numeric',
                 'archivo' => 'required|string',
+                // 'tamano' => 'nullable|numeric',
+                // 'evo1' => 'nullable|numeric',
+                // 'evo2' => 'nullable|numeric',
+                // 'vida' => 'required|numeric',
             ]);
 
             DB::transaction(function () use ($validados) {
-                // Crea los datos en una transaccion //
                 Xuxemons::create($validados);
             });
 
             // Devuelve un 200 (OK) para confirmar al usuario //
             return response()->json(['message' => 'Xuxemon creado con exito'], 200);
         } catch (\Exception $e) {
-            // Y devuelve un mensaje de error //
             return response()->json(['message' => 'Ha ocurrido un error al crear el Xuxemon: ' . $e->getMessage()], 500);
         }
     }
@@ -57,7 +55,6 @@ class XuxemonsController extends Controller
 
     public function showOne(Xuxemons $xuxemons)
     {
-
         try {
             return response()->json(['xuxemons' => $xuxemons]);
         } catch (\Exception $e) {
@@ -65,22 +62,20 @@ class XuxemonsController extends Controller
         }
     }
 
-
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, Xuxemons $xuxemons)
     {
-
         try {
             // Valida los datos
             $validados = $request->validate([
                 'nombre' => ['required', 'max:20', 'unique:xuxemons,nombre,' . $xuxemons->id],
                 'tipo' => ['required', 'in:Tierra,Aire,Agua'],
-                'tamano' => ['required'],
-                'evo1' => ['required'],
-                'evo2' => ['required'],
                 'archivo' => ['required', 'unique:xuxemons,archivo,' . $xuxemons->id],
+                // 'tamano' => ['required'],
+                // 'evo1' => ['required'],
+                // 'evo2' => ['required'],
             ]);
 
             // Hace el update dentro de una transaccion
@@ -91,9 +86,27 @@ class XuxemonsController extends Controller
             // Retorna actualizado de forma satisfactoria
             return response()->json(['message' => 'Se ha actualizado de forma correcta'], 200);
         } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar los xuxemons: ' . $e->getMessage()], 500);
+        }
+    }
+
+    /**
+     * Remove the specified resource from storage.
+     */
+    public function destroy(Xuxemons $xuxemons)
+    {
+        try {
+
+            DB::transaction(function () use ($xuxemons) {
+                $xuxemons->delete();
+            });
+
+            // Retorna borrado de forma correcta
+            return response()->json(['message' => 'Se ha borrado de forma correcta'], 200);
+        } catch (\Exception $e) {
 
             // Retorna error
-            return response()->json(['message' => 'Ha ocurrido un error al actualizar los xuxemons: ' . $e->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al eliminar: ' . $e->getMessage()], 500);
         }
     }
 
@@ -122,23 +135,5 @@ class XuxemonsController extends Controller
         }
     }
 
-    /**
-     * Remove the specified resource from storage.
-     */
-    public function destroy(Xuxemons $xuxemons)
-    {
-        try {
 
-            DB::transaction(function () use ($xuxemons) {
-                $xuxemons->delete();
-            });
-
-            // Retorna borrado de forma correcta
-            return response()->json(['message' => 'Se ha borrado de forma correcta'], 200);
-        } catch (\Exception $e) {
-
-            // Retorna error
-            return response()->json(['message' => 'Ha ocurrido un error al eliminar: ' . $e->getMessage()], 500);
-        }
-    }
 }

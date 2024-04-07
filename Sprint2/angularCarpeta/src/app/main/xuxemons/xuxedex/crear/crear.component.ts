@@ -1,4 +1,5 @@
-import { Component, EventEmitter, OnInit, Output } from '@angular/core';
+import { Component, EventEmitter, Output } from '@angular/core';
+// Imports extras //
 import {
   FormGroup,
   FormBuilder,
@@ -6,11 +7,9 @@ import {
   Validators,
 } from '@angular/forms';
 import { ReactiveFormsModule } from '@angular/forms';
-// Imports de las rutas //
 import { Router } from '@angular/router';
 import { UsersService } from 'src/app/services/users.service';
 import { XuxemonsService } from 'src/app/services/xuxemons.service';
-// Imports de los modelos necesarios //
 import { Xuxemons } from '../../../../models/xuxedex/xuxedex.model';
 
 @Component({
@@ -34,15 +33,13 @@ export class CrearComponent {
     public userService: UsersService,
     public xuxemonsService: XuxemonsService,
     private router: Router
-  ) {}
+  ) { }
 
   ngOnInit(): void {
     // Restricciones que se espera que tenga el FormGroup //
     this.xuxemonForm = this.fb.group({
       nombre: new FormControl('', [Validators.required]),
       tipo: new FormControl('', [Validators.required]),
-      tamano: new FormControl('', [Validators.required]),
-      vida: new FormControl('', [Validators.required]),
       archivo: new FormControl('', [Validators.required]),
     });
   }
@@ -53,7 +50,7 @@ export class CrearComponent {
       // Se subscribe para recibir la información de la función a la que hace referencia en xuxemons.service //
       this.xuxemonsService.createXuxemon(this.xuxemonForm.value).subscribe({
         // Aceptada //
-        next: (data: any) => {
+        next: () => {
           // Redirije a la xuxedex y le da un mensaje //
           this.router.navigate(['home/home/xuxemons/xuxedex']);
           alert('Xuxemon creado con exito.');

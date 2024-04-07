@@ -9,14 +9,24 @@ class XuxemonsUser extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nombre',
-        'tipo',
-        'archivo',
-        'tamano',
-        'comida',
-        'evo1',
-        'evo2',
-        'vida',
-        'idUser',
+        'xuxemon_id',
+        'user_id'
     ];
+    
+    /**
+     * Obtener el Xuxemon asociado a este registro pivot.
+     */
+    public function xuxemon()
+    {
+        return $this->belongsTo(Xuxemons::class, 'xuxemon_id');
+    }
+
+    /**
+     * Obtener el usuario asociado a este registro pivot.
+     */
+    public function user()
+    {
+        return $this->belongsTo(User::class, 'user_id');
+    }
 }
+

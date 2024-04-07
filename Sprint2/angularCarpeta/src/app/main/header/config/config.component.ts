@@ -75,35 +75,35 @@ export class ConfigComponent {
     });
   }
 
-  // Función para editar el tamaño por defecto de los Xuxemon //
-  editarTamanoDef() {
-    this.xuxemonsService
-      .XuxeConfig(this.configTam.value, this.xuxeData.id)
-      .subscribe({
-        next: (data: any) => {
-          alert('Tamaño de los Xuxemons modificado con exito.');
-        },
-        error: (error) => {
-          console.log(error);
-          alert('No se pudo cambiar el tamaño del Xuxemon');
-          throw new Error(error);
-        },
-      });
-  }
+  // // Función para editar el tamaño por defecto de los Xuxemon //
+  // editarTamanoDef() {
+  //   this.xuxemonsService
+  //     .XuxeConfig(this.configTam.value, this.xuxeData.id)
+  //     .subscribe({
+  //       next: (data: any) => {
+  //         alert('Tamaño de los Xuxemons modificado con exito.');
+  //       },
+  //       error: (error) => {
+  //         console.log(error);
+  //         alert('No se pudo cambiar el tamaño del Xuxemon');
+  //         throw new Error(error);
+  //       },
+  //     });
+  // }
 
-  // Función para editar el nivel por defecto que necessitan para evolucionar los Xuxemon //
-  editarChuches() {
-    this.xuxemonsService
-      .ChuchesConfig(this.configChuches.value, this.xuxeData.id)
-      .subscribe({
-        next: (data: any) => {
-          alert('Requisitos de evolución modificados');
-        },
-        error: (error) => {
-          console.log(error);
-          alert('No se pudo cambiar las evoluciones del Xuxemon');
-          throw new Error(error);
-        },
-      });
-  }
+  // // Función para editar el nivel por defecto que necessitan para evolucionar los Xuxemon //
+  // editarChuches() {
+  //   this.xuxemonsService
+  //     .ChuchesConfig(this.configChuches.value, this.xuxeData.id)
+  //     .subscribe({
+  //       next: (data: any) => {
+  //         alert('Requisitos de evolución modificados');
+  //       },
+  //       error: (error) => {
+  //         console.log(error);
+  //         alert('No se pudo cambiar las evoluciones del Xuxemon');
+  //         throw new Error(error);
+  //       },
+  //     });
+  // }
 }

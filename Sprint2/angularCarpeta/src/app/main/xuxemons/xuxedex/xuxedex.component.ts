@@ -1,11 +1,9 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { NavigationExtras, Router } from '@angular/router';
-// Imports de los modelos necesarios //
+// Imports extras //
 import { Xuxemons } from '../../../models/xuxedex/xuxedex.model';
-import { XuxemonsUsers } from '../../../models/xuxemons/xuxemons.model';
-// Imports de los servicios //
 import { UsersService } from '../../../services/users.service';
-import { XuxemonsService } from 'src/app/services/xuxemons.service';
+import { XuxemonsService } from '../../../services/xuxemons.service';
 import { TokenService } from '../../../services/token.service';
 
 @Component({
@@ -16,10 +14,7 @@ import { TokenService } from '../../../services/token.service';
 export class XuxedexComponent implements OnInit {
   xuxemons: Xuxemons[] = [];
   userRole: Number | null;
-  // Variables para saber si el usuario tiene al xuxemon y para saber el rol del usuario //
-  //xuxemonsView: boolean = false;
   
-
   constructor(
     public userService: UsersService,
     public xuxemonsService: XuxemonsService,
@@ -29,28 +24,28 @@ export class XuxedexComponent implements OnInit {
     this.userRole = this.tokenService ? this.tokenService.getRole() : null;
   }
 
-  getImageStyle(tamano: number): any {
-    let width: number;
+  // getImageStyle(tamano: number): any {
+  //   let width: number;
 
-    switch (tamano) {
-      case 1:
-        width = 50;
-        break;
-      case 2:
-        width = 100;
-        break;
-      case 3:
-        width = 150;
-        break;
-      default:
-        width = 50;
-        break;
-    }
+  //   switch (tamano) {
+  //     case 1:
+  //       width = 50;
+  //       break;
+  //     case 2:
+  //       width = 100;
+  //       break;
+  //     case 3:
+  //       width = 150;
+  //       break;
+  //     default:
+  //       width = 50;
+  //       break;
+  //   }
 
-    return {
-      'width.px': width,
-    };
-  }
+  //   return {
+  //     'width.px': width,
+  //   };
+  // }
 
   ngOnInit(): void {
     this.updateXuxemons();
@@ -79,10 +74,10 @@ export class XuxedexComponent implements OnInit {
         id: xuxe.id,
         nombre: xuxe.nombre,
         tipo: xuxe.tipo,
-        tamano: xuxe.tamano,
-        evo1: xuxe.evo1,
-        evo2: xuxe.evo2,
         archivo: xuxe.archivo,
+        // tamano: xuxe.tamano,
+        // evo1: xuxe.evo1,
+        // evo2: xuxe.evo2,
       },
     };
     // Envia al usuario a la ruta de edición //
@@ -97,7 +92,7 @@ export class XuxedexComponent implements OnInit {
     // Se subscribe para recibir la información de la función a la que hace referencia en users.service //
     this.xuxemonsService.XuxeDelete($id).subscribe({
       // Aceptada //
-      next: (data: any) => {
+      next: () => {
         // Redirije al usuario y le da un mensaje //
         this.router.navigate(['/home/home/xuxemons/xuxedex']);
         alert('Xuxemon eliminado con exito.');

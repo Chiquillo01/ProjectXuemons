@@ -12,19 +12,13 @@ return new class extends Migration
     public function up(): void
     {
         Schema::create('xuxemons_users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('nombre', 20);
-            $table->string('tipo', 50);
-            $table->integer('tamano')->nullable()->default(1);
-            $table->integer('comida')->nullable()->default(0);
-            $table->integer('evo1')->nullable()->default(3);
-            $table->integer('evo2')->nullable()->default(5);
-            $table->integer('vida')->nullable()->default(100);
-            $table->string('archivo');
-            $table->unsignedBigInteger('idUser');
+            $table->unsignedBigInteger('xuxemon_id');
+            $table->unsignedBigInteger('user_id');
             $table->timestamps();
 
-            $table->foreign('idUser')->references('id')->on('users');
+            // Definir las claves foráneas
+            $table->foreign('xuxemon_id')->references('id')->on('xuxemons')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
         });
     }
 

@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('chuches_users', function (Blueprint $table) {
-            $table->bigIncrements('id');
-            $table->string('nombre', 15);
-            $table->integer('dinero');
-            $table->integer('modificador');
-            $table->string('archivo');
-            $table->string('stack')->default(1);
-            $table->unsignedBigInteger('idUser');
-            $table->timestamps();
+        // Schema::create('chuches_users', function (Blueprint $table) {
+        //     $table->bigIncrements('id');
+        //     $table->string('nombre', 15);
+        //     $table->integer('dinero');
+        //     $table->integer('modificador');
+        //     $table->string('archivo');
+        //     $table->string('stack')->default(1);
+        //     $table->unsignedBigInteger('idUser');
+        //     $table->timestamps();
 
-            $table->foreign('idUser')->references('id')->on('users');
-        });
+        //     $table->foreign('idUser')->references('id')->on('users');
+        // });
     }
 
     /**

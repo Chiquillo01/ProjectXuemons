@@ -3,41 +3,38 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<div>
+<body>
   <div class="container">
-    <!-- Solo para usuario administrador -->
-    <div class="adminButons" *ngIf="userRole === 1">
+
+    <div class="adminButons">
       <button (click)="debug()">
         Debug
       </button>
-
     </div>
-    <!-- //////////////////////////////////////// -->
 
     <div class="list-container">
-      <div class="card-flex" *ngFor="let card of xuxemonsUsers">
+      <div class="card-flex" *ngFor="let cardUser of xuxemonsUser">
         <h3 class="card-title">
-          {{card.nombre}}
+          {{cardUser.nombre}}
         </h3>
         <div class="imgFormat">
-          <img *ngIf="card.tamano" [src]="'../assets/xuxemons/' + card.archivo" [attr.alt]="card.nombre"
-            [ngStyle]="getImageStyle(card.tamano)">
+          <img *ngIf="cardUser.archivo" [src]="'../assets/xuxemons/' + cardUser.archivo" [attr.alt]="cardUser.nombre">
         </div>
 
         <h4 class="card-title">
-          {{card.tipo}} {{card.vida}}
+          {{cardUser.tipo}}
         </h4>
 
         <div>
-          <button class="editar-btn" (click)="alimentar(card)">
+          <button class="editar-btn">
             Alimentar
           </button>
 
-          <button class="eliminar-btn" (click)="evolucionar(card.nombre);">
+          <button class="eliminar-btn">
             Evolucionar
           </button>
         </div>
       </div>
     </div>
   </div>
-</div>
+</body>

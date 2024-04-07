@@ -8,26 +8,23 @@ export class TokenService {
     throw new Error('Method not implemented.');
   }
   // static getToken: any;
-  constructor() {}
+  constructor() { }
 
   private readonly TOKEN_KEY = 'auth_token';
 
-  // Recoje el token de la bd //
+  // Getters y Setters de la info del localStorage //
   getToken(): string | null {
     return localStorage.getItem(this.TOKEN_KEY) || 'default';
   }
-  // Recoje el rol de la bd //
   getRole(): number | null {
     return parseInt(localStorage.getItem('userRole') || '1');
   }
-
-  // Setea el token y el rol //
   setToken(token: any): void {
     localStorage.setItem(this.TOKEN_KEY, token.access_token);
     localStorage.setItem('userRole', token.rol);
   }
 
-  // Funciones para eliminar el token y el rol //
+  // Funciones para eliminar el token y el rol del localStorage //
   removeToken(): boolean {
     try {
       localStorage.removeItem(this.TOKEN_KEY);

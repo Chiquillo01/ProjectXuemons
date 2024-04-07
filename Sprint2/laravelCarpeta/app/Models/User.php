@@ -25,6 +25,14 @@ class User extends Authenticatable
     ];
 
     /**
+     * Los Xuxemons que pertenecen a este usuario.
+     */
+    public function xuxemons()
+    {
+        return $this->belongsToMany(Xuxemons::class, 'xuxemons_users');
+    }
+
+    /**
      * The attributes that should be hidden for serialization.
      *
      * @var array<int, string>

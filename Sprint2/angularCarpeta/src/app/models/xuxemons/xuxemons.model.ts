@@ -1,14 +1,9 @@
 export interface XuxemonsUsers {
-  id?: number;
+  xuxemon_id: number;
+  user_id: number;
   nombre: string;
   tipo: string;
-  tamano: number;
-  comida: number;
-  evo1?: number;
-  evo2?: number;
-  vida?: number;
   archivo: string;
-  idUser?: number;
-  created_at?: string;
-  updated_at?: string;
+  created_at: string;
+  updated_at: string;
 }

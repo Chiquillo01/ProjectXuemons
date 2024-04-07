@@ -7,7 +7,7 @@
 /* Header */
 header {
     background-color: rgb(210, 210, 210);
-    border-color: rgb(71, 71, 71);
+    border-color: rgb(253, 20, 242);
     border-style: none none solid none;
     padding: 10px 0;
 }
@@ -104,7 +104,7 @@ body {
 /* Footer */
 footer {
     background-color: rgb(32, 32, 32);
-    border-color: rgb(71, 71, 71);
+    border-color: rgb(253, 20, 242);
     border-style: solid none none none;
     margin-top: auto;
     width: 100%;
