@@ -7,9 +7,9 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
   providedIn: 'root',
 })
 export class UsersService {
-  constructor(private http: HttpClient, public tokenService: TokenService) {}
+  constructor(private http: HttpClient, public tokenService: TokenService) { }
 
-  // Funciones de logear y registrarse //
+  // Funciones de logear, registrarse y salir de la sesión //
   Login(user: any): Observable<any> {
     return this.http.post('http://127.0.0.1:8000/api/login', user);
   }

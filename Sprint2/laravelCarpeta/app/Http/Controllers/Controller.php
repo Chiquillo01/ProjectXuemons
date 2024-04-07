@@ -103,31 +103,4 @@ class Controller extends BaseController
             return response()->json(['message' => 'Ha ocurrido un error al hacer login: ' . $e->getMessage()], 500);
         }
     }
-
-    /**
-     * Cerrar sesión del usuario
-     * @return \Illuminate\Http\JsonResponse
-     */
-    public function logout()
-    {
-
-        try {
-            // Busca el usuario //
-            $user = Auth::guard('sanctum')->user();
-
-            if ($user) {
-                // Y elimina el token de acceso del usuario //
-                $user->currentAccessToken()->delete();
-
-                // Devuelve un OK
-                return response()->json(['message' => 'Se ha cerrado la sesión de forma satisfactoria'], 200);
-            } else {
-                // Si no se ha podido encontrar el usuario //
-                return response()->json(['message' => 'User not found'], 404);
-            }
-        } catch (\Exception $e) {
-            // Si hay algun error se muestra //
-            return response()->json(['message' => 'Ha ocurrido un error al hacer logout: ' . $e->getMessage()], 500);
-        }
-    }
 }

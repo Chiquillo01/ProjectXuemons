@@ -1,51 +1,60 @@
+body {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
 .cuerpoHome {
-    height: auto;
-    display: flex;
-    flex-flow: row wrap;
-    justify-content: space-around;
-    padding: 20px;
-    background: linear-gradient(to top, #ca95ff, #ffccff);
-  }
-  
-  .homeCards {
-      display: flex;
-      flex-direction: column;
-      align-items: center; /* Centra los elementos horizontalmente */
-      justify-content: center; /* Centra los elementos verticalmente */
-      border-radius: 10px;
-      border: 2px solid #000;
-      margin: 10px;
-      width: 45%;
-      background-color: rgb(162, 255, 255);
-  }
-  
-  .homeCards > a {
-      width: 100%; /* Hacer el enlace del 100% del contenedor */
-      display: flex;
-      justify-content: center; /* Centrar la imagen horizontalmente */
-  }
-  
-  .homeCards:hover .homeImg {
-      transform: scale(1.25); /* Cambia el tamaño de la imagen al 110% del tamaño original */
-    }
-  
-  .homeImg {
-      height: 100px;
-      width: 100px;
-      margin-top: 10px;
-      transition: transform 0.3s ease; /* Agrega una transición suave al cambio de tamaño */
-  }
-  
-  .homeCards:hover .homeText {
-      transform: scale(1.3); /* Cambia el tamaño del texto al 110% del tamaño original */
-      font-weight: bold; /* Cambia el peso de la fuente a negrita */
-    }
-    
-    .homeText {
-      margin-top: 5px; /* Establecer margen superior entre la imagen y el texto */
-      text-align: center; /* Centrar el texto horizontalmente */
-      margin-top: 10px;
-      transition: transform 0.3s ease; /* Agrega una transición suave al cambio de tamaño */
-    }
-    
-  
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: space-around;
+  border-radius: 5px;
+  padding: 20px;
+  margin: 1em 0;
+  height: auto;
+}
+
+.homeCards {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 10px;
+  border: 2px solid #000;
+  margin: 10px;
+  width: 45%;
+  height: 200px;
+  background-color: rgb(162, 255, 255);
+}
+
+.homeCards>a {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.homeCards>p {
+  font-weight: bold;
+}
+
+.homeCards:hover .homeImg {
+  transform: scale(1.25);
+}
+
+.homeImg {
+  height: 100px;
+  width: 100px;
+  margin-top: 10px;
+  transition: transform 0.3s ease;
+}
+
+.homeCards:hover .homeText {
+  transform: scale(1.3);
+  font-weight: bold;
+}
+
+.homeText {
+  margin-top: 5px;
+  text-align: center;
+  margin-top: 10px;
+  transition: transform 0.3s ease;
+}

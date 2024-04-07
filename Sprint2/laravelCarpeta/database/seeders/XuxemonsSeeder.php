@@ -2,7 +2,6 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
 use Illuminate\Support\Facades\DB;
 
@@ -33,7 +32,6 @@ class XuxemonsSeeder extends Seeder
         for ($i = 0; $i < count($nombres); $i++) {
 
             DB::table('xuxemons')->insert([
-                'id' => 0,
                 'nombre' => $nombres[$i],
                 'tipo' => $tipo[$i],
                 'archivo' => strtolower($nombres[$i]) . '.png',

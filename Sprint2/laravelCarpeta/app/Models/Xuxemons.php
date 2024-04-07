@@ -11,10 +11,17 @@ class Xuxemons extends Model
     protected $fillable = [
         'nombre',
         'tipo',
-        'tamano',
-        'evo1',
-        'evo2',
-        'vida',
         'archivo',
+        // 'tamano',
+        // 'evo1',
+        // 'evo2',
     ];
+
+    /**
+     * Los usuarios que poseen este Xuxemon.
+     */
+    public function users()
+    {
+        return $this->belongsToMany(User::class, 'xuxemons_users');
+    }
 }

@@ -16,12 +16,12 @@
                     <a routerLink="home/xuxemons" class="imgHeader">Xuxemons</a>
                     <!-- Solo para usuario administrador -->
                     <span class="adminButons" *ngIf="userRole === 1">
-                        <a routerLink="header/config" class="imgHeader">Config</a>
+                        <a routerLink="header/config" class="imgHeaderAdmin">Config</a>
                     </span>
                     <!-- //////////////////////////////////////// -->
                 </span>
                 <span>
-                    <a routerLink="/login">
+                    <a (click)="logout()">
                         <img class="button_slide" alt="Logo" onmouseout="this.src='../../assets/xuxemons/user.png'"
                             onmouseover="this.src='../../assets/xuxemons/user1.png';"
                             src="../../assets/xuxemons/user.png">

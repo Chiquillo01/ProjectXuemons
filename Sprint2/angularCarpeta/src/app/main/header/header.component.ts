@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
-import { NavigationExtras, Router } from '@angular/router';
-// Imports de los servicios //
+// Imports extras //
+import { Router } from '@angular/router';
 import { UsersService } from '../../services/users.service';
 import { XuxemonsService } from 'src/app/services/xuxemons.service';
 import { TokenService } from '../../services/token.service';
@@ -16,9 +16,18 @@ export class HeaderComponent {
   constructor(
     public userService: UsersService,
     public xuxemonsService: XuxemonsService,
-    private router: Router,
-    public tokenService: TokenService
+    public tokenService: TokenService,
+    private router: Router
   ) {
     this.userRole = this.tokenService ? this.tokenService.getRole() : null;
+  }
+
+  logout() {
+    // Elimina el token de autenticación y el rol del usuario del localStorage
+    this.tokenService.removeToken();
+    this.tokenService.removeRole();
+
+    // Redirige a la página de inicio de sesión
+    this.router.navigate(['/landingPage']);
   }
 }
