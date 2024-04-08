@@ -3,10 +3,10 @@
     integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<div>
+<body>
   <div class="container">
     <!-- Solo para usuario administrador -->
-    <div class="adminButons" *ngIf="userRole === 1">
+    <div class="adminButons">
       <button (click)="debug()">
         Debug
       </button>
@@ -14,26 +14,25 @@
     <!-- //////////////////////////////////////// -->
 
     <div class="list-container">
-      <div class="card-flex" *ngFor="let chuche of ChuchesUser">
-        <div class="title">
-
-          <h1 *ngIf="chuche.stack > 1" class="stack">
+      <div class="card-flex" *ngFor="let chuche of chucheUser">
+        <h2 class="card-title">
+          {{chuche.nombre}}
+        </h2>
+        <!-- <h1  *ngIf="chuche.stack > 1" class="stack">
             {{chuche.stack}}
-          </h1>
-
-          <h3 class="card-title">
-            {{chuche.nombre}}
-          </h3>
-
+          </h1> -->
+        <div class="imgFormat">
+          <img [src]="'../../../../assets/home/chuches/' + chuche.archivo" alt="{{ chuche.nombre }}">
         </div>
 
-        <img [src]="'../../../../assets/home/' + chuche.archivo" alt="{{ chuche.nombre }}">
-
-        <h4 class="card-title">
-          {{chuche.dinero}} {{chuche.modificador}}
+        <!-- <h4 class="card-title">
+          {{chuche.dinero}}<p>coins</p>
         </h4>
+        <h4 class="card-title">
+          {{chuche.modificador}}<p>xp</p>
+        </h4> -->
 
       </div>
     </div>
   </div>
-</div>
+</body>

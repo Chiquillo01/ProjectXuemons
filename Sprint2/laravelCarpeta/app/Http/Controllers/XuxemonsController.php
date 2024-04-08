@@ -10,7 +10,9 @@ use Illuminate\Support\Facades\DB;
 class XuxemonsController extends Controller
 {
     /**
-     * Store a newly created resource in storage.
+     * Nombre: store
+     * Función: se encarga de crear los nuevos xuxemons, para ello valida los datos recibidos 
+     * y crea el nuevo xuxemon a traves de una transacción
      */
     public function store(Request $request)
     {
@@ -20,10 +22,6 @@ class XuxemonsController extends Controller
                 'nombre' => 'required|string',
                 'tipo' => 'required|string',
                 'archivo' => 'required|string',
-                // 'tamano' => 'nullable|numeric',
-                // 'evo1' => 'nullable|numeric',
-                // 'evo2' => 'nullable|numeric',
-                // 'vida' => 'required|numeric',
             ]);
 
             DB::transaction(function () use ($validados) {
@@ -38,7 +36,8 @@ class XuxemonsController extends Controller
     }
 
     /**
-     * Display the specified resource.
+     * Nombre: show
+     * Función: Recoje todos los xuxemons de la bd y se los pasa al servicio de angular
      */
     public function show(Xuxemons $xuxemons)
     {
@@ -53,17 +52,11 @@ class XuxemonsController extends Controller
         }
     }
 
-    public function showOne(Xuxemons $xuxemons)
-    {
-        try {
-            return response()->json(['xuxemons' => $xuxemons]);
-        } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al retornar los xuxemons: ' . $e->getMessage()], 500);
-        }
-    }
-
     /**
-     * Update the specified resource in storage.
+     * Nombre: update
+     * Función: se encarga de actualizar los nuevos valores, para ello valida los datos recibidos 
+     * y crea el update de losdatos xuxemon a traves de una transacción. Sabe el xuxemon a actualizar 
+     * gracias al paremetro extra que le llega por la api
      */
     public function update(Request $request, Xuxemons $xuxemons)
     {
@@ -73,9 +66,6 @@ class XuxemonsController extends Controller
                 'nombre' => ['required', 'max:20', 'unique:xuxemons,nombre,' . $xuxemons->id],
                 'tipo' => ['required', 'in:Tierra,Aire,Agua'],
                 'archivo' => ['required', 'unique:xuxemons,archivo,' . $xuxemons->id],
-                // 'tamano' => ['required'],
-                // 'evo1' => ['required'],
-                // 'evo2' => ['required'],
             ]);
 
             // Hace el update dentro de una transaccion
@@ -91,7 +81,8 @@ class XuxemonsController extends Controller
     }
 
     /**
-     * Remove the specified resource from storage.
+     * Nombre: destroy
+     * Función: elimina al xuxemon que le llega como parametro
      */
     public function destroy(Xuxemons $xuxemons)
     {
@@ -111,29 +102,55 @@ class XuxemonsController extends Controller
     }
 
     /**
-     * Update the specified resource in storage.
+     * Nombre: updateTam
+     * Función: gracias al valor que se le pasa por paremetro hace un update
+     * a la bd con el nuevo valor, esto lo hace a todos los registros
      */
-    public function updateTam(Request $request, Xuxemons $xuxemons)
+    public function updateTam(Request $request, $tamano)
     {
         try {
-            // Valida los datos recibidos
-            $validados = $request->validate([
-                'tamano' => 'required', // Validación simple, puedes ajustarla según tus necesidades
-            ]);
-
-            // Hace el update dentro de una transacción
-            DB::transaction(function () use ($validados, $xuxemons) {
-                $xuxemons->update($validados);
+            DB::transaction(function () use ($tamano) {
+                Xuxemons::query()->update(['tamano' => $tamano]);
             });
 
-            // Retorna actualizado de forma satisfactoria
-            return response()->json(['message' => 'Se ha actualizado de forma correcta'], 200);
+            return response()->json(['message' => 'Se ha actualizado el tamaño de los xuxemons correctamente'], 200);
         } catch (\Exception $e) {
-
-            // Retorna error
             return response()->json(['message' => 'Ha ocurrido un error al actualizar los xuxemons: ' . $e->getMessage()], 500);
         }
     }
 
+    /**
+     * Nombre: updateEvo1
+     * Función: gracias al valor que se le pasa por paremetro hace un update
+     * a la bd con el nuevo valor, esto lo hace a todos los registros
+     */
+    public function updateEvo1(Request $request, $evo1)
+    {
+        try {
+            DB::transaction(function () use ($evo1) {
+                Xuxemons::query()->update(['evo1' => $evo1]);
+            });
 
+            return response()->json(['message' => 'Se ha actualizado el tamaño de los xuxemons correctamente'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar los xuxemons: ' . $e->getMessage()], 500);
+        }
+    }
+    /**
+     * Nombre: updateEvo2
+     * Función: gracias al valor que se le pasa por paremetro hace un update
+     * a la bd con el nuevo valor, esto lo hace a todos los registros
+     */
+    public function updateEvo2(Request $request, $evo2)
+    {
+        try {
+            DB::transaction(function () use ($evo2) {
+                Xuxemons::query()->update(['evo2' => $evo2]);
+            });
+
+            return response()->json(['message' => 'Se ha actualizado el tamaño de los xuxemons correctamente'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar los xuxemons: ' . $e->getMessage()], 500);
+        }
+    }
 }

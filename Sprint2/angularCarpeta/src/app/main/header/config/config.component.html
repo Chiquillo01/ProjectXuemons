@@ -3,22 +3,34 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<!-- Formulario de edición
-<form [formGroup]="configTam" (ngSubmit)="editarTamanoDef()">
-    <h2>Editar Tamaño por defecto</h2>
-    <input formControlName="nombre" type="text" placeholder="Nombre"><br>
-    <select formControlName="tamano">
-        <option value=1>Pequeño</option>
-        <option value=2>Mediano</option>
-        <option value=3>Grande</option>
-    </select>
-    <button class="boton" type="submit" [disabled]="!configTam.valid">Actualizar Valores</button>
-</form>
+<body>
+    <div class="flexContainer">
+        <form class="tamanioFormStyle" [formGroup]="configTam" (ngSubmit)="editarTamanoDef()">
+            <h2>Editar Tamaño por defecto</h2>
 
-<form [formGroup]="configChuches" (ngSubmit)="editarChuches()">
-    <h2>Editar Necesidades de Evolución</h2>
-    <input formControlName="nombre" type="text" placeholder="Nombre"><br>
-    <input formControlName="evo1" type="number" placeholder="Evolución 1"><br>
-    <input formControlName="evo2" type="number" placeholder="Evolución 1"><br>
-    <button class="boton" type="submit" [disabled]="!configChuches.valid">Actualizar Valores</button>
-</form> -->
+            <select formControlName="tamano">
+                <option value="pequeno">Pequeño</option>
+                <option value="mediano">Mediano</option>
+                <option value="grande">Grande</option>
+            </select>
+
+            <button class="boton" type="submit" [disabled]="!configTam.valid">Actualizar Valores</button>
+        </form>
+
+        <form class="evo1FormStyle" [formGroup]="configEvo" (ngSubmit)="editarEvoDef()">
+            <h2>Editar Evolución 1</h2>
+
+            <input formControlName="evo1" type="number" placeholder="Evolución 1"><br>
+
+            <button class="boton" type="submit" [disabled]="!configEvo.valid">Actualizar Valores</button>
+        </form>
+
+        <form class="evo2FormStyle" [formGroup]="configEvo2" (ngSubmit)="editarEvoDef2()">
+            <h2>Editar Evolución 2</h2>
+
+            <input formControlName="evo2" type="number" placeholder="Evolución 1"><br>
+
+            <button class="boton" type="submit" [disabled]="!configEvo2.valid">Actualizar Valores</button>
+        </form>
+    </div>
+</body>

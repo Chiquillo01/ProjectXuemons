@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('xuxemons_users', function (Blueprint $table) {
             $table->unsignedBigInteger('xuxemon_id');
             $table->unsignedBigInteger('user_id');
+            $table->integer('comida')->nullable()->default(0);
             $table->timestamps();
 
             // Definir las claves foráneas

@@ -9,10 +9,7 @@ class ChuchesUser extends Model
 {
     use HasFactory;
     protected $fillable = [
-        'nombre',
-        'dinero',
-        'modificador',
-        'archivo',
-        'idUser'
+        'chuche_id',
+        'user_id'
     ];
 }

@@ -1,8 +1,8 @@
 body {
+  background-color: rgb(65, 65, 65);
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  margin: 1em 0;
+  min-height: 75vh;
 }
 
 .adminButons {
@@ -14,63 +14,63 @@ body {
 }
 
 .adminButons button {
+  background-color: #10567e;
+  color: #ffffff;
+  border: 1px solid rgb(255, 133, 249);
+  border-radius: 10px;
   width: 200px;
   height: 40px;
-  border-radius: 10px;
-  color: #ffffff;
-  line-height: 36px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  background-color: #10567e;
 }
 
 .adminButons button:hover {
-  background-color: #278eb6;
+  background-color: #21799c;
 }
 
 .list-container {
+  background: linear-gradient(to top, #95baff, #cce6ff);
+  border: 2px solid rgb(255, 133, 249);
+  border-radius: 5px;
   display: flex;
   flex-flow: row wrap;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: center;
   align-content: center;
+  gap: 6px;
+  margin: 1em 0;
   padding: 20px;
-  border-radius: 5px;
-  border: 2px solid black;
-  background: linear-gradient(to top, #95baff, #cce6ff);
 }
 
 .card-flex {
-  border-radius: 10px;
-  border: 2px solid rgb(116, 106, 255);
-  color: white;
   background-color: rgb(29, 29, 29);
+  color: white;
+  border: 2px solid rgb(255, 133, 249);
+  border-radius: 10px;
   margin-top: 5px;
 }
 
 .card-title {
   display: flex;
-  width: 100%;
   justify-content: center;
+  width: 100%;
 }
 
 .imgFormat {
   display: flex;
   justify-content: center;
-  width: 160px;
   padding: 10px 2px 10px 2px;
 }
 
-.editar-btn,
+.alimentar-btn,
 .eliminar-btn {
-  background-color: #4caf50;
+  background-color: pink;
+  color: rgb(0, 0, 0);
   border: none;
-  color: white;
-  padding: 10px 20px;
   text-align: center;
+  padding: 10px 20px;
   margin-top: 8px;
 }
 
-.editar-btn {
+.alimentar-btn {
   border-radius: 0 0 0 8px;
 }
 
@@ -78,7 +78,7 @@ body {
   border-radius: 0 0 8px 0;
 }
 
-.editar-btn:hover,
+.alimentar-btn:hover,
 .eliminar-btn:hover {
-  background-color: #45a049;
+  background: linear-gradient(to top, #95baff, #cce6ff);
 }

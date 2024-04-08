@@ -11,14 +11,14 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::create('chuches', function (Blueprint $table) {
-        //     $table->id();
-        //     $table->string('nombre', 15);
-        //     $table->integer('dinero');
-        //     $table->integer('modificador');
-        //     $table->string('archivo');
-        //     $table->timestamps();
-        // });
+        Schema::create('chuches', function (Blueprint $table) {
+            $table->id();
+            $table->string('nombre', 15);
+            $table->integer('dinero');
+            $table->integer('modificador');
+            $table->string('archivo');
+            $table->timestamps();
+        });
     }
 
     /**

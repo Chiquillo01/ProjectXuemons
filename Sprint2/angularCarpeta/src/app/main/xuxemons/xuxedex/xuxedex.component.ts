@@ -14,7 +14,7 @@ import { TokenService } from '../../../services/token.service';
 export class XuxedexComponent implements OnInit {
   xuxemons: Xuxemons[] = [];
   userRole: Number | null;
-  
+
   constructor(
     public userService: UsersService,
     public xuxemonsService: XuxemonsService,
@@ -24,33 +24,37 @@ export class XuxedexComponent implements OnInit {
     this.userRole = this.tokenService ? this.tokenService.getRole() : null;
   }
 
-  // getImageStyle(tamano: number): any {
-  //   let width: number;
-
-  //   switch (tamano) {
-  //     case 1:
-  //       width = 50;
-  //       break;
-  //     case 2:
-  //       width = 100;
-  //       break;
-  //     case 3:
-  //       width = 150;
-  //       break;
-  //     default:
-  //       width = 50;
-  //       break;
-  //   }
-
-  //   return {
-  //     'width.px': width,
-  //   };
-  // }
-
   ngOnInit(): void {
     this.updateXuxemons();
   }
 
+  /**
+   * Nombre: getImageStyle
+   * Función: Modificar el tamaño de la imagen segun el tamaño del xuxemon
+   * @param tamano 
+   * @returns 
+   */
+  getImageStyle(tamano: string): any {
+    let width: number;
+    const paqueno = 50;
+    const mediano = 100;
+    const grande = 150;
+
+    switch (tamano) {
+      case 'pequeno': width = paqueno; break;
+      case 'mediano': width = mediano; break;
+      case 'grande': width = grande; break;
+      default: width = paqueno; break;
+    }
+    return {
+      'width.px': width,
+    };
+  }
+
+  /**
+   * Nombre: updateXuxemons
+   * Función: Obtener todos los Xuxemons de la BD
+   */
   updateXuxemons() {
     this.xuxemonsService.getAllXuxemons().subscribe({
       next: (value: any) => {
@@ -62,12 +66,18 @@ export class XuxedexComponent implements OnInit {
     });
   }
 
-  // Función crar que envia al usuario a la vista para crear Xuxemons //
+  /**
+   * Nombre: crear
+   * Función: Crar que envia al usuario a la vista para crear Xuxemons
+   */
   crear() {
     this.router.navigate(['home/home/xuxemons/xuxedex/crear']);
   }
 
-  // Función para editar el Xuxemon seleccionado //
+  /**
+   * Nombre: editar
+   * Función: Editar el Xuxemon seleccionado
+   */
   editar(xuxe: any) {
     const navigationExtras: NavigationExtras = {
       queryParams: {
@@ -75,33 +85,27 @@ export class XuxedexComponent implements OnInit {
         nombre: xuxe.nombre,
         tipo: xuxe.tipo,
         archivo: xuxe.archivo,
-        // tamano: xuxe.tamano,
-        // evo1: xuxe.evo1,
-        // evo2: xuxe.evo2,
       },
     };
-    // Envia al usuario a la ruta de edición //
     this.router.navigate(
       ['/home/home/xuxemons/xuxedex/editar'],
       navigationExtras
     );
   }
 
-  // Función para eliminar el xuxemon seleccionado //
+  /**
+   * Nombre: eliminar
+   * Función: Eliminar el xuxemon seleccionado
+   */
   eliminar($id: any) {
-    // Se subscribe para recibir la información de la función a la que hace referencia en users.service //
     this.xuxemonsService.XuxeDelete($id).subscribe({
-      // Aceptada //
       next: () => {
-        // Redirije al usuario y le da un mensaje //
         this.router.navigate(['/home/home/xuxemons/xuxedex']);
         alert('Xuxemon eliminado con exito.');
         window.location.reload();
       },
       // Rechazada //
       error: (error) => {
-        console.log(error);
-        // Avisa de que algo salió mal //
         alert('Ha fallado algo, el Xuxemon no pudo ser eliminado');
         throw new Error(error);
       },

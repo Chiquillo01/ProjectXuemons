@@ -3,64 +3,81 @@
 namespace App\Http\Controllers;
 
 // Imports //
-use Illuminate\Http\Request;
-use App\Models\Chuches;
 use App\Models\ChuchesUser;
+use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
 class ChuchesUserController extends Controller
 {
     /**
-     * Display the specified resource.
+     * Nombre: obtenerXuxemonAleatorio
+     * Función: Obtener una chuche aleatoria de la tabla chuches.
+     * @return \App\Models\Xuxemons|null
      */
-    public function show(ChuchesUser $chuches)
+    public static function obtenerChucheAleatoria()
     {
-        try {
-            // Selecciona todas las xuxes
-            $chuches = ChuchesUser::all();
-            // Retorna todos las xuxes en forma json
-            return response()->json([$chuches, 200]);
-        } catch (\Exception $e) {
-            // Retorna error con el mensaje de error
-            return response()->json(['message' => 'Ha ocurrido un error al retornar las chuches: ' . $e->getMessage()], 500);
-        }
+        $chucheAleatoria = DB::select("SELECT id FROM chuches ORDER BY RAND() LIMIT 1");
+
+        return !empty($chucheAleatoria) ? $chucheAleatoria[0]->id : null;
     }
 
     /**
-     * Create a random Xuxemon from JSON data.
+     * Nombre: debug
+     * Función: Crear un nuevo xuxemon aleatorio asociado al usuario en sesión.
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\JsonResponse
      */
-    public function debug(Request $request)
+    public function debug(Request $request, $userId)
     {
         try {
-            // Valida los datos //
-            $validados = $request->validate([
-                'nombre' => 'required|string',
-                'dinero' => 'required|numeric',
-                'modificador' => 'required|numeric',
-                'archivo' => 'required|string',
-                'idUser' => 'required|numeric',
-            ]);
+            $chucheAleatoria = self::obtenerChucheAleatoria();
 
-            DB::transaction(function () use ($validados) {
-                // Selecciona un xuxemon aleatorio //
-                $chuchesAleatorio = Chuches::inRandomOrder()->first();
+            if ($chucheAleatoria) {
+                // Crear un nuevo xuxemon asociado al usuario en sesión
+                $nuevaChucheUsuario = new ChuchesUser();
+                $nuevaChucheUsuario->chuche_id = $chucheAleatoria;
+                $nuevaChucheUsuario->user_id = $userId;
+                $nuevaChucheUsuario->save();
 
-                // Asigna la ID 1 al xuxemon aleatorio seleccionado //
-                // $validados['idUser'] = $chuchesAleatorio->id;
+                // Retornar la respuesta con éxito
+                return response()->json(['message' => 'Nuevo Xuxemon creado con éxito'], 200);
+            } else {
+                // Retornar un error si no se encontró un xuxemon aleatorio
+                return response()->json(['message' => 'No se pudo encontrar un xuxemon aleatorio'], 404);
+            }
 
-                // Crea los datos en una transacción //
-                ChuchesUser::create($validados);
-            });
-
-            // Devuelve un 200 (OK) para confirmar al usuario //
-            return response()->json(['message' => 'Chuches creado aleatoriamente con éxito'], 200);
         } catch (\Exception $e) {
-            // Y devuelve un mensaje de error //
             return response()->json(['message' => 'Ha ocurrido un error al crear la chuche aleatorio: ' . $e->getMessage()], 500);
         }
     }
 
-    public function updateStack(Request $request, ChuchesUser $chuches)
+    /**
+     * Nombre: show
+     * Función: Enviar los datos para que se muestren en el frontend
+     */
+    public function show(Request $request, $userId)
+    {
+        try {
+            // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
+            $chuches = ChuchesUser::where('user_id', $userId)
+                ->join('chuches', 'chuches_users.chuche_id', '=', 'chuches.id')
+                ->select('chuches_users.*', 'chuches.nombre', 'chuches.dinero', 'chuches.modificador', 'chuches.archivo')
+                ->get();
+
+            // Retorna todos los xuxemons en forma json
+            return response()->json([$chuches, 200]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al retornar las chuches: ' . $e->getMessage()], 500);
+        }
+    }
+
+
+
+
+
+
+
+    function updateStack(Request $request, ChuchesUser $chuches)
     {
         try {
             // Valida los datos recibidos

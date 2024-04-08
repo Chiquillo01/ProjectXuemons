@@ -10,7 +10,8 @@ class XuxemonsUser extends Model
     use HasFactory;
     protected $fillable = [
         'xuxemon_id',
-        'user_id'
+        'user_id',
+        'comida'
     ];
     
     /**

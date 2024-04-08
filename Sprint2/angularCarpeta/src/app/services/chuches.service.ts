@@ -2,33 +2,37 @@ import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { TokenService } from '../services/token.service';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { Chuches } from '../models/chuches/chuches.model';
 import { ChuchesUser } from '../models/chuches/chuchesUser.model';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ChuchesService {
-  constructor(private http: HttpClient, public tokenService: TokenService) {}
+  constructor(private http: HttpClient, public tokenService: TokenService) { }
 
-  getAllChuches(): Observable<Chuches[]> {
-    // Realizar la solicitud HTTP GET para obtener todos los Xuxemons
-    return this.http.get<Chuches[]>('http://127.0.0.1:8000/api/chuches/');
-  }
-
-  getAllChuchesUser(): Observable<ChuchesUser[]> {
-    // Realizar la solicitud HTTP GET para obtener todos los Xuxemons
+  /**
+   * Nombre: getAllChuchesUser
+   * Función: Obtener todas las chuches que tiene un usuario
+   * @returns la url de la api
+   */
+  getAllChuchesUser(userId: number): Observable<ChuchesUser[]> {
     return this.http.get<ChuchesUser[]>(
-      'http://127.0.0.1:8000/api/chuchesUser/'
+      `http://127.0.0.1:8000/api/chuchesUser/${userId}`
     );
   }
 
-  // Método para crear un nuevo xuxemon //
-  createChuchesAleatorios(chuchesData: any): Observable<any> {
-    return this.http.post<any>(
-      'http://127.0.0.1:8000/api/chuches/random/',
-      chuchesData
-    );
+  /**
+   * Nombre: createChuchesAleatorios
+   * Función: Crear una nueva chuche para el usuario que esta la sesión
+   * @returns la url de la api
+   */
+  createChuchesAleatorios(userId: number): Observable<any> {
+    const authToken = this.tokenService.getToken();
+    const headers = {
+      headers: { Authorization: `Bearer ${authToken}` }
+    };
+    
+    return this.http.post<any>(`http://127.0.0.1:8000/api/chuches/random/${userId}`, headers);
   }
 
   // // Función para editar la chuche //
@@ -57,7 +61,7 @@ export class ChuchesService {
       headers,
     });
   }
-  
+
   // chucheUpdate(stack: number, id: any): Observable<any> {
   //   // Token de sesion //
   //   const authToken = this.tokenService.getToken();

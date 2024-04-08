@@ -11,18 +11,15 @@ return new class extends Migration
      */
     public function up(): void
     {
-        // Schema::create('chuches_users', function (Blueprint $table) {
-        //     $table->bigIncrements('id');
-        //     $table->string('nombre', 15);
-        //     $table->integer('dinero');
-        //     $table->integer('modificador');
-        //     $table->string('archivo');
-        //     $table->string('stack')->default(1);
-        //     $table->unsignedBigInteger('idUser');
-        //     $table->timestamps();
+        Schema::create('chuches_users', function (Blueprint $table) {
+            $table->unsignedBigInteger('chuche_id');
+            $table->unsignedBigInteger('user_id');
+            $table->timestamps();
 
-        //     $table->foreign('idUser')->references('id')->on('users');
-        // });
+            // Definir las claves foráneas
+            $table->foreign('chuche_id')->references('id')->on('chuches')->onDelete('cascade');
+            $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
+        });
     }
 
     /**

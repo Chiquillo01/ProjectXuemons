@@ -1,3 +1,10 @@
+body {
+  background-color: rgb(65, 65, 65);
+  display: flex;
+  flex-direction: column;
+  min-height: 60vh;
+}
+
 .cuerpoHome {
   display: flex;
   flex-flow: row wrap;
@@ -9,21 +16,21 @@
 }
 
 .homeCards {
+  background-color: rgb(162, 255, 255);
+  border: 1px solid rgb(255, 133, 249);
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   border-radius: 10px;
-  border: 2px solid #000;
   margin: 10px;
-  width: 45%;
-  background-color: rgb(162, 255, 255);
+  width: 40%;
 }
 
 .homeCards>a {
-  width: 100%;
   display: flex;
   justify-content: center;
+  width: 100%;
 }
 
 .homeCards>p {
@@ -35,20 +42,19 @@
 }
 
 .homeImg {
+  margin-top: 10px;
   height: 100px;
   width: 100px;
-  margin-top: 10px;
   transition: transform 0.3s ease;
 }
 
 .homeCards:hover .homeText {
-  transform: scale(1.3);
   font-weight: bold;
+  transform: scale(1.3);
 }
 
 .homeText {
-  margin-top: 5px;
   text-align: center;
-  margin-top: 10px;
+  margin-top: 8px;
   transition: transform 0.3s ease;
 }

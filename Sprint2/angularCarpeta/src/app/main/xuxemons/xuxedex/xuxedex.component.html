@@ -20,15 +20,13 @@
         </h3>
 
         <div class="imgFormat">
-          <img [src]="'../assets/xuxemons/' + card.archivo" [attr.alt]="card.nombre">
+          <img [src]="'../assets/xuxemons/' + card.archivo" [attr.alt]="card.nombre"
+            [ngStyle]="getImageStyle(card.tamano.toString())">
         </div>
 
         <h4 class="card-title">
           {{card.tipo}}
         </h4>
-        <!-- <h4 class="card-title">*ngIf="card.tamano"[ngStyle]="getImageStyle(card.tamano)"
-          {{card.tipo}} {{card.vida}}
-        </h4> -->
 
         <!-- Solo para usaruio administrador -->
         <div *ngIf="userRole === 1">

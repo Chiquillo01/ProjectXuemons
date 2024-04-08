@@ -40,6 +40,7 @@ label {
 
 input {
   width: 90%;
+  padding: 4px;
   margin-left: 12px;
   margin-bottom: 20px;
   border-radius: 5px;
@@ -47,7 +48,7 @@ input {
 }
 
 input:hover {
-  border: 2px solid rgb(207, 125, 255);
+  border: 1px solid rgb(255, 133, 249);
 }
 
 .flexBotones {
@@ -74,8 +75,8 @@ input:hover {
 }
 
 .registrar:hover {
-  background-color: #005f6b;
-  border: 1px solid #00e1ff;
+  background-color: #229faf;
+  border: 1px solid rgb(255, 133, 249);
 }
 
 .logear {
@@ -84,8 +85,8 @@ input:hover {
 }
 
 .logear:hover {
-  background-color: #348138;
-  border: 1px solid #62ff6a;
+  background-color: #41a546;
+  border: 1px solid rgb(255, 133, 249);
 }
 
 p{

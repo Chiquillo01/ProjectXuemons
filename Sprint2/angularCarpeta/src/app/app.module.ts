@@ -40,7 +40,6 @@ import { LandingComponent } from './landing/landing.component';
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    // Añadimos los imports de los formularios reactivos //
     FormsModule,
     ReactiveFormsModule,
     CommonModule,

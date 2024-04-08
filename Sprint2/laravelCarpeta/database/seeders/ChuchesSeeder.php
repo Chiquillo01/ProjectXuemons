@@ -19,20 +19,19 @@ class ChuchesSeeder Extends Seeder
             'cotton-candy', 'lollipop', 'sweets'
         ];
         $modificador = [
-            '1', '1', '2', '2',
-            '3', '3', '4',
-            '4', '5', '5'
+            '1', '2', '1', '2',
+            '3', '3', '5',
+            '4', '4', '5'
         ];
         $precio = [
-            '50', '100', '150', '200',
-            '250', '300', '350',
-            '400', '450', '500'
+            '50', '100', '50', '100',
+            '200', '200', '300',
+            '250', '250', '300'
         ];
 
         for ($i = 0; $i < count($nombres); $i++) {
 
             DB::table('chuches')->insert([
-                'id' => 0,
                 'nombre' => $nombres[$i],
                 'modificador' => $modificador[$i],
                 'dinero' => $precio[$i],

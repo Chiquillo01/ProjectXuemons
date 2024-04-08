@@ -17,8 +17,10 @@
         <h3 class="card-title">
           {{cardUser.nombre}}
         </h3>
+
         <div class="imgFormat">
-          <img *ngIf="cardUser.archivo" [src]="'../assets/xuxemons/' + cardUser.archivo" [attr.alt]="cardUser.nombre">
+          <img [src]="'../assets/xuxemons/' + cardUser.archivo" [attr.alt]="cardUser.nombre"
+            [ngStyle]="getImageStyle(cardUser.tamano)">
         </div>
 
         <h4 class="card-title">
@@ -26,12 +28,12 @@
         </h4>
 
         <div>
-          <button class="editar-btn">
+          <button class="alimentar-btn" (click)="alimentar(cardUser)">
             Alimentar
           </button>
 
-          <button class="eliminar-btn">
-            Evolucionar
+          <button class="eliminar-btn" (click)="eliminar()">
+            Eliminar
           </button>
         </div>
       </div>
