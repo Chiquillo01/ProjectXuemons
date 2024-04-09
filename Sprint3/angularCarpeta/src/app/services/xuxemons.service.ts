@@ -127,7 +127,7 @@ export class XuxemonsService {
       Authorization: `Bearer ${authToken}`,
     });
 
-    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/evos/${evo.evo2}`, {
+    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/evos2/${evo.evo2}`, {
       headers,
     });
   }
@@ -166,7 +166,7 @@ export class XuxemonsService {
       Authorization: `Bearer ${authToken}`,
     });
 
-    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/${user_Id}/evolucionar/${xuxemonId}`,
+    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/${user_Id}/evolucionar2/${xuxemonId}`,
       { cumpleEvo2, headers, });
   }
 

@@ -41,14 +41,14 @@ Route::post('/xuxemons/pc/random/{userId}', [XuxemonsUserController::class, 'deb
 Route::put('/xuxemons/{xuxemons}', [XuxemonsController::class, 'update']);
 // Actualizar tamaño por defecto del xuxemon //
 Route::put('/xuxemons/tamano/{tamano}', [XuxemonsController::class, 'updateTam']);
-// Actualizar tamaño para la evolución //
+// Actualizar tamaño para la evolución por defecto ( uso del administrador) //
 Route::put('/xuxemons/{user_Id}/evolucionar/{xuxemonId}', [XuxemonsUserController::class, 'evolucionarXuxemon']);
-// Actualizar tamaño para la evolución //
-Route::put('/xuxemons/{user_Id}/evolucionar/{xuxemonId}', [XuxemonsUserController::class, 'evolucionarXuxemon2']);
+// Actualizar tamaño para la evolución por defecto ( uso del administrador) //
+Route::put('/xuxemons/{user_Id}/evolucionar2/{xuxemonId}', [XuxemonsUserController::class, 'evolucionarXuxemon2']);
 // Actualizar evoluciones xuxemon //
 Route::put('/xuxemons/evos/{evo1}', [XuxemonsController::class, 'updateEvo1']);
 // Actualizar evoluciones xuxemon //
-Route::put('/xuxemons/evos/{evo2}', [XuxemonsController::class, 'updateEvo2']);
+Route::put('/xuxemons/evos2/{evo2}', [XuxemonsController::class, 'updateEvo2']);
 // Actualizar alimentos xuxemon usuario //
 Route::put('/xuxemons/{xuxemon_id}/alimentar/{chuche_id}/user/{user_Id}', [XuxemonsUserController::class, 'alimentar']);
 // Eliminar un xuxemon //
