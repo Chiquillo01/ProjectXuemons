@@ -1,0 +1,24 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <form [formGroup]="xuxemonForm" (ngSubmit)="editarXuxemon()">
+        <h2>Editar Xuxemon</h2>
+        <input formControlName="nombre" type="text" placeholder="Nombre"><br>
+
+        <select formControlName="tipo">
+            <option value="Tierra">Tierra</option>
+            <option value="Aire">Aire</option>
+            <option value="Agua">Agua</option>
+        </select>
+
+        <input formControlName="archivo" type="text" placeholder="Nombre del archivo"><br>
+        
+        <button class="boton" type="submit" [disabled]="!xuxemonForm.valid">Guardar</button>
+        <a href="home/home/xuxemons/xuxedex">
+            <img class="atras" src="../../../../../assets/home/atras.png" alt="">
+        </a>
+    </form>
+</body>

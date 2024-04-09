@@ -1,0 +1,16 @@
+<div class="container">
+    <form [formGroup]="loginForm" (ngSubmit)="Login()">
+        <img routerLink="landingPage" src="../../assets/loginRegis/loginImg.jpg">
+        <label for="emailInput">Email:</label>
+        <input formControlName="email" type="email" placeholder="Escribe aqui tu correo electrónico">
+        <label for="passwordInput">Contraseña:</label>
+        <input formControlName="password" type="password" placeholder="Escribe aqui tu contraseña">
+
+        <div class="flexBotones">
+            <button class="boton logear" type="submit">Iniciar Sesión</button>
+
+            <p>¿No tienes cuenta?</p>
+            <button routerLink="/registro" class="boton registrar">Registro</button>
+        </div>
+    </form>
+</div>

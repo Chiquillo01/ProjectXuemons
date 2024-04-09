@@ -1,0 +1,36 @@
+<head>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+        integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+</head>
+
+<body>
+    <div class="flexContainer">
+        <form class="tamanioFormStyle" [formGroup]="configTam" (ngSubmit)="editarTamanoDef()">
+            <h2>Editar Tamaño por defecto</h2>
+
+            <select formControlName="tamano">
+                <option value="pequeno">Pequeño</option>
+                <option value="mediano">Mediano</option>
+                <option value="grande">Grande</option>
+            </select>
+
+            <button class="boton" type="submit" [disabled]="!configTam.valid">Actualizar Valores</button>
+        </form>
+
+        <form class="evo1FormStyle" [formGroup]="configEvo" (ngSubmit)="editarEvoDef()">
+            <h2>Editar Evolución 1</h2>
+
+            <input formControlName="evo1" type="number" placeholder="Evolución 1"><br>
+
+            <button class="boton" type="submit" [disabled]="!configEvo.valid">Actualizar Valores</button>
+        </form>
+
+        <form class="evo2FormStyle" [formGroup]="configEvo2" (ngSubmit)="editarEvoDef2()">
+            <h2>Editar Evolución 2</h2>
+
+            <input formControlName="evo2" type="number" placeholder="Evolución 1"><br>
+
+            <button class="boton" type="submit" [disabled]="!configEvo2.valid">Actualizar Valores</button>
+        </form>
+    </div>
+</body>

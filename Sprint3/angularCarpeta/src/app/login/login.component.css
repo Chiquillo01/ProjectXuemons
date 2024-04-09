@@ -1,0 +1,95 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, serif;
+}
+
+form {
+  background-color: rgb(231, 231, 231);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  border-radius: 20px;
+  border-style: dashed solid dashed solid;
+  border-width: 2px;
+  border-color: aquamarine pink aquamarine pink;
+  width: 50%;
+  height: auto;
+  margin-left: 25%;
+  margin-top: 4em;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  margin: 4% 0 2% 40%;
+}
+
+img:hover {
+  cursor: pointer;
+}
+
+label {
+  width: 90%;
+  margin-left: 12px;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+input {
+  width: 90%;
+  padding: 4px;
+  margin-left: 12px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid rgb(219, 156, 255);
+}
+
+input:hover {
+  border: 1px solid rgb(255, 133, 249);
+}
+
+.flexBotones {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+}
+
+.boton {
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+
+  text-align: center;
+  width: auto;
+}
+
+.registrar {
+  background-color: #008cba;
+  margin: 0 9% 1em 0;
+}
+
+.registrar:hover {
+  background-color: #229faf;
+  border: 1px solid rgb(255, 133, 249);
+}
+
+.logear {
+  background-color: #4caf50;
+  margin: 0 6% 1em 0;
+}
+
+.logear:hover {
+  background-color: #41a546;
+  border: 1px solid rgb(255, 133, 249);
+}
+
+p{
+  margin-bottom: 1em;
+  margin-right: 4px;
+}

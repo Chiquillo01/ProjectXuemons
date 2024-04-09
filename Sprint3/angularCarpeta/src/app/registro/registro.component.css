@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, serif;
+}
+
+body{}
+
+form {
+  background-color: rgb(231, 231, 231);
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+  align-content: center;
+  align-items: center;
+  border-radius: 20px;
+  border-style: dashed solid dashed solid;
+  border-width: 2px;
+  border-color: aquamarine pink aquamarine pink;
+  width: 50%;
+  height: auto;
+  margin-left: 25%;
+  margin-top: 4em;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  margin: 4% 0 2% 40%;
+}
+
+img:hover {
+  cursor: pointer;
+}
+
+label {
+  width: 90%;
+  margin-left: 12px;
+  margin-bottom: 4px;
+  font-weight: bold;
+}
+
+input {
+  width: 90%;
+  padding: 4px;
+  margin-left: 12px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid rgb(219, 156, 255);
+}
+
+input:hover {
+  border: 1px solid rgb(255, 133, 249);
+}
+
+.labelCheck {
+  width: auto;
+}
+
+.checkbox {
+  width: auto;
+  margin-left: 5px;
+  margin-bottom: 6px;
+}
+
+.flexBotones {
+  display: flex;
+  flex-flow: row nowrap;
+  justify-content: flex-end;
+  width: 100%;
+}
+
+.boton {
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+
+  text-align: center;
+  width: auto;
+}
+
+.registrar {
+  background-color: #008cba;
+  margin: 0 6% 1em 0;
+}
+
+.registrar:hover {
+  background-color: #005f6b;
+  border: 1px solid #00e1ff;
+}
+
+.logear {
+  background-color: #4caf50;
+  margin: 0 10% 1em 0;
+}
+
+.logear:hover {
+  background-color: #348138;
+  border: 1px solid #62ff6a;
+}

@@ -1,0 +1,66 @@
+body {
+  background-color: rgb(65, 65, 65);
+  min-height: 75vh;
+  font-family: Georgia, serif;
+}
+
+.flexContainer {
+  display: flex;
+  flex-flow: row wrap;
+  justify-content: center;
+  margin: 0 auto;
+  width: 60%;
+}
+
+form {
+  background-color: #e6e6e6;
+  border: 2px solid pink;
+  border-radius: 10px;
+  padding: 20px;
+  margin: 1em 0;
+}
+
+.tamanioFormStyle {
+  min-width: 80%;
+}
+
+.evo1FormStyle {
+  margin-right: 10px;
+  min-width: 40%;
+}
+
+.evo2FormStyle {
+  margin-left: 10px;
+  min-width: 40%;
+}
+
+h2 {
+  text-align: center;
+}
+
+input,
+select {
+  border: 1px solid #fcabff;
+  border-radius: 4px;
+  box-sizing: border-box;
+  margin: 12px 0;
+  padding: 8px;
+  width: 100%;
+}
+
+.boton {
+  background-color: #add8e6;
+  color: #333;
+  border-color: pink;
+  border-radius: 4px;
+  display: inline-block;
+  margin-top: 14px;
+  padding: 10px 20px;
+  text-decoration: none;
+  transition: background-color 0.3s ease;
+}
+
+.boton:hover {
+  background-color: #87cefa;
+  cursor: pointer;
+}

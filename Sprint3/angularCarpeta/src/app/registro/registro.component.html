@@ -1,0 +1,25 @@
+<body>
+    <div class="container">
+        <form [formGroup]="registroForm" (ngSubmit)="Registrar()">
+            <img routerLink="landingPage" src="../../assets/loginRegis/registreImg.png">
+
+            <label>Nick name:</label>
+            <input placeholder="Nombre de entrenador" type="text" formControlName="nick">
+
+            <label>Email:</label>
+            <input placeholder="Correo electrónico" type="email" formControlName="email">
+
+            <label>Contraseña:</label>
+            <input type="password" placeholder="Contraseña" formControlName="password">
+            <input type="password" placeholder="RepetirContraseña" formControlName="password_confirmation">
+
+            <label class="labelCheck">Admin:</label>
+            <input class="checkbox" type="checkbox" formControlName="rol">
+
+            <div class="flexBotones">
+                <button type="submit" class="boton registrar">Registrarse</button>
+                <button routerLink="/login" class="boton logear">Volver al login</button>
+            </div>
+        </form>
+    </div>
+</body>
