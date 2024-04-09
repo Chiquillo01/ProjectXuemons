@@ -88,64 +88,74 @@ export class XuxemonsService {
     });
   }
 
-  // // Función para actualizar datos del Xuxemon //
-  // XuxeUserUpdate(card: any, id: any): Observable<any> {
-  //   // card.tamano = parseInt(card.tamano);
-  //   // card.evo1 = parseInt(card.evo1);
-  //   // card.evo2 = parseInt(card.evo2);
-  //   console.log('Datos del Xuxemon a actualizar:', card);
-  //   // Token de sesion //
-  //   const authToken = this.tokenService.getToken();
-  //   // Header con el token //
-  //   const headers = new HttpHeaders({
-  //     Authorization: `Bearer ${authToken}`,
-  //   });
-  //   // Peticion con headers de actualizacion //
-  //   return this.http.put(`http://127.0.0.1:8000/api/xuxemons_users/${id}`, card, {
-  //     headers,
-  //   });
-  // }
+  /**
+   * Nombre: XuxeUpdate
+   * Función: Función para actualizar el tamaño por defecto del juego
+   * @returns la url de la api
+   */
+  confTamDef(tamano: any): Observable<any> {
+    const authToken = this.tokenService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
 
-  // // Función para actualizar datos del Xuxemon //
-  // XuxeComer(card: any, id: any): Observable<any> {
-  //   console.log('Datos del Xuxemon a actualizar la comida:', card);
-  //   // Token de sesion //
-  //   const authToken = this.tokenService.getToken();
-  //   // Header con el token //
-  //   const headers = new HttpHeaders({
-  //     Authorization: `Bearer ${authToken}`,
-  //   });
-  //   // Peticion con headers de actualizacion //
-  //   return this.http.put(`http://127.0.0.1:8000/api/xuxemons/users/comer/${id}`, card, {
-  //     headers,
-  //   });
-  // }
+    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/tamano/${tamano.tamano}`, {
+      headers,
+    });
+  }
 
-  // // Función para actualizar tamaño del Xuxemon //
-  // XuxeConfig(tamano: any, id: any): Observable<any> {
-  //   // Token de sesion //
-  //   const authToken = this.tokenService.getToken();
-  //   // Header con el token //
-  //   const headers = new HttpHeaders({
-  //     Authorization: `Bearer ${authToken}`,
-  //   });
-  //   // Peticion con headers de actualizacion //
-  //   return this.http.put(`http://127.0.0.1:8000/api/xuxemons/${id}`, tamano, {
-  //     headers,
-  //   });
-  // }
+  /**
+   * Nombre: XuxeUpdate
+   * Función: Función para actualizar el nivel evolutivo por defecto del juego
+   * @returns la url de la api
+   */
+  confEvo(evo: any): Observable<any> {
+    console.log('Datos del Xuxemon a actualizar:', evo.evo1);
+    const authToken = this.tokenService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
 
-  // // Función para actualizar tamaño del Xuxemon //
-  // ChuchesConfig(evos: any, id: any): Observable<any> {
-  //   // Token de sesion //
-  //   const authToken = this.tokenService.getToken();
-  //   // Header con el token //
-  //   const headers = new HttpHeaders({
-  //     Authorization: `Bearer ${authToken}`,
-  //   });
-  //   // Peticion con headers de actualizacion //
-  //   return this.http.put(`http://127.0.0.1:8000/api/xuxemons/${id}`, evos, {
-  //     headers,
-  //   });
-  // }
+    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/evos/${evo.evo1}`, {
+      headers,
+    });
+  }
+
+  /**
+   * Nombre: XuxeUpdate
+   * Función: Función para actualizar el nivel evolutivo por defecto del juego
+   * @returns la url de la api
+   */
+  confEvo2(evo: any): Observable<any> {
+    console.log('Datos del Xuxemon a actualizar:', evo.evo2);
+    const authToken = this.tokenService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+
+    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/evos/${evo.evo2}`, {
+      headers,
+    });
+  }
+
+  /**
+   * Nombre: alimentar
+   * Función: Función para actualizar el nivel evolutivo por defecto del juego
+   * @returns la url de la api
+   */
+  alimentar(xuxemon_id: any, chuche_id: any): Observable<any> {
+    console.log('Estamos en alimentar:');
+    const authToken = this.tokenService.getToken();
+    const headers = new HttpHeaders({
+      Authorization: `Bearer ${authToken}`,
+    });
+
+    const body = {
+      chuche_id: chuche_id
+    };
+
+    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/alimentar/${xuxemon_id}/`, body,{
+      headers,
+    });
+  }
 }

@@ -39,6 +39,14 @@ Route::post('/xuxemons', [XuxemonsController::class, 'store']);
 Route::post('/xuxemons/pc/random/{userId}', [XuxemonsUserController::class, 'debug']);
 // Actualizar xuxemon //
 Route::put('/xuxemons/{xuxemons}', [XuxemonsController::class, 'update']);
+// Actualizar tamaño xuxemon //
+Route::put('/xuxemons/tamano/{tamano}', [XuxemonsController::class, 'updateTam']);
+// Actualizar evoluciones xuxemon //
+Route::put('/xuxemons/evos/{evo1}', [XuxemonsController::class, 'updateEvo1']);
+// Actualizar evoluciones xuxemon //
+Route::put('/xuxemons/evos/{evo2}', [XuxemonsController::class, 'updateEvo2']);
+// Actualizar alimentos xuxemon usuario //
+Route::put('/xuxemons/alimentar${xuxemon_id}/', [XuxemonsUserController::class, 'alimentar']);
 // Eliminar un xuxemon //
 Route::delete('/xuxemons/{xuxemons}', [XuxemonsController::class, 'destroy']);
 // Mostrar todos los xuxemons //
@@ -48,23 +56,20 @@ Route::get('/xuxemonsUser/{userId}', [XuxemonsUserController::class, 'show']);
 // ---------------------- //
 // ---------------------- //
 
-// Alimentar xuxemons //
-Route::put('/xuxemons/users/comer/{xuxemons}', [XuxemonsUserController::class, 'alimentar']);
-
-// Mostrar todos los xuxemons del usuario //
-Route::put('/xuxemons_users/{xuxemons_users}', [XuxemonsUserController::class, 'update']);
-// Actualizar tamaño xuxemon //
-Route::put('/xuxemons/tamano', [XuxemonsController::class, 'updateTam']);
-// Actualizar evoluciones xuxemon //
-Route::put('/xuxemons/evos', [XuxemonsUserController::class, 'updateEvos']);
 // Rutas para las chuches //
-// Mostrar todas las xuxes del usuario //
-Route::get('/chuches', [ChuchesController::class, 'show']);
-// Mostrar todas las xuxes del usuario //
-Route::get('/chuchesUser', [ChuchesUserController::class, 'show']);
 // Crear chuches aleatorias //
-Route::post('/chuches/random', [ChuchesUserController::class, 'debug']);
-// Actualizar chuche //
-Route::put('/chuches/{chuches}', [ChuchesUserController::class, 'updateStack']);
+Route::post('/chuches/random/{userId}', [ChuchesUserController::class, 'debug']);
+// Mostrar todas las xuxes del usuario //
+Route::get('/chuchesUser/{userId}', [ChuchesUserController::class, 'show']);
+
+
+// // Alimentar xuxemons //
+// Route::put('/xuxemons/users/comer/{xuxemons}', [XuxemonsUserController::class, 'alimentar']);
+
+// 
+
+
+// // Actualizar chuche //
+// Route::put('/chuches/{chuches}', [ChuchesUserController::class, 'updateStack']);
 // ---------------------- //
 // ---------------------- //
