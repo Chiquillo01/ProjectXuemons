@@ -46,7 +46,6 @@ class XuxemonsUserController extends Controller
                 // Retornar un error si no se encontró un xuxemon aleatorio
                 return response()->json(['message' => 'No se pudo encontrar un xuxemon aleatorio'], 404);
             }
-
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error al crear el nuevo Xuxemon: ' . $e->getMessage()], 500);
         }
@@ -86,10 +85,13 @@ class XuxemonsUserController extends Controller
      * agrega el nuevo valor de comida al xuxemon y ha su vez elimina la xuxe usada.
      * Por último comprovaciones para ver si el Xuxemon puede evolucionar
      */
-    public function alimentar(Request $request, $xuxemon_id, $chuche_id, $user_id)
+    public function alimentar(Request $request)
     {
+        $iduser = $request->input('user_id');
+        $chuche_id = $request->input('chuche_id');
+        $xuxemon_id = $request->input('xuxemon_id');
         try {
-            $xuxemonInfo = XuxemonsUser::where('user_id', $user_id)
+            $xuxemonInfo = XuxemonsUser::where('user_id', $iduser)
                 ->where('xuxemon_id', $xuxemon_id)
                 ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
                 ->select(
@@ -101,7 +103,7 @@ class XuxemonsUserController extends Controller
                 )
                 ->first();
 
-            $chucheInfo = ChuchesUser::where('user_id', $user_id)
+            $chucheInfo = ChuchesUser::where('user_id', $iduser)
                 ->where('chuche_id', $chuche_id)
                 ->join('chuches', 'chuches_users.chuche_id', '=', 'chuches.id')
                 ->select(
@@ -111,13 +113,13 @@ class XuxemonsUserController extends Controller
                 ->first();
             // ------------- //
             $nuevaComida = $xuxemonInfo->comida + $chucheInfo->modificador;
-            DB::transaction(function () use ($user_id, $xuxemon_id, $nuevaComida, $chuche_id) {
+            DB::transaction(function () use ($iduser, $xuxemon_id, $nuevaComida, $chuche_id) {
                 // Actualizar el valor de comida en la tabla xuxemons_users dentro de la transacción
-                XuxemonsUser::where('user_id', $user_id)
+                XuxemonsUser::where('user_id', $iduser)
                     ->where('xuxemon_id', $xuxemon_id)
                     ->update(['comida' => $nuevaComida]);
 
-                ChuchesUser::where('user_id', $user_id)
+                ChuchesUser::where('user_id', $iduser)
                     ->where('chuche_id', $chuche_id)
                     ->delete();
             });
@@ -127,11 +129,14 @@ class XuxemonsUserController extends Controller
 
             // ------------- //
             return response()->json([
-                'cumpleEvo1' => $cumpleEvo1,
-                'cumpleEvo2' => $cumpleEvo2,
+                'request' => $request
             ], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al actualizar los xuxemons: ' . $e->getMessage()], 500);
+            // return response()->json(['message' => 'Ha ocurrido un error al actualizar los xuxemons: ' . $e->getMessage()], 500);
+
+            return response()->json([
+                'request' => $request
+            ]);
         }
     }
 

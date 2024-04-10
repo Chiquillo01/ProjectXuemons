@@ -143,8 +143,13 @@ export class XuxemonsService {
     const headers = new HttpHeaders({
       Authorization: `Bearer ${authToken}`,
     });
+    const body = {
+      'xuxemon_id': xuxemon_id,
+      'chuche_id': chuche_id,
+      'user_id': user_Id
+    }
 
-    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/${xuxemon_id}/alimentar/${chuche_id}/user/${user_Id}`, {}, {
+    return this.http.put('http://127.0.0.1:8000/api/xuxemons/alimentar/user', {body,
       headers,
     });
   }

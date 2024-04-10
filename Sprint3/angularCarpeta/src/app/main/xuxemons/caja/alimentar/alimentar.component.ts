@@ -55,14 +55,17 @@ export class AlimentarComponent {
       .alimentar(newXuxeData, newAlimentData)
       .subscribe({
         next: (returns) => {
-          console.log(returns);
+          console.log('Este sale por el next: ' + returns);
           this.cumpleEvo1 = returns.cumpleEvo1;
           this.cumpleEvo2 = returns.cumpleEvo2;
-          alert('Le ha gustado el alimento.');
+          // alert('Le ha gustado el alimento.');
+          console.log('Este es el de evo 1: ' +returns.cumpleEvo1);
+          console.log('Este es el de evo 2: ' +returns.cumpleEvo2);
         },
         error: (error) => {
-          alert('No quiere tu mierda de chuche.');
-          throw new Error(error);
+          console.log('Esta saliendo por el erros: ' + error);
+          // alert('No quiere tu mierda de chuche.');
+          // throw new Error(error);
         },
       });
   }
