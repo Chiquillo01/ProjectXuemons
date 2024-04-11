@@ -7,6 +7,8 @@ export interface XuxemonsUsers {
   tamano: string;
   evo1: number;
   evo2: number;
+  activo: number;
+  favorito: number;
   created_at: string;
   updated_at: string;
 }

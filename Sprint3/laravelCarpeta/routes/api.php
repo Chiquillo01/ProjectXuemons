@@ -41,6 +41,8 @@ Route::post('/xuxemons/pc/random/{userId}', [XuxemonsUserController::class, 'deb
 Route::put('/xuxemons/{xuxemons}', [XuxemonsController::class, 'update']);
 // Actualizar tamaño por defecto del xuxemon //
 Route::put('/xuxemons/tamano/{tamano}', [XuxemonsController::class, 'updateTam']);
+// Actualizar tamaño por defecto del xuxemon //
+Route::put('/xuxemons/{user_Id}/activo/{xuxemon_id}', [XuxemonsController::class, 'updateActivo']);
 // Actualizar tamaño para la evolución por defecto ( uso del administrador) //
 Route::put('/xuxemons/{user_Id}/evolucionar/{xuxemonId}', [XuxemonsUserController::class, 'evolucionarXuxemon']);
 // Actualizar tamaño para la evolución por defecto ( uso del administrador) //
@@ -57,6 +59,8 @@ Route::delete('/xuxemons/{xuxemons}', [XuxemonsController::class, 'destroy']);
 Route::get('/xuxemons', [XuxemonsController::class, 'show']);
 // Mostrar todos los xuxemons del usuario //
 Route::get('/xuxemonsUser/{userId}', [XuxemonsUserController::class, 'show']);
+// Mostrar todos los xuxemons del usuario //
+Route::get('/xuxemonsUserActivos/{userId}', [XuxemonsUserController::class, 'showActivos']);
 // ---------------------- //
 // ---------------------- //
 

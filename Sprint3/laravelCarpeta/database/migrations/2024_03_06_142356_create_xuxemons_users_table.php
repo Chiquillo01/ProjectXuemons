@@ -15,6 +15,8 @@ return new class extends Migration
             $table->unsignedBigInteger('xuxemon_id');
             $table->unsignedBigInteger('user_id');
             $table->integer('comida')->nullable()->default(0);
+            $table->integer('activo')->nullable()->default(false);
+            $table->integer('favorito')->nullable()->default(false);
             $table->timestamps();
 
             // Definir las claves foráneas

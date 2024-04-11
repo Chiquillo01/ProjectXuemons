@@ -12,8 +12,9 @@
       </button>
     </div>
 
-    <div class="list-container">
-      <div class="card-flex" *ngFor="let cardUser of xuxemonsUser">
+    <!-- contenedor que se ven los xuxemons activos -->
+    <div class="list-container-activos">
+      <div class="card-flex-activos" *ngFor="let cardUser of xuxemonsUserActivos">
         <h3 class="card-title">
           {{cardUser.nombre}}
         </h3>
@@ -28,12 +29,50 @@
         </h4>
 
         <div>
+          <button class="alimentar-btn-fav" (click)="alimentar(cardUser)">
+            Alimentar
+          </button>
+        </div>
+      </div>
+    </div>
+
+
+
+    <!-- contenedor que se ven los xuxemons que tiene -->
+    <div class="list-container">
+      <div class="card-flex" *ngFor="let cardUser of xuxemonsUser">
+        <h3 class="card-title">
+          {{cardUser.nombre}}
+        </h3>
+
+        <div class="imgFormat">
+          <img [src]="'../assets/xuxemons/' + cardUser.archivo" [attr.alt]="cardUser.nombre"
+            [ngStyle]="getImageStyle(cardUser.tamano)">
+        </div>
+
+        <h4 class="card-title">
+          {{cardUser.tipo}}
+        </h4>
+        
+        <button (click)="activo(cardUser.xuxemon_id)">
+          Activo
+        </button>
+        <button (click)="favorito(cardUser)">
+          Favorito
+        </button>
+
+        <div  *ngIf="cardUser.favorito == 0">
           <button class="alimentar-btn" (click)="alimentar(cardUser)">
             Alimentar
           </button>
 
           <button class="eliminar-btn" (click)="eliminar()">
-            Eliminar
+            Liberar
+          </button>
+        </div>
+        <div  *ngIf="cardUser.favorito == 1">
+          <button class="alimentar-btn-fav" (click)="alimentar(cardUser)">
+            Alimentar
           </button>
         </div>
       </div>

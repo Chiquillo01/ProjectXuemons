@@ -30,6 +30,20 @@ export class XuxemonsService {
   }
 
   /**
+   * Nombre: getAllXuxemonsUser
+   * Función: Obtener todos los Xuxemons activos que tiene un usuario
+   * @returns la url de la api
+   */
+  getAllXuxemonsUserActivos(userId: number): Observable<XuxemonsUsers[]> {
+    // const body={
+    //   'user_id': userId
+    // }
+    return this.http.get<XuxemonsUsers[]>(`http://127.0.0.1:8000/api/xuxemonsUserActivos/${userId}`);
+  }
+
+
+
+  /**
    * Nombre: createXuxemon
    * Función: Crear un nuevo xuxemon
    * @returns la url de la api
@@ -153,6 +167,29 @@ export class XuxemonsService {
       headers,
     });
   }
+
+    /**
+   * Nombre: xuxemonActivo
+   * Función: Función para actualizar el nivel evolutivo por defecto del juego
+   * @returns la url de la api
+   */
+    xuxemonActivo(xuxemonId: number): Observable<any> {
+      const user_Id = this.tokenService.getRole();
+      const authToken = this.tokenService.getToken();
+      // const headers = new HttpHeaders({
+      //   Authorization: `Bearer ${authToken}`,
+      // });
+      const headers = new HttpHeaders({
+        Authorization: `Bearer ${authToken}`,
+      });
+      console.log("Info xuxeId:" + xuxemonId);
+      console.log("Info user:" + user_Id);
+      console.log("Info token:" + authToken);
+      console.log("Info header:" + headers);
+      console.log(`http://127.0.0.1:8000/api/xuxemons/${user_Id}/activo/${xuxemonId}`,'',{headers});
+  
+      return this.http.put(`http://127.0.0.1:8000/api/xuxemons/${user_Id}/activo/${xuxemonId}`,'',{headers});
+    }
 
   evolucionarXuxemon(xuxemonId: number, cumpleEvo1: boolean): Observable<any> {
     const user_Id = this.tokenService.getRole();

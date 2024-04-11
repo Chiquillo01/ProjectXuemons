@@ -61,6 +61,38 @@ class XuxemonsUserController extends Controller
             // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
             $xuxemons = XuxemonsUser::where('user_id', $userId)
                 ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
+                ->where('xuxemons_users.activo', 0)
+                ->select(
+                    'xuxemons_users.*',
+                    'xuxemons.nombre',
+                    'xuxemons.tipo',
+                    'xuxemons.archivo',
+                    'xuxemons.tamano',
+                    'xuxemons.evo1',
+                    'xuxemons.evo2'
+                )
+                ->orderBy('xuxemons_users.favorito', 'desc')
+                ->get();
+
+            // Retorna todos los xuxemons en forma json
+            return response()->json([$xuxemons, 200]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al retornar los xuxemons: ' . $e->getMessage()], 500);
+        }
+    }
+
+
+    /**
+     * Nombre: show
+     * Función: Enviar los datos para que se muestren en el frontend
+     */
+    public function showActivos(Request $request, $userId)
+    {
+        try {
+            // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
+            $xuxemons = XuxemonsUser::where('user_id', $userId)
+                ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
+                ->where('xuxemons_users.activo', 1)
                 ->select(
                     'xuxemons_users.*',
                     'xuxemons.nombre',
@@ -78,6 +110,43 @@ class XuxemonsUserController extends Controller
             return response()->json(['message' => 'Ha ocurrido un error al retornar los xuxemons: ' . $e->getMessage()], 500);
         }
     }
+
+        /**
+     * Nombre: updateTam
+     * Función: gracias al valor que se le pasa por paremetro hace un update
+     * a la bd con el nuevo valor, esto lo hace a todos los registros
+     */
+    public function updateActivo(Request $request, $user_Id, $xuxemon_id)
+    {
+        // $xuxemon_id = $request->input('xuxemon_id');
+        // $iduser = $request->input('user_id');
+
+        try {
+            DB::transaction(function () use ($user_Id, $xuxemon_id) {
+                // Actualizar el valor de comida en la tabla xuxemons_users dentro de la transacción
+                XuxemonsUser::where('user_id', $user_Id)
+                    ->where('xuxemon_id', $xuxemon_id)
+                    ->update(['xuxemons_users.activo' => 'true']);
+
+                // XuxemonsUser::where('user_id', $user_Id)
+                //         ->where('xuxemon_id', $xuxemon_id)
+                //         ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
+                //         ->update(['xuxemons.tamano' => 'mediano']);3
+            });
+            info('Request: '.$request);
+
+            return response()->json(['message' => 'Ahora es un xuxemon activo'], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al hacer activo al xuxemon: ' . $e->getMessage()], 500);
+        }
+    }
+
+    // public function updateFav(Request $request){
+
+    //     try {
+    //         DB::transaction(function () use ($user_Id, $xuxemon_id) {
+
+    // }
 
     /**
      * Nombre: alimentar

@@ -40,12 +40,34 @@ body {
   padding: 20px;
 }
 
+.list-container-activos {
+  background: linear-gradient(to top, #95baff, #cce6ff);
+  border: 2px solid rgb(255, 133, 249);
+  border-radius: 5px;
+  display: flex;
+  flex-flow: row wrap;
+  justify-content:space-evenly ;
+  align-items: center;
+  align-content: center;
+  margin: 1em 0;
+  padding: 30px;
+}
+
 .card-flex {
   background-color: rgb(29, 29, 29);
   color: white;
   border: 2px solid rgb(255, 133, 249);
   border-radius: 10px;
   margin-top: 5px;
+}
+
+.card-flex-activos {
+  background-color: rgb(29, 29, 29);
+  color: white;
+  border: 2px solid rgb(255, 133, 249);
+  border-radius: 10px;
+  margin-top: 5px;
+  padding-top: 10px;
 }
 
 .card-title {
@@ -70,8 +92,21 @@ body {
   margin-top: 8px;
 }
 
+.alimentar-btn-fav{
+  background-color: pink;
+  color: rgb(0, 0, 0);
+  border: none;
+  text-align: center;
+  padding: 10px 60px;
+  margin-top: 8px;
+}
+
 .alimentar-btn {
   border-radius: 0 0 0 8px;
+}
+
+.alimentar-btn-fav {
+  border-radius: 0 0 8px 8px;
 }
 
 .eliminar-btn {
@@ -79,6 +114,7 @@ body {
 }
 
 .alimentar-btn:hover,
-.eliminar-btn:hover {
+.eliminar-btn:hover,
+.alimentar-btn-fav:hover {
   background: linear-gradient(to top, #95baff, #cce6ff);
 }
