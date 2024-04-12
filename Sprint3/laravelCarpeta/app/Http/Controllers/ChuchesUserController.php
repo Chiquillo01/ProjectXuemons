@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 // Imports //
 use App\Models\ChuchesUser;
+use App\Models\Chuches;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -16,40 +17,62 @@ class ChuchesUserController extends Controller
      */
     public static function obtenerChucheAleatoria()
     {
-        $chucheAleatoria = DB::select("SELECT id FROM chuches ORDER BY RAND() LIMIT 1");
+        // $chucheAleatoria = DB::select("SELECT id FROM chuches ORDER BY RAND() LIMIT 1");
 
-        return !empty($chucheAleatoria) ? $chucheAleatoria[0]->id : null;
+        // return !empty($chucheAleatoria) ? $chucheAleatoria[0]->id : null;
+
+        // Utiliza Eloquent para obtener una chuche aleatoria
+        $chucheAleatoria = Chuches::inRandomOrder()->first();
+
+        // Retorna el id si se encuentra una chuche aleatoria, o null si no se encuentra ninguna
+        return $chucheAleatoria ? $chucheAleatoria->id : null;
     }
 
     /**
      * Nombre: debug
-     * Función: Crear un nuevo xuxemon aleatorio asociado al usuario en sesión.
+     * Función: Crear una nueva chuche aleatoria asociada al usuario en sesión.
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
     public function debug(Request $request, $userId)
     {
         try {
+            // Obtener una chuche aleatoria
             $chucheAleatoria = self::obtenerChucheAleatoria();
 
-            if ($chucheAleatoria) {
-                // Crear un nuevo xuxemon asociado al usuario en sesión
+            if (!$chucheAleatoria) {
+                return response()->json(['message' => 'No se pudo encontrar una chuche aleatoria.'], 404);
+            }
+
+            // Verificar si el usuario ya tiene esta chuche
+            $chucheExistente = ChuchesUser::where('user_id', $userId)
+                ->where('chuche_id', $chucheAleatoria)
+                ->first();
+
+            if ($chucheExistente) {
+                // Incrementar el valor de stack en 1
+                $chucheExistente->stack += 1;
+                $chucheExistente->save();
+
+                // Si ya tiene la chuche, retornar un mensaje indicándolo
+                return response()->json(['message' => 'Chuche añadida en el stack'], 200);
+            } else {
+                // Crear un nuevo ChuchesUser
                 $nuevaChucheUsuario = new ChuchesUser();
                 $nuevaChucheUsuario->chuche_id = $chucheAleatoria;
                 $nuevaChucheUsuario->user_id = $userId;
+                $nuevaChucheUsuario->stack = 1; // Establecer el valor inicial de stack
                 $nuevaChucheUsuario->save();
 
                 // Retornar la respuesta con éxito
-                return response()->json(['message' => 'Nuevo Xuxemon creado con éxito'], 200);
-            } else {
-                // Retornar un error si no se encontró un xuxemon aleatorio
-                return response()->json(['message' => 'No se pudo encontrar un xuxemon aleatorio'], 404);
+                return response()->json(['message' => 'Nueva chuche creada con éxito'], 200);
             }
-
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al crear la chuche aleatorio: ' . $e->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al crear la chuche aleatoria: ' . $e->getMessage()], 500);
         }
     }
+
+
 
     /**
      * Nombre: show
@@ -98,6 +121,4 @@ class ChuchesUserController extends Controller
             return response()->json(['message' => 'Ha ocurrido un error al actualizar las chuches: ' . $e->getMessage()], 500);
         }
     }
-
 }
-

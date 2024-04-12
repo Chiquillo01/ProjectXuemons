@@ -61,3 +61,12 @@ img{
   width: 100px;
   height: 100px;
 }
+
+.stackZone{
+  background-color: rgb(67, 67, 67);
+  color: white;
+  width: 50px;
+  border-radius: 100px;
+  border: 2px solid red;
+  margin: -20px;
+}

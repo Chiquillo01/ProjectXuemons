@@ -27,6 +27,7 @@ export class ChuchesComponent implements OnInit {
    */
   getChuches() {
     const userId = this.tokenService.getRole();
+    console.log("UserId: " + userId);
 
     if (userId !== null) {
       this.chuchesService.getAllChuchesUser(userId).subscribe({
@@ -52,10 +53,12 @@ export class ChuchesComponent implements OnInit {
 
     this.chuchesService.createChuchesAleatorios(userId!).subscribe({
       next: () => {
+        console.log("Chuche añadida")
         this.getChuches();
       },
       error: (error) => {
         alert('Chuche fallida.');
+        console.log(error);
       }
     });
   }
