@@ -116,9 +116,11 @@ export class CajaComponent implements OnInit {
     });
   }
 
-  activo(xuxeUser: number) {
-    console.log("Info: " + xuxeUser);
-    this.xuxemonsService.xuxemonActivo(xuxeUser).subscribe({
+  activo(xuxeUser: any) {
+    const xuxemon_id = xuxeUser.xuxemon_id;
+    console.log(xuxeUser);
+    console.log("Id xuxemon: " + xuxemon_id);
+    this.xuxemonsService.xuxemonActivo(xuxemon_id).subscribe({
       next: (returns) => {
         console.log('Este sale por el next: ' + returns);
         // alert('Le ha gustado el alimento.');
@@ -157,5 +159,18 @@ export class CajaComponent implements OnInit {
    * Nombre: eliminar
    * Función: Eliminar el xuxemon seleccionado
    */
-  eliminar() {}
+  eliminar(xuxeUser: number) {
+    this.xuxemonsService.XuxeDelete(xuxeUser).subscribe({
+      next: (returns) => {
+        console.log('Este sale por el next: ' + returns);
+        this.getXuxemons();
+        // alert('Le ha gustado el alimento.');
+      },
+      error: (error) => {
+        console.log('Esta saliendo por el error: ' + error);
+        // alert('No quiere tu mierda de chuche.');
+        // throw new Error(error);
+      },
+    });
+  }
 }
