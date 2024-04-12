@@ -4,19 +4,23 @@
   font-family: Georgia, serif;
 }
 
-body{}
+body {
+  background-color: rgb(65, 65, 65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
 
 form {
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(132, 132, 132);
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
   align-content: center;
   align-items: center;
   border-radius: 20px;
-  border-style: dashed solid dashed solid;
-  border-width: 2px;
-  border-color: aquamarine pink aquamarine pink;
+  border: 10px dashed aquamarine;
   width: 50%;
   height: auto;
   margin-left: 25%;
