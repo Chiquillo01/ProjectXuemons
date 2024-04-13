@@ -47,9 +47,9 @@ export class AlimentarComponent {
    * Nombre: alimentarXuxemon
    * Función: para editar el Xuxemon
    */
-  alimentarXuxemon() {
+  alimentarXuxemon(newAlimentData: number) {
     const newXuxeData = parseInt(this.xuxeData.id);
-    const newAlimentData = parseInt(this.alimentForm.value['chucheSeleccionada']);
+    // const newAlimentData = parseInt(this.alimentForm.value['chucheSeleccionada']);
 
     this.xuxemonsService
       .alimentar(newXuxeData, newAlimentData)

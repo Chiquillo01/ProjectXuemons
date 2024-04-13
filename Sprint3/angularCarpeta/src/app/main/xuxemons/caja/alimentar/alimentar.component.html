@@ -3,7 +3,7 @@
         integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
 </head>
 
-<body>
+<!-- <body>
     <div class="container">
         <div class="list-container">
             <div class="card-flex">
@@ -34,6 +34,67 @@
                     <img class="atras" src="../../../../../assets/home/atras.png" alt="">
                 </a>
             </form>
+        </div>
+    </div>
+</body> -->
+
+<body>
+    <div class="container">
+        <div class="list-container">
+            <div class="card-flex">
+                <h3 class="card-title">
+                    {{xuxeData.nombre}}
+                </h3>
+
+                <div class="imgFormat">
+                    <img [src]="'../assets/xuxemons/' + xuxeData.archivo" [attr.alt]="xuxeData.nombre"
+                        [ngStyle]="getImageStyle(xuxeData.tamano)">
+                </div>
+                <div>
+                    <button *ngIf="cumpleEvo1" (click)="accionCumpleEvo1()" class="evolutionBtn uno">Evolución
+                        1</button>
+                    <button *ngIf="cumpleEvo2" (click)="accionCumpleEvo2()" class="evolutionBtn dos">Evolución
+                        2</button>
+                </div>
+            </div>
+
+            <div class="list-container-chuches">
+
+                <div class="card-flex-chuches" *ngFor="let chuche of chuchesList">
+                    <a (click)="alimentarXuxemon(chuche.chuche_id)">
+                        <div class="stackZone" *ngIf="chuche.stack > 1">
+                            <h2 class="card-title">
+                                {{chuche.stack}}
+                            </h2>
+                        </div>
+                        <h2 class="card-title-chuches">
+                            {{chuche.nombre}}
+                        </h2>
+                        <!-- <h1  *ngIf="chuche.stack > 1" class="stack">
+                          {{chuche.stack}}
+                        </h1> -->
+                        <div class="imgFormat">
+                            <img [src]="'../../../../assets/home/chuches/' + chuche.archivo" alt="{{ chuche.nombre }}">
+                        </div>
+                    </a>
+                </div>
+
+            </div>
+
+
+            <!-- <form [formGroup]="alimentForm" (ngSubmit)="alimentarXuxemon()">
+                <h2>Alimentar Xuxemon</h2>
+
+                <label for="">Selecciona la chuche</label>
+                <select formControlName="chucheSeleccionada">
+                    <option *ngFor="let chuche of chuchesList" [value]="chuche.chuche_id">{{ chuche.nombre }}</option>
+                </select>
+
+                <button class="boton" type="submit" [disabled]="!alimentForm.valid">Alimentar</button>
+                <a href="home/home/xuxemons/caja">
+                    <img class="atras" src="../../../../../assets/home/atras.png" alt="">
+                </a>
+            </form> -->
         </div>
     </div>
 </body>
