@@ -8,12 +8,14 @@ use Illuminate\Database\Eloquent\Model;
 class XuxemonsUser extends Model
 {
     use HasFactory;
+
+    protected $primaryKey = 'xuxemon_id';
     protected $fillable = [
         'xuxemon_id',
         'user_id',
         'comida',
         'activo',
-        'favorito'
+        'favorito',
     ];
     
     /**

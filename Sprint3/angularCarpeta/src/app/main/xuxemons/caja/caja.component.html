@@ -25,9 +25,12 @@
         </div>
 
         <h4 class="card-title">
-          {{cardUser.tipo}}
+          Tipo: <img class="type_img" src="../../../assets/home/otros/{{cardUser.tipo}}.png" alt="{{cardUser.tipo}}">
+          <!-- {{cardUser.tipo}} -->
         </h4>
-
+        <img class="button_upload" src="../../../../assets/xuxemons/iconos/download1.png" alt=""
+          onmouseover="this.src='../../../../assets/xuxemons/iconos/download.gif';"
+          onmouseout="this.src='../../../assets/xuxemons/iconos/download1.png'" (click)="activo(cardUser)">
         <div>
           <button class="alimentar-btn-fav" (click)="alimentar(cardUser)">
             Alimentar
@@ -48,14 +51,15 @@
           </h3>
           <a (click)="favorito(cardUser)" *ngIf="cardUser.favorito == 0">
             <img class="button_slide" alt="Logo" onmouseout="this.src='../../../assets/xuxemons/iconos/star1.png'"
-              onmouseover="this.src='../../../assets/xuxemons/iconos/star2.png';"
-              src="../../../assets/xuxemons/iconos/star1.png">
+              onmouseover="this.src='../../../assets/xuxemons/iconos/star3.png';"
+              src="../../../assets/xuxemons/iconos/star1.png"
+              onclick="this.src='../../../assets/xuxemons/iconos/star2.png';">
           </a>
 
           <a (click)="favorito(cardUser)" *ngIf="cardUser.favorito == 1">
-            <img class="button_slide" alt="Logo" onmouseout="this.src='../../../assets/xuxemons/iconos/star2.png'"
+            <img class="button_slide" alt="Logo" onmouseout="this.src='../../../assets/xuxemons/iconos/star3.png'"
               onmouseover="this.src='../../../assets/xuxemons/iconos/star1.png';"
-              src="../../../assets/xuxemons/iconos/star2.png">
+              src="../../../assets/xuxemons/iconos/star3.png">
           </a>
         </div>
 
@@ -65,15 +69,16 @@
             [ngStyle]="getImageStyle(cardUser.tamano)">
         </div>
 
-        <div  class="card-header">
+        <div class="card-header">
           <h4 class="card-title-type">
-            <!-- Tipo: <img class="type_img" src="../../../assets/home/otros/{{cardUser.tipo}}.png" alt="{{cardUser.tipo}}"> -->
-          {{cardUser.tipo}}
+            Tipo: <img class="type_img" src="../../../assets/home/otros/{{cardUser.tipo}}.png" alt="{{cardUser.tipo}}">
+            <!-- {{cardUser.tipo}} -->
           </h4>
-
-          <button (click)="activo(cardUser)">
-            Activo
-          </button>
+          <a>
+            <img class="button_upload" src="../../../../assets/xuxemons/iconos/upload1.png" alt=""
+              onmouseover="this.src='../../../../assets/xuxemons/iconos/upload.gif';"
+              onmouseout="this.src='../../../assets/xuxemons/iconos/upload1.png'" (click)="activo(cardUser)">
+          </a>
         </div>
 
         <div *ngIf="cardUser.favorito == 0">

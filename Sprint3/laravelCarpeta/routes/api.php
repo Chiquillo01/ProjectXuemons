@@ -41,8 +41,10 @@ Route::post('/xuxemons/pc/random/{userId}', [XuxemonsUserController::class, 'deb
 Route::put('/xuxemons/{xuxemons}', [XuxemonsController::class, 'update']);
 // Actualizar tamaño por defecto del xuxemon //
 Route::put('/xuxemons/tamano/{tamano}', [XuxemonsController::class, 'updateTam']);
-// Actualizar tamaño por defecto del xuxemon //
-Route::put('/xuxemons/{user_Id}/activo/{xuxemon_id}', [XuxemonsController::class, 'updateActivo']);
+// Actualizar activo por defecto del xuxemon //
+Route::post('/xuxemons/{user_Id}/activo/{xuxemon_id}', [XuxemonsUserController::class, 'updateActivo']);
+// Actualizar favorito por defecto del xuxemon //
+Route::post('/xuxemons/{user_Id}/favorito/{xuxemon_id}', [XuxemonsUserController::class, 'updateFav']);
 // Actualizar tamaño para la evolución por defecto ( uso del administrador) //
 Route::put('/xuxemons/{user_Id}/evolucionar/{xuxemonId}', [XuxemonsUserController::class, 'evolucionarXuxemon']);
 // Actualizar tamaño para la evolución por defecto ( uso del administrador) //

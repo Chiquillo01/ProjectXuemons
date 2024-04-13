@@ -111,7 +111,7 @@ class XuxemonsUserController extends Controller
         }
     }
 
-        /**
+    /**
      * Nombre: updateTam
      * Función: gracias al valor que se le pasa por paremetro hace un update
      * a la bd con el nuevo valor, esto lo hace a todos los registros
@@ -124,43 +124,59 @@ class XuxemonsUserController extends Controller
         try {
 
             $xuxemonInfo = XuxemonsUser::where('user_id', $user_id)
-            ->where('xuxemon_id', $xuxemon_id)
-            ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
-            ->select(
-                'xuxemons_users.*',
-                'xuxemons.nombre',
-                'xuxemons.tamano',
-                'xuxemons.evo1',
-                'xuxemons.evo2'
-            )
-            ->first();
-
-            $activo = 1;
-        DB::transaction(function () use ($user_id, $xuxemon_id, $activo) {
-            // Actualizar el valor de comida en la tabla xuxemons_users dentro de la transacción
-            XuxemonsUser::where('user_id', $user_id)
                 ->where('xuxemon_id', $xuxemon_id)
-                ->update(['activo' => $activo]);
-        });
+                ->first();
 
-            // DB::transaction(function () use ($user_Id, $xuxemon_id) {
-            //     // Actualizar el valor de comida en la tabla xuxemons_users dentro de la transacción
-            //     XuxemonsUser::where('user_id', $user_Id)
-            //         ->where('xuxemon_id', $xuxemon_id)
-            //         ->update(['xuxemons_users.activo' => 'true']);
+            $activar = 1;
 
-            //     // XuxemonsUser::where('user_id', $user_Id)
-            //     //         ->where('xuxemon_id', $xuxemon_id)
-            //     //         ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
-            //     //         ->update(['xuxemons.tamano' => 'mediano']);3
-            // });
-            // info('Request: '.$request);
+             if ($xuxemonInfo->activo == 1) {
+                 $activar = 0;
+             }
 
-            return response()->json(['message' => 'Ahora es un xuxemon activo'], 200);
+            if ($xuxemonInfo) {
+                $xuxemonInfo->activo = $activar;
+                $xuxemonInfo->save();
+            }
+
+            return response()->json(['message' => 'Ahora es un xuxemon activo' . $xuxemonInfo], 200);
         } catch (\Exception $e) {
-            return response()->json(['message' => 'Ha ocurrido un error al hacer activo al xuxemon: ' . $e->getMessage()], 500);
+            return response()->json(['message' => 'Ha ocurrido un error al hacer activo al xuxemon: ' . $e->getMessage() . '' . $xuxemonInfo], 500);
         }
     }
+
+    /**
+     * Nombre: updateTam
+     * Función: gracias al valor que se le pasa por paremetro hace un update
+     * a la bd con el nuevo valor, esto lo hace a todos los registros
+     */
+    public function updateFav(Request $request, $user_id, $xuxemon_id)
+    {
+        // $xuxemon_id = $request->input('xuxemon_id');
+        // $iduser = $request->input('user_id');
+
+        try {
+
+            $xuxemonInfo = XuxemonsUser::where('user_id', $user_id)
+                ->where('xuxemon_id', $xuxemon_id)
+                ->first();
+
+            $fav = 1;
+
+             if ($xuxemonInfo->favorito == 1) {
+                 $fav = 0;
+             }
+
+            if ($xuxemonInfo) {
+                $xuxemonInfo->favorito = $fav;
+                $xuxemonInfo->save();
+            }
+
+            return response()->json(['message' => 'Ahora es un xuxemon activo' . $xuxemonInfo], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al hacer activo al xuxemon: ' . $e->getMessage() . '' . $xuxemonInfo], 500);
+        }
+    }
+
 
     /**
      * Nombre: alimentar
@@ -169,109 +185,65 @@ class XuxemonsUserController extends Controller
      * Por último comprovaciones para ver si el Xuxemon puede evolucionar
      */
 
-     public function alimentar(Request $request, $xuxemon_id, $chuche_id, $user_id)
-     {
-         try {
-             $xuxemonInfo = XuxemonsUser::where('user_id', $user_id)
-                 ->where('xuxemon_id', $xuxemon_id)
-                 ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
-                 ->select(
-                     'xuxemons_users.*',
-                     'xuxemons.nombre',
-                     'xuxemons.tamano',
-                     'xuxemons.evo1',
-                     'xuxemons.evo2'
-                 )
-                 ->first();
- 
-             $chucheInfo = ChuchesUser::where('user_id', $user_id)
-                 ->where('chuche_id', $chuche_id)
-                 ->join('chuches', 'chuches_users.chuche_id', '=', 'chuches.id')
-                 ->select(
-                     'chuches_users.*',
-                     'chuches.modificador',
-                 )
-                 ->first();
-             // ------------- //
-             $nuevaComida = $xuxemonInfo->comida + $chucheInfo->modificador;
-             DB::transaction(function () use ($user_id, $xuxemon_id, $nuevaComida, $chuche_id) {
-                 // Actualizar el valor de comida en la tabla xuxemons_users dentro de la transacción
-                 XuxemonsUser::where('user_id', $user_id)
-                     ->where('xuxemon_id', $xuxemon_id)
-                     ->update(['comida' => $nuevaComida]);
- 
-                 ChuchesUser::where('user_id', $user_id)
-                     ->where('chuche_id', $chuche_id)
-                     ->delete();
-             });
-             // ------------- //
-             $cumpleEvo1 = $nuevaComida >= $xuxemonInfo->evo1;
-             $cumpleEvo2 = $nuevaComida >= $xuxemonInfo->evo2;
- 
-             // ------------- //
-             return response()->json([
-                 'cumpleEvo1' => $cumpleEvo1,
-                 'cumpleEvo2' => $cumpleEvo2,
-             ], 200);
-         } catch (\Exception $e) {
-             return response()->json(['message' => 'Ha ocurrido un error al actualizar los xuxemons: ' . $e->getMessage()], 500);
-         }
-     }
+    public function alimentar(Request $request, $xuxemon_id, $chuche_id, $user_id)
+    {
+        try {
+            $xuxemonInfo = XuxemonsUser::where('user_id', $user_id)
+                ->where('xuxemon_id', $xuxemon_id)
+                ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
+                ->select(
+                    'xuxemons_users.*',
+                    'xuxemons.nombre',
+                    'xuxemons.tamano',
+                    'xuxemons.evo1',
+                    'xuxemons.evo2'
+                )
+                ->first();
 
-    // public function alimentar(Request $request)
-    // {
-    //     $iduser = $request->input('user_id');
-    //     $chuche_id = $request->input('chuche_id');
-    //     $xuxemon_id = $request->input('xuxemon_id');
-    //     try {
-    //         $xuxemonInfo = XuxemonsUser::where('user_id', $iduser)
-    //             ->where('xuxemon_id', $xuxemon_id)
-    //             ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
-    //             ->select(
-    //                 'xuxemons_users.*',
-    //                 'xuxemons.nombre',
-    //                 'xuxemons.tamano',
-    //                 'xuxemons.evo1',
-    //                 'xuxemons.evo2'
-    //             )
-    //             ->first();
+            $chucheInfo = ChuchesUser::where('user_id', $user_id)
+                ->where('chuche_id', $chuche_id)
+                ->join('chuches', 'chuches_users.chuche_id', '=', 'chuches.id')
+                ->select(
+                    'chuches_users.*',
+                    'chuches.modificador',
+                )
+                ->first();
+            // ------------- //
+            $nuevaComida = $xuxemonInfo->comida + $chucheInfo->modificador;
+            DB::transaction(function () use ($user_id, $xuxemon_id, $nuevaComida, $chuche_id) {
+                // Actualizar el valor de comida en la tabla xuxemons_users dentro de la transacción
+                XuxemonsUser::where('user_id', $user_id)
+                    ->where('xuxemon_id', $xuxemon_id)
+                    ->update(['comida' => $nuevaComida]);
 
-    //         $chucheInfo = ChuchesUser::where('user_id', $iduser)
-    //             ->where('chuche_id', $chuche_id)
-    //             ->join('chuches', 'chuches_users.chuche_id', '=', 'chuches.id')
-    //             ->select(
-    //                 'chuches_users.*',
-    //                 'chuches.modificador',
-    //             )
-    //             ->first();
-    //         // ------------- //
-    //         $nuevaComida = $xuxemonInfo->comida + $chucheInfo->modificador;
-    //         DB::transaction(function () use ($iduser, $xuxemon_id, $nuevaComida, $chuche_id) {
-    //             // Actualizar el valor de comida en la tabla xuxemons_users dentro de la transacción
-    //             XuxemonsUser::where('user_id', $iduser)
-    //                 ->where('xuxemon_id', $xuxemon_id)
-    //                 ->update(['comida' => $nuevaComida]);
+                $chucheUser = ChuchesUser::where('user_id', $user_id)
+                    ->where('chuche_id', $chuche_id)
+                    ->first();
 
-    //             ChuchesUser::where('user_id', $iduser)
-    //                 ->where('chuche_id', $chuche_id)
-    //                 ->delete();
-    //         });
-    //         // ------------- //
-    //         $cumpleEvo1 = $nuevaComida >= $xuxemonInfo->evo1;
-    //         $cumpleEvo2 = $nuevaComida >= $xuxemonInfo->evo2;
+                // si el stack es 1 borra la chuche
+                // si el stack no es 1 le resta 1 a stack
+                if ($chucheUser->stack == 1) {
+                    ChuchesUser::where('user_id', $user_id)
+                        ->where('chuche_id', $chuche_id)
+                        ->delete();
+                } else {
+                    $chucheUser->stack -= 1;
+                    $chucheUser->save();
+                }
+            });
+            // ------------- //
+            $cumpleEvo1 = $nuevaComida >= $xuxemonInfo->evo1;
+            $cumpleEvo2 = $nuevaComida >= $xuxemonInfo->evo2;
 
-    //         // ------------- //
-    //         return response()->json([
-    //             'request' => $request
-    //         ], 200);
-    //     } catch (\Exception $e) {
-    //         // return response()->json(['message' => 'Ha ocurrido un error al actualizar los xuxemons: ' . $e->getMessage()], 500);
-
-    //         return response()->json([
-    //             'request' => $request
-    //         ]);
-    //     }
-    // }
+            // ------------- //
+            return response()->json([
+                'cumpleEvo1' => $cumpleEvo1,
+                'cumpleEvo2' => $cumpleEvo2,
+            ], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al actualizar los xuxemons: ' . $e->getMessage()], 500);
+        }
+    }
 
     /**
      * Nombre: evolucionarXuxemon
