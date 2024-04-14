@@ -34,7 +34,7 @@ Route::post('/login', [Controller::class, 'login']);
 
 // Rutas para los Xuxemons // 
 // Crear xuxemon //
-Route::post('/xuxemons', [XuxemonsController::class, 'store']);
+Route::post('/xuxemons', [XuxemonsController::class, 'crearXuxemon']);
 // Crear xuxemon aleatorios //
 Route::post('/xuxemons/pc/random/{userId}', [XuxemonsUserController::class, 'debug']);
 // Actualizar xuxemon //
