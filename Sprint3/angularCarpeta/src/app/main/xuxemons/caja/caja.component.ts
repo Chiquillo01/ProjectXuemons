@@ -119,31 +119,43 @@ export class CajaComponent implements OnInit {
   activo(xuxeUser: any) {
     const userId = this.tokenService.getRole();
     const xuxemon_id = xuxeUser.xuxemon_id;
+    const ContadorActivo = this.xuxemonsUserActivos.length;
     console.log(xuxeUser);
-    console.log("Id xuxemon: " + xuxemon_id);
-    console.log("Id user: " + userId);
-    this.xuxemonsService.xuxemonActivo(userId!,xuxemon_id).subscribe({
-      next: (returns) => {
-        console.log('Este sale por el next: ' + returns);
-        // alert('Le ha gustado el alimento.');
-        this.getXuxemonsActivos();
-        this.getXuxemons();
-      },
-      error: (error) => {
-        console.log('Esta saliendo por el error: ' + error);
-        // alert('No quiere tu mierda de chuche.');
-        // throw new Error(error);
-      },
-    });
+    console.log('Id xuxemon: ' + xuxemon_id);
+    console.log('Id user: ' + userId);
+
+
+    if (ContadorActivo < 4 || xuxeUser.activo == 1) {
+      console.log(ContadorActivo);
+      this.xuxemonsService.xuxemonActivo(userId!, xuxemon_id).subscribe({
+        next: (returns) => {
+          console.log('Este sale por el next: ' + returns);
+          // alert('Le ha gustado el alimento.');
+          this.getXuxemonsActivos();
+          this.getXuxemons();
+          if(xuxeUser.activo == 0){
+            xuxeUser.activo = 1;
+          }
+          else{
+            xuxeUser.activo = 0;
+          }
+        },
+        error: (error) => {
+          console.log('Esta saliendo por el error: ' + error);
+          // alert('No quiere tu mierda de chuche.');
+          // throw new Error(error);
+        },
+      });
+    }
   }
 
   favorito(xuxeUser: any) {
     const userId = this.tokenService.getRole();
     const xuxemon_id = xuxeUser.xuxemon_id;
     console.log(xuxeUser);
-    console.log("Id xuxemon: " + xuxemon_id);
-    console.log("Id user: " + userId);
-    this.xuxemonsService.xuxemonFav(userId!,xuxemon_id).subscribe({
+    console.log('Id xuxemon: ' + xuxemon_id);
+    console.log('Id user: ' + userId);
+    this.xuxemonsService.xuxemonFav(userId!, xuxemon_id).subscribe({
       next: (returns) => {
         console.log('Este sale por el next: ' + returns);
         // alert('Le ha gustado el alimento.');

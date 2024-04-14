@@ -51,9 +51,9 @@
                         [ngStyle]="getImageStyle(xuxeData.tamano)">
                 </div>
                 <div>
-                    <button *ngIf="cumpleEvo1" (click)="accionCumpleEvo1()" class="evolutionBtn uno">Evolución
+                    <button *ngIf="cumpleEvo1 && xuxeData.tamano == 'pequeno'" (click)="accionCumpleEvo1()" class="evolutionBtn uno">Evolución
                         1</button>
-                    <button *ngIf="cumpleEvo2 && xuxeData.evo1" (click)="accionCumpleEvo2()" class="evolutionBtn dos">Evolución
+                    <button *ngIf="cumpleEvo2 && xuxeData.tamano == 'mediano'" (click)="accionCumpleEvo2()" class="evolutionBtn dos">Evolución
                         2</button>
                 </div>
             </div>

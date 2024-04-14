@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { XuxemonsService } from 'src/app/services/xuxemons.service';
 import { TokenService } from '../../../../services/token.service';
 import { ChuchesService } from '../../../../services/chuches.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-alimentar',
@@ -22,6 +22,7 @@ export class AlimentarComponent {
     private fb: FormBuilder,
     public xuxemonsService: XuxemonsService,
     private route: ActivatedRoute,
+    private router: Router,
     private tokenService: TokenService,
     private chuchesService: ChuchesService
   ) {
@@ -91,6 +92,7 @@ export class AlimentarComponent {
         },
       });
   }
+
   accionCumpleEvo2() {
     const newXuxeData = parseInt(this.xuxeData.id);
 
@@ -100,6 +102,7 @@ export class AlimentarComponent {
         next: () => {
           alert('Evolucionado con éxito!');
           this.ngOnInit();
+          this.router.navigate(['/home/home/xuxemons/caja']);
         },
         error: (error) => {
           alert('No quiere evolucionar.');
@@ -107,6 +110,7 @@ export class AlimentarComponent {
         },
       });
   }
+
   /**
    * Nombre: getChuches
    * Función: obtiene todas las chuches que son del usuario que esta en sessión
