@@ -10,7 +10,7 @@ import { Router } from '@angular/router';
   styleUrls: ['./registro.component.css']
 })
 export class RegistroComponent implements OnInit {
-  // Valores que espera y validadores de estos que espera del formulario //
+  // Valores y validadores que espera del formulario //
   registroForm: FormGroup = new FormGroup({
     nick: new FormControl('', [Validators.required]),
     email: new FormControl('', [Validators.required]),
@@ -19,7 +19,9 @@ export class RegistroComponent implements OnInit {
     rol: new FormControl(false)
   });
 
-  constructor(public userService: UsersService, private router: Router) { }
+  constructor(
+    public userService: UsersService,
+    private router: Router) { }
 
   ngOnInit(): void { }
 
@@ -32,7 +34,7 @@ export class RegistroComponent implements OnInit {
   Registrar() {
     if (this.registroForm.value.contraseña === this.registroForm.value.RepetirContraseña) {
       this.userService.Registrar(this.registroForm.value).subscribe({
-        next: (data) => {
+        next: () => {
           this.router.navigate(['/login']);
           alert('Usuario registrado correctamente.');
         },

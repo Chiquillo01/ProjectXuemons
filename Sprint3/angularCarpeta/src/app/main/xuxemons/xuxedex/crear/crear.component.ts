@@ -44,23 +44,18 @@ export class CrearComponent {
     });
   }
 
-  // Guarda el Xuxemon en la BD //
+  /**
+   * Nombre: crearXuxemon
+   * Función: Guarda el Xuxemon en la BD
+   */
   crearXuxemon() {
     if (this.xuxemonForm.valid) {
-      // Se subscribe para recibir la información de la función a la que hace referencia en xuxemons.service //
       this.xuxemonsService.createXuxemon(this.xuxemonForm.value).subscribe({
-        // Aceptada //
         next: () => {
-          // Redirije a la xuxedex y le da un mensaje //
           this.router.navigate(['home/home/xuxemons/xuxedex']);
           alert('Xuxemon creado con exito.');
-          this.router.navigate(['home/home/xuxemons/xuxedex']);
         },
-        // Rechazada //
         error: (error) => {
-          console.log(error);
-          // Avisa de que algo salió mal //
-          console.error('Error al crear el Xuxemon:', error);
           alert('No se pudo crear el Xuxemon');
           throw new Error(error);
         },

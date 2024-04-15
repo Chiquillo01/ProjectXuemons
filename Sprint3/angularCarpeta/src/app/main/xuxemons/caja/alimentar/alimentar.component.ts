@@ -45,7 +45,8 @@ export class AlimentarComponent {
 
   /**
    * Nombre: alimentarXuxemon
-   * Función: para editar el Xuxemon
+   * Función: recoje los valores necesarios para poder identidicar al xuxemon y la chuche en la bd,
+   * pasa dichos valores al service y retorna voleanos si cumplen los requisitos
    */
   alimentarXuxemon() {
     const newXuxeData = parseInt(this.xuxeData.id);
@@ -55,7 +56,6 @@ export class AlimentarComponent {
       .alimentar(newXuxeData, newAlimentData)
       .subscribe({
         next: (returns) => {
-          console.log(returns);
           this.cumpleEvo1 = returns.cumpleEvo1;
           this.cumpleEvo2 = returns.cumpleEvo2;
           alert('Le ha gustado el alimento.');
@@ -100,6 +100,7 @@ export class AlimentarComponent {
         },
       });
   }
+
   /**
    * Nombre: getChuches
    * Función: obtiene todas las chuches que son del usuario que esta en sessión
@@ -121,6 +122,12 @@ export class AlimentarComponent {
     }
   }
 
+  /**
+   * Nombre: getImageStyle
+   * Función: Modificar el tamaño de la imagen segun el tamaño del xuxemon
+   * @param tamano 
+   * @returns 
+   */
   getImageStyle(tamano: string): any {
     let width: number;
     const paqueno = 50;

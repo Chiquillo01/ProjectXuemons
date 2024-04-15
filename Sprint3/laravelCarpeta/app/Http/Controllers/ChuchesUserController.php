@@ -31,21 +31,16 @@ class ChuchesUserController extends Controller
     {
         try {
             $chucheAleatoria = self::obtenerChucheAleatoria();
-
             if ($chucheAleatoria) {
                 // Crear un nuevo xuxemon asociado al usuario en sesión
                 $nuevaChucheUsuario = new ChuchesUser();
                 $nuevaChucheUsuario->chuche_id = $chucheAleatoria;
                 $nuevaChucheUsuario->user_id = $userId;
                 $nuevaChucheUsuario->save();
-
-                // Retornar la respuesta con éxito
                 return response()->json(['message' => 'Nuevo Xuxemon creado con éxito'], 200);
             } else {
-                // Retornar un error si no se encontró un xuxemon aleatorio
                 return response()->json(['message' => 'No se pudo encontrar un xuxemon aleatorio'], 404);
             }
-
         } catch (\Exception $e) {
             return response()->json(['message' => 'Ha ocurrido un error al crear la chuche aleatorio: ' . $e->getMessage()], 500);
         }
@@ -58,13 +53,11 @@ class ChuchesUserController extends Controller
     public function show(Request $request, $userId)
     {
         try {
-            // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
             $chuches = ChuchesUser::where('user_id', $userId)
                 ->join('chuches', 'chuches_users.chuche_id', '=', 'chuches.id')
                 ->select('chuches_users.*', 'chuches.nombre', 'chuches.dinero', 'chuches.modificador', 'chuches.archivo')
                 ->get();
 
-            // Retorna todos los xuxemons en forma json
             return response()->json([$chuches, 200]);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Ha ocurrido un error al retornar las chuches: ' . $e->getMessage()], 500);

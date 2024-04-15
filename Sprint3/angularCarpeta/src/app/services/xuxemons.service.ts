@@ -144,7 +144,8 @@ export class XuxemonsService {
       Authorization: `Bearer ${authToken}`,
     });
 
-    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/${xuxemon_id}/alimentar/${chuche_id}/user/${user_Id}`, {}, {
+    return this.http.put(`http://127.0.0.1:8000/api/xuxemons/${xuxemon_id}
+    /alimentar/${chuche_id}/user/${user_Id}`, {}, {
       headers,
     });
   }

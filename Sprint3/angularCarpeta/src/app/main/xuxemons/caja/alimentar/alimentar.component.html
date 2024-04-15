@@ -16,8 +16,10 @@
                         [ngStyle]="getImageStyle(xuxeData.tamano)">
                 </div>
                 <div>
-                    <button *ngIf="cumpleEvo1" (click)="accionCumpleEvo1()" class="evolutionBtn uno">Evolución 1</button>
-                    <button *ngIf="cumpleEvo2" (click)="accionCumpleEvo2()" class="evolutionBtn dos">Evolución 2</button>
+                    <button *ngIf="cumpleEvo1" (click)="accionCumpleEvo1()" class="evolutionBtn uno">Evolución
+                        1</button>
+                    <button *ngIf="cumpleEvo2" (click)="accionCumpleEvo2()" class="evolutionBtn dos">Evolución
+                        2</button>
                 </div>
             </div>
 
@@ -26,7 +28,9 @@
 
                 <label for="">Selecciona la chuche</label>
                 <select formControlName="chucheSeleccionada">
-                    <option *ngFor="let chuche of chuchesList" [value]="chuche.chuche_id">{{ chuche.nombre }}</option>
+                    <option *ngFor="let chuche of chuchesList" [value]="chuche.chuche_id">
+                        {{ chuche.nombre }}
+                    </option>
                 </select>
 
                 <button class="boton" type="submit" [disabled]="!alimentForm.valid">Alimentar</button>
