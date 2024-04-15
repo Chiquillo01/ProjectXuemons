@@ -1,11 +1,11 @@
-* {
+/* * {
   margin: 0;
   padding: 0;
   font-family: Georgia, serif;
 }
 
 form {
-  background-color: rgb(231, 231, 231);
+  background-color: rgb(132, 132, 132);
   display: flex;
   flex-flow: row wrap;
   justify-content: flex-start;
@@ -13,7 +13,7 @@ form {
   align-items: center;
   border-radius: 20px;
   border-style: dashed solid dashed solid;
-  border-width: 2px;
+  border-width: 10px;
   border-color: aquamarine pink aquamarine pink;
   width: 50%;
   height: auto;
@@ -32,6 +32,7 @@ img:hover {
 }
 
 label {
+  display: flex;
   width: 90%;
   margin-left: 12px;
   margin-bottom: 4px;
@@ -48,7 +49,7 @@ input {
 }
 
 input:hover {
-  border: 1px solid rgb(255, 133, 249);
+  border: 3px solid rgb(255, 133, 249);
 }
 
 .flexBotones {
@@ -92,4 +93,113 @@ input:hover {
 p{
   margin-bottom: 1em;
   margin-right: 4px;
+}
+
+body {
+  background-color: rgb(65, 65, 65);
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+} */
+
+
+
+* {
+  margin: 0;
+  padding: 0;
+  font-family: Georgia, serif;
+}
+
+.container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
+}
+
+form {
+  background-color: rgb(132, 132, 132);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  border-radius: 20px;
+  border: 10px dashed aquamarine;
+  width: 50%;
+  padding: 20px;
+}
+
+img {
+  width: 100px;
+  height: 100px;
+  margin-bottom: 20px;
+}
+
+label {
+  width: 90%;
+  font-weight: bold;
+  text-align: left;
+}
+
+input {
+  width: calc(100% - 24px);
+  padding: 4px;
+  margin-bottom: 20px;
+  border-radius: 5px;
+  border: 1px solid rgb(219, 156, 255);
+}
+
+input:hover {
+  border: 3px solid rgb(255, 133, 249);
+}
+
+.flexBotones {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  width: 100%;
+  margin-top: 20px;
+}
+
+.boton {
+  color: white;
+  border-radius: 5px;
+  border: none;
+  padding: 5px 10px;
+  text-align: center;
+  width: auto;
+}
+
+.registrar {
+  background-color: #008cba;
+  margin-right: 9px;
+}
+
+.registrar:hover {
+  background-color: #229faf;
+  border: 1px solid rgb(255, 133, 249);
+}
+
+.logear {
+  background-color: #4caf50;
+}
+
+.logear:hover {
+  background-color: #41a546;
+  border: 1px solid rgb(255, 133, 249);
+}
+
+p {
+  display: flex;
+  align-items: center;
+  /* margin-bottom: 1em; */
+  margin-left: 40px;
+  margin-right: 15px;
+}
+
+body {
+  background-color: rgb(65, 65, 65);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100vh;
 }

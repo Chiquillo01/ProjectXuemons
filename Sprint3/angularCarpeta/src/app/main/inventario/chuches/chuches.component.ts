@@ -15,10 +15,10 @@ export class ChuchesComponent implements OnInit {
   constructor(
     private tokenService: TokenService,
     private chuchesService: ChuchesService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
-    this.getChuches()
+    this.getChuches();
   }
 
   /**
@@ -27,6 +27,7 @@ export class ChuchesComponent implements OnInit {
    */
   getChuches() {
     const userId = this.tokenService.getRole();
+    console.log('UserId: ' + userId);
 
     if (userId !== null) {
       this.chuchesService.getAllChuchesUser(userId).subscribe({
@@ -50,13 +51,17 @@ export class ChuchesComponent implements OnInit {
   debug(): void {
     const userId = this.tokenService.getRole();
 
+    console.log('UserId: ' + userId);
+
     this.chuchesService.createChuchesAleatorios(userId!).subscribe({
       next: () => {
+        console.log('Chuche añadida');
         this.getChuches();
       },
       error: () => {
         alert('Chuche fallida.');
-      }
+        console.log(error);
+      },
     });
   }
 }

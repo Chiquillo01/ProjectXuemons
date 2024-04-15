@@ -14,6 +14,7 @@ return new class extends Migration
         Schema::create('chuches_users', function (Blueprint $table) {
             $table->unsignedBigInteger('chuche_id');
             $table->unsignedBigInteger('user_id');
+            $table->unsignedBigInteger('stack');
             $table->timestamps();
 
             // Definir las claves foráneas

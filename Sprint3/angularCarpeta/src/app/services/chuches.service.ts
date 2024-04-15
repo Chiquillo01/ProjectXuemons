@@ -8,7 +8,7 @@ import { ChuchesUser } from '../models/chuches/chuchesUser.model';
   providedIn: 'root',
 })
 export class ChuchesService {
-  constructor(private http: HttpClient, public tokenService: TokenService) { }
+  constructor(private http: HttpClient, public tokenService: TokenService) {}
 
   /**
    * Nombre: getAllChuchesUser
@@ -29,10 +29,13 @@ export class ChuchesService {
   createChuchesAleatorios(userId: number): Observable<any> {
     const authToken = this.tokenService.getToken();
     const headers = {
-      headers: { Authorization: `Bearer ${authToken}` }
+      headers: { Authorization: `Bearer ${authToken}` },
     };
-    
-    return this.http.post<any>(`http://127.0.0.1:8000/api/chuches/random/${userId}`, headers);
+
+    return this.http.post<any>(
+      `http://127.0.0.1:8000/api/chuches/random/${userId}`,
+      headers
+    );
   }
 
   chucheUpdate(stack: any, id: any): Observable<any> {
@@ -43,8 +46,12 @@ export class ChuchesService {
       Authorization: `Bearer ${authToken}`,
     });
     // Peticion con headers de actualizacion //
-    return this.http.put(`http://127.0.0.1:8000/api/chuches/${id.id}`, { stack: stack.stack }, {
-      headers,
-    });
+    return this.http.put(
+      `http://127.0.0.1:8000/api/chuches/${id.id}`,
+      { stack: stack.stack },
+      {
+        headers,
+      }
+    );
   }
 }

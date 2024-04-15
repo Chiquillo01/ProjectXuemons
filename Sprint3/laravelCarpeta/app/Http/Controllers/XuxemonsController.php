@@ -14,7 +14,7 @@ class XuxemonsController extends Controller
      * Función: se encarga de crear los nuevos xuxemons, para ello valida los datos recibidos 
      * y crea el nuevo xuxemon a traves de una transacción
      */
-    public function store(Request $request)
+    public function crearXuxemon(Request $request)
     {
         try {
             // Valida los datos //

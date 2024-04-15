@@ -13,6 +13,11 @@
 
     <div class="list-container">
       <div class="card-flex" *ngFor="let chuche of chucheUser">
+        <div class="stackZone" *ngIf="chuche.stack > 1">
+          <h2 class="card-title">
+            {{chuche.stack}}
+          </h2>
+        </div>
         <h2 class="card-title">
           {{chuche.nombre}}
         </h2>

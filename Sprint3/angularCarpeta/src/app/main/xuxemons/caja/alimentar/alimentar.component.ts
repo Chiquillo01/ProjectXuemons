@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { XuxemonsService } from 'src/app/services/xuxemons.service';
 import { TokenService } from '../../../../services/token.service';
 import { ChuchesService } from '../../../../services/chuches.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-alimentar',
@@ -22,6 +22,7 @@ export class AlimentarComponent {
     private fb: FormBuilder,
     public xuxemonsService: XuxemonsService,
     private route: ActivatedRoute,
+    private router: Router,
     private tokenService: TokenService,
     private chuchesService: ChuchesService
   ) {
@@ -48,9 +49,9 @@ export class AlimentarComponent {
    * Función: recoje los valores necesarios para poder identidicar al xuxemon y la chuche en la bd,
    * pasa dichos valores al service y retorna voleanos si cumplen los requisitos
    */
-  alimentarXuxemon() {
+  alimentarXuxemon(newAlimentData: number) {
     const newXuxeData = parseInt(this.xuxeData.id);
-    const newAlimentData = parseInt(this.alimentForm.value['chucheSeleccionada']);
+    // const newAlimentData = parseInt(this.alimentForm.value['chucheSeleccionada']);
 
     this.xuxemonsService
       .alimentar(newXuxeData, newAlimentData)
@@ -58,7 +59,7 @@ export class AlimentarComponent {
         next: (returns) => {
           this.cumpleEvo1 = returns.cumpleEvo1;
           this.cumpleEvo2 = returns.cumpleEvo2;
-          alert('Le ha gustado el alimento.');
+          this.getChuches();
         },
         error: (error) => {
           alert('No quiere tu mierda de chuche.');
@@ -78,6 +79,7 @@ export class AlimentarComponent {
           this.cumpleEvo1 = returns.cumpleEvo1;
           this.cumpleEvo2 = returns.cumpleEvo2;
           alert('Evolucionado con éxito!');
+          this.ngOnInit();
         },
         error: (error) => {
           alert('No quiere evolucionar.');
@@ -85,6 +87,7 @@ export class AlimentarComponent {
         },
       });
   }
+
   accionCumpleEvo2() {
     const newXuxeData = parseInt(this.xuxeData.id);
 
@@ -93,6 +96,8 @@ export class AlimentarComponent {
       .subscribe({
         next: () => {
           alert('Evolucionado con éxito!');
+          this.ngOnInit();
+          this.router.navigate(['/home/home/xuxemons/caja']);
         },
         error: (error) => {
           alert('No quiere evolucionar.');
