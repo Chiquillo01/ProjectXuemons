@@ -46,7 +46,6 @@ class XuxemonsUserController extends Controller
                 // Retornar un error si no se encontró un xuxemon aleatorio
                 return response()->json(['message' => 'No se pudo encontrar un xuxemon aleatorio'], 404);
             }
-
         } catch (\Exception $e) {
             return response()->json(['message' => 'Error al crear el nuevo Xuxemon: ' . $e->getMessage()], 500);
         }
@@ -62,6 +61,38 @@ class XuxemonsUserController extends Controller
             // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
             $xuxemons = XuxemonsUser::where('user_id', $userId)
                 ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
+                ->where('xuxemons_users.activo', 0)
+                ->select(
+                    'xuxemons_users.*',
+                    'xuxemons.nombre',
+                    'xuxemons.tipo',
+                    'xuxemons.archivo',
+                    'xuxemons.tamano',
+                    'xuxemons.evo1',
+                    'xuxemons.evo2'
+                )
+                ->orderBy('xuxemons_users.favorito', 'desc')
+                ->get();
+
+            // Retorna todos los xuxemons en forma json
+            return response()->json([$xuxemons, 200]);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al retornar los xuxemons: ' . $e->getMessage()], 500);
+        }
+    }
+
+
+    /**
+     * Nombre: show
+     * Función: Enviar los datos para que se muestren en el frontend
+     */
+    public function showActivos(Request $request, $userId)
+    {
+        try {
+            // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
+            $xuxemons = XuxemonsUser::where('user_id', $userId)
+                ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
+                ->where('xuxemons_users.activo', 1)
                 ->select(
                     'xuxemons_users.*',
                     'xuxemons.nombre',
@@ -81,11 +112,79 @@ class XuxemonsUserController extends Controller
     }
 
     /**
+     * Nombre: updateTam
+     * Función: gracias al valor que se le pasa por paremetro hace un update
+     * a la bd con el nuevo valor, esto lo hace a todos los registros
+     */
+    public function updateActivo(Request $request, $user_id, $xuxemon_id)
+    {
+        // $xuxemon_id = $request->input('xuxemon_id');
+        // $iduser = $request->input('user_id');
+
+        try {
+
+            $xuxemonInfo = XuxemonsUser::where('user_id', $user_id)
+                ->where('xuxemon_id', $xuxemon_id)
+                ->first();
+
+            $activar = 1;
+
+             if ($xuxemonInfo->activo == 1) {
+                 $activar = 0;
+             }
+
+            if ($xuxemonInfo) {
+                $xuxemonInfo->activo = $activar;
+                $xuxemonInfo->save();
+            }
+
+            return response()->json(['message' => 'Ahora es un xuxemon activo' . $xuxemonInfo], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al hacer activo al xuxemon: ' . $e->getMessage() . '' . $xuxemonInfo], 500);
+        }
+    }
+
+    /**
+     * Nombre: updateTam
+     * Función: gracias al valor que se le pasa por paremetro hace un update
+     * a la bd con el nuevo valor, esto lo hace a todos los registros
+     */
+    public function updateFav(Request $request, $user_id, $xuxemon_id)
+    {
+        // $xuxemon_id = $request->input('xuxemon_id');
+        // $iduser = $request->input('user_id');
+
+        try {
+
+            $xuxemonInfo = XuxemonsUser::where('user_id', $user_id)
+                ->where('xuxemon_id', $xuxemon_id)
+                ->first();
+
+            $fav = 1;
+
+             if ($xuxemonInfo->favorito == 1) {
+                 $fav = 0;
+             }
+
+            if ($xuxemonInfo) {
+                $xuxemonInfo->favorito = $fav;
+                $xuxemonInfo->save();
+            }
+
+            return response()->json(['message' => 'Ahora es un xuxemon activo' . $xuxemonInfo], 200);
+        } catch (\Exception $e) {
+            return response()->json(['message' => 'Ha ocurrido un error al hacer activo al xuxemon: ' . $e->getMessage() . '' . $xuxemonInfo], 500);
+        }
+    }
+
+
+    /**
      * Nombre: alimentar
      * Función: Primero recoje los valores necesarios, seguidamente suma y 
      * agrega el nuevo valor de comida al xuxemon y ha su vez elimina la xuxe usada.
      * Por último comprovaciones para ver si el Xuxemon puede evolucionar
      */
+
     public function alimentar(Request $request, $xuxemon_id, $chuche_id, $user_id)
     {
         try {
@@ -117,9 +216,20 @@ class XuxemonsUserController extends Controller
                     ->where('xuxemon_id', $xuxemon_id)
                     ->update(['comida' => $nuevaComida]);
 
-                ChuchesUser::where('user_id', $user_id)
+                $chucheUser = ChuchesUser::where('user_id', $user_id)
                     ->where('chuche_id', $chuche_id)
-                    ->delete();
+                    ->first();
+
+                // si el stack es 1 borra la chuche
+                // si el stack no es 1 le resta 1 a stack
+                if ($chucheUser->stack == 1) {
+                    ChuchesUser::where('user_id', $user_id)
+                        ->where('chuche_id', $chuche_id)
+                        ->delete();
+                } else {
+                    $chucheUser->stack -= 1;
+                    $chucheUser->save();
+                }
             });
             // ------------- //
             $cumpleEvo1 = $nuevaComida >= $xuxemonInfo->evo1;

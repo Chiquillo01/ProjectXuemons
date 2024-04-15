@@ -4,7 +4,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { XuxemonsService } from 'src/app/services/xuxemons.service';
 import { TokenService } from '../../../../services/token.service';
 import { ChuchesService } from '../../../../services/chuches.service';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 
 @Component({
   selector: 'app-alimentar',
@@ -22,6 +22,7 @@ export class AlimentarComponent {
     private fb: FormBuilder,
     public xuxemonsService: XuxemonsService,
     private route: ActivatedRoute,
+    private router: Router,
     private tokenService: TokenService,
     private chuchesService: ChuchesService
   ) {
@@ -47,22 +48,27 @@ export class AlimentarComponent {
    * Nombre: alimentarXuxemon
    * Función: para editar el Xuxemon
    */
-  alimentarXuxemon() {
+  alimentarXuxemon(newAlimentData: number) {
     const newXuxeData = parseInt(this.xuxeData.id);
-    const newAlimentData = parseInt(this.alimentForm.value['chucheSeleccionada']);
+    // const newAlimentData = parseInt(this.alimentForm.value['chucheSeleccionada']);
 
     this.xuxemonsService
       .alimentar(newXuxeData, newAlimentData)
       .subscribe({
         next: (returns) => {
-          console.log(returns);
+          console.log('Este sale por el next: ' + returns);
           this.cumpleEvo1 = returns.cumpleEvo1;
           this.cumpleEvo2 = returns.cumpleEvo2;
-          alert('Le ha gustado el alimento.');
+          // alert('Le ha gustado el alimento.');
+          console.log('Este es el de evo 1: ' +returns.cumpleEvo1);
+          console.log('Este es el de evo 2: ' +returns.cumpleEvo2);
+          this.getChuches();
+          // this.ngOnInit();
         },
         error: (error) => {
-          alert('No quiere tu mierda de chuche.');
-          throw new Error(error);
+          console.log('Esta saliendo por el erros: ' + error);
+          // alert('No quiere tu mierda de chuche.');
+          // throw new Error(error);
         },
       });
   }
@@ -78,6 +84,7 @@ export class AlimentarComponent {
           this.cumpleEvo1 = returns.cumpleEvo1;
           this.cumpleEvo2 = returns.cumpleEvo2;
           alert('Evolucionado con éxito!');
+          this.ngOnInit();
         },
         error: (error) => {
           alert('No quiere evolucionar.');
@@ -85,6 +92,7 @@ export class AlimentarComponent {
         },
       });
   }
+
   accionCumpleEvo2() {
     const newXuxeData = parseInt(this.xuxeData.id);
 
@@ -93,6 +101,8 @@ export class AlimentarComponent {
       .subscribe({
         next: () => {
           alert('Evolucionado con éxito!');
+          this.ngOnInit();
+          this.router.navigate(['/home/home/xuxemons/caja']);
         },
         error: (error) => {
           alert('No quiere evolucionar.');
@@ -100,6 +110,7 @@ export class AlimentarComponent {
         },
       });
   }
+
   /**
    * Nombre: getChuches
    * Función: obtiene todas las chuches que son del usuario que esta en sessión
