@@ -172,7 +172,8 @@ export class CajaComponent implements OnInit {
 
   /**
    * Nombre: alimentar
-   * Función: Envia al usuario a a ruta para alimentar al Xuxemon, a su vez esta enviando los datos del xuxuemon
+   * Función: Envia al usuario a a ruta para alimentar al Xuxemon, a su 
+   * vez esta enviando los datos del xuxuemon
    */
   alimentar(xuxeUser: any) {
     console.log('Datos de xuxeUser:', xuxeUser);

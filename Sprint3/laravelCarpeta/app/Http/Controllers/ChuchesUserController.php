@@ -61,7 +61,7 @@ class ChuchesUserController extends Controller
                 $nuevaChucheUsuario = new ChuchesUser();
                 $nuevaChucheUsuario->chuche_id = $chucheAleatoria;
                 $nuevaChucheUsuario->user_id = $userId;
-                $nuevaChucheUsuario->stack = 1; // Establecer el valor inicial de stack
+                $nuevaChucheUsuario->stack = 1;
                 $nuevaChucheUsuario->save();
 
                 // Retornar la respuesta con éxito
@@ -81,13 +81,11 @@ class ChuchesUserController extends Controller
     public function show(Request $request, $userId)
     {
         try {
-            // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
             $chuches = ChuchesUser::where('user_id', $userId)
                 ->join('chuches', 'chuches_users.chuche_id', '=', 'chuches.id')
                 ->select('chuches_users.*', 'chuches.nombre', 'chuches.dinero', 'chuches.modificador', 'chuches.archivo')
                 ->get();
 
-            // Retorna todos los xuxemons en forma json
             return response()->json([$chuches, 200]);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Ha ocurrido un error al retornar las chuches: ' . $e->getMessage()], 500);

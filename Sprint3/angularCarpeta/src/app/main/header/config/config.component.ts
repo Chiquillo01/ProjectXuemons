@@ -35,54 +35,51 @@ export class ConfigComponent {
 
   /**
    * Nombre: editarTamanoDef
-   * Función: 
+   * Función: Envia los valores que tiene el formulario de tamaño al
+   * servicio del xuxemon, para enviar la información a la api
    */
   editarTamanoDef() {
     this.xuxemonsService.confTamDef(this.configTam.value).subscribe({
-      next: (response) => {
-        console.log('Configuración de tamaño actualizada:', response);
+      next: () => {
         alert('Tamaño por defecto de los Xuxemnos actualizado con exito rotundo.');
         this.router.navigate(['/home/header/config']);
       },
-      error: (error) => {
+      error: () => {
         alert('Fallo estrepitoso al actualizar el tamaño por defecto');
-        console.error('Error al actualizar la configuración de tamaño:', error);
       }
     });
   }
 
   /**
    * Nombre: editarEvoDef
-   * Función:
+   * Función: Envia los valores que tiene el formulario de evolución 1 al
+   * servicio del xuxemon, para enviar la información a la api
    */
   editarEvoDef() {
     this.xuxemonsService.confEvo(this.configEvo.value).subscribe({
-      next: (response) => {
-        console.log('Configuración de los  actualizada:', response);
+      next: () => {
         alert('Evos actualizado con exito rotundo.');
         this.router.navigate(['/home/header/config']);
       },
-      error: (error) => {
+      error: () => {
         alert('Fallo estrepitoso al actualizar las eevoluciones  por defecto');
-        console.error('Error al actualizar las evoluciones:', error);
       }
     });
   }
 
   /**
-   * Nombre: editarEvoDef
-   * Función:
+   * Nombre: editarEvoDef2
+   * Función: Envia los valores que tiene el formulario de evolución 1 al
+   * servicio del xuxemon, para enviar la información a la api
    */
   editarEvoDef2() {
     this.xuxemonsService.confEvo2(this.configEvo2.value).subscribe({
-      next: (response) => {
-        console.log('Configuración de los  actualizada:', response);
+      next: () => {
         alert('Evos actualizado con exito rotundo.');
         this.router.navigate(['/home/header/config']);
       },
-      error: (error) => {
+      error: () => {
         alert('Fallo estrepitoso al actualizar las eevoluciones  por defecto');
-        console.error('Error al actualizar las evoluciones:', error);
       }
     });
   }

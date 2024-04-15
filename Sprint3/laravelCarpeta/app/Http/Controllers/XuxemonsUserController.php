@@ -32,18 +32,13 @@ class XuxemonsUserController extends Controller
     {
         try {
             $xuxemonAleatorio = self::obtenerXuxemonAleatorio();
-
             if ($xuxemonAleatorio) {
-                // Crear un nuevo xuxemon asociado al usuario en sesión
                 $nuevoXuxemonUsuario = new XuxemonsUser();
                 $nuevoXuxemonUsuario->xuxemon_id = $xuxemonAleatorio;
                 $nuevoXuxemonUsuario->user_id = $userId;
                 $nuevoXuxemonUsuario->save();
-
-                // Retornar la respuesta con éxito
                 return response()->json(['message' => 'Nuevo Xuxemon creado con éxito'], 200);
             } else {
-                // Retornar un error si no se encontró un xuxemon aleatorio
                 return response()->json(['message' => 'No se pudo encontrar un xuxemon aleatorio'], 404);
             }
         } catch (\Exception $e) {
@@ -58,7 +53,6 @@ class XuxemonsUserController extends Controller
     public function show(Request $request, $userId)
     {
         try {
-            // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
             $xuxemons = XuxemonsUser::where('user_id', $userId)
                 ->join('xuxemons', 'xuxemons_users.xuxemon_id', '=', 'xuxemons.id')
                 ->where('xuxemons_users.activo', 0)
@@ -103,8 +97,6 @@ class XuxemonsUserController extends Controller
                     'xuxemons.evo2'
                 )
                 ->get();
-
-            // Retorna todos los xuxemons en forma json
             return response()->json([$xuxemons, 200]);
         } catch (\Exception $e) {
             return response()->json(['message' => 'Ha ocurrido un error al retornar los xuxemons: ' . $e->getMessage()], 500);

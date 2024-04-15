@@ -184,7 +184,6 @@ export class XuxemonsService {
     );
   }
 
-
   /**
    * Nombre: xuxemonActivo
    * Función: Función para actualizar el nivel evolutivo por defecto del juego

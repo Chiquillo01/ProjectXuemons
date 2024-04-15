@@ -58,7 +58,7 @@ export class ChuchesComponent implements OnInit {
         console.log('Chuche añadida');
         this.getChuches();
       },
-      error: (error) => {
+      error: () => {
         alert('Chuche fallida.');
         console.log(error);
       },
