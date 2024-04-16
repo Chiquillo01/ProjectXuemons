@@ -61,10 +61,12 @@ export class CajaComponent implements OnInit {
    * Función: obtiene todos los Xuxemons que son del usuario que esta en sessión
    */
   getXuxemons() {
-    const userId = this.tokenService.getRole();
+    const userToken = this.tokenService.getToken();
 
-    if (userId !== null) {
-      this.xuxemonsService.getAllXuxemonsUser(userId).subscribe({
+    console.log(userToken);
+
+    if (userToken !== null) {
+      this.xuxemonsService.getAllXuxemonsUser(userToken).subscribe({
         next: (xuxemonsUser: any) => {
           this.xuxemonsUser = xuxemonsUser[0];
         },
@@ -82,10 +84,10 @@ export class CajaComponent implements OnInit {
    * Función: obtiene todos los Xuxemons que son del usuario que esta en sessión
    */
   getXuxemonsActivos() {
-    const userId = this.tokenService.getRole();
+    const userToken = this.tokenService.getToken();
 
-    if (userId !== null) {
-      this.xuxemonsService.getAllXuxemonsUserActivos(userId).subscribe({
+    if (userToken !== null) {
+      this.xuxemonsService.getAllXuxemonsUserActivos(userToken).subscribe({
         next: (xuxemonsUserActivos: any) => {
           this.xuxemonsUserActivos = xuxemonsUserActivos[0];
         },
@@ -104,9 +106,9 @@ export class CajaComponent implements OnInit {
    * Despues actualizara la lista de Xuxemons del Usuario
    */
   debug(): void {
-    const userId = this.tokenService.getRole();
+    const userToken = this.tokenService.getToken();
 
-    this.xuxemonsService.createRandomXuxemon(userId!).subscribe({
+    this.xuxemonsService.createRandomXuxemon(userToken!).subscribe({
       next: () => {
         this.getXuxemons();
       },
@@ -117,17 +119,17 @@ export class CajaComponent implements OnInit {
   }
 
   activo(xuxeUser: any) {
-    const userId = this.tokenService.getRole();
+    const userToken = this.tokenService.getToken();
     const xuxemon_id = xuxeUser.xuxemon_id;
     const ContadorActivo = this.xuxemonsUserActivos.length;
     console.log(xuxeUser);
     console.log('Id xuxemon: ' + xuxemon_id);
-    console.log('Id user: ' + userId);
+    console.log('Token user: ' + userToken);
 
 
     if (ContadorActivo < 4 || xuxeUser.activo == 1) {
       console.log(ContadorActivo);
-      this.xuxemonsService.xuxemonActivo(userId!, xuxemon_id).subscribe({
+      this.xuxemonsService.xuxemonActivo(userToken!, xuxemon_id).subscribe({
         next: (returns) => {
           console.log('Este sale por el next: ' + returns);
           // alert('Le ha gustado el alimento.');
@@ -150,12 +152,12 @@ export class CajaComponent implements OnInit {
   }
 
   favorito(xuxeUser: any) {
-    const userId = this.tokenService.getRole();
+    const userToken = this.tokenService.getToken();
     const xuxemon_id = xuxeUser.xuxemon_id;
     console.log(xuxeUser);
     console.log('Id xuxemon: ' + xuxemon_id);
-    console.log('Id user: ' + userId);
-    this.xuxemonsService.xuxemonFav(userId!, xuxemon_id).subscribe({
+    console.log('Token user: ' + userToken);
+    this.xuxemonsService.xuxemonFav(userToken!, xuxemon_id).subscribe({
       next: (returns) => {
         console.log('Este sale por el next: ' + returns);
         // alert('Le ha gustado el alimento.');

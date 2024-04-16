@@ -56,7 +56,7 @@ class Controller extends BaseController
             // Devuelve un 200 (OK) para confirmar al usuario //
             return response()->json(['message' => 'Usuario registrado correctamente'], 200);
         } catch (\Exception $e) {
-            
+
             // Si hay algun fallo, hace un rollback //
             DB::rollBack();
 
@@ -87,6 +87,9 @@ class Controller extends BaseController
                 $user = Auth::user();
                 $token = $user->createToken('authToken')->plainTextToken;
                 $rol = Auth::user()->rol;
+
+                $user->remember_token = $token;
+                $user->save();
 
                 // Deuvelve el token de acceso y el tipo de token //
                 return response()->json([

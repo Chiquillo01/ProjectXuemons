@@ -25,9 +25,9 @@ export class XuxemonsService {
    * Función: Obtener todos los Xuxemons que tiene un usuario
    * @returns la url de la api
    */
-  getAllXuxemonsUser(userId: number): Observable<XuxemonsUsers[]> {
+  getAllXuxemonsUser(userToken: string): Observable<XuxemonsUsers[]> {
     return this.http.get<XuxemonsUsers[]>(
-      `http://127.0.0.1:8000/api/xuxemonsUser/${userId}`
+      `http://127.0.0.1:8000/api/xuxemonsUser/${userToken}`
     );
   }
 
@@ -36,12 +36,12 @@ export class XuxemonsService {
    * Función: Obtener todos los Xuxemons activos que tiene un usuario
    * @returns la url de la api
    */
-  getAllXuxemonsUserActivos(userId: number): Observable<XuxemonsUsers[]> {
+  getAllXuxemonsUserActivos(userToken: string): Observable<XuxemonsUsers[]> {
     // const body={
-    //   'user_id': userId
+    //   'userToken': userToken
     // }
     return this.http.get<XuxemonsUsers[]>(
-      `http://127.0.0.1:8000/api/xuxemonsUserActivos/${userId}`
+      `http://127.0.0.1:8000/api/xuxemonsUserActivos/${userToken}`
     );
   }
 
@@ -62,14 +62,14 @@ export class XuxemonsService {
    * Función: Crear un nuevo xuxemon al pc del usuario que esta la sesión
    * @returns la url de la api
    */
-  createRandomXuxemon(userId: number): Observable<any> {
+  createRandomXuxemon(userToken: string): Observable<any> {
     const authToken = this.tokenService.getToken();
     const headers = {
       headers: { Authorization: `Bearer ${authToken}` },
     };
 
     return this.http.post<any>(
-      `http://127.0.0.1:8000/api/xuxemons/pc/random/${userId}`,
+      `http://127.0.0.1:8000/api/xuxemons/pc/random/${userToken}`,
       headers
     );
   }
@@ -169,14 +169,14 @@ export class XuxemonsService {
    * @returns la url de la api
    */
   alimentar(xuxemon_id: number, chuche_id: number): Observable<any> {
-    const user_Id = this.tokenService.getRole();
+    const userToken = this.tokenService.getRole();
     const authToken = this.tokenService.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${authToken}`,
     });
 
     return this.http.put(
-      `http://127.0.0.1:8000/api/xuxemons/${xuxemon_id}/alimentar/${chuche_id}/user/${user_Id}`,
+      `http://127.0.0.1:8000/api/xuxemons/${xuxemon_id}/alimentar/${chuche_id}/user/${userToken}`,
       {},
       {
         headers,
@@ -190,14 +190,14 @@ export class XuxemonsService {
    * Función: Función para actualizar el nivel evolutivo por defecto del juego
    * @returns la url de la api
    */
-  xuxemonActivo(user_Id: number, xuxemon_id: number): Observable<any> {
+  xuxemonActivo(userToken: string, xuxemon_id: number): Observable<any> {
     const authToken = this.tokenService.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${authToken}`,
     });
 
     return this.http.post<any>(
-      `http://127.0.0.1:8000/api/xuxemons/${user_Id}/activo/${xuxemon_id}`,
+      `http://127.0.0.1:8000/api/xuxemons/${userToken}/activo/${xuxemon_id}`,
       headers
     );
   }
@@ -208,14 +208,14 @@ export class XuxemonsService {
    * Función: Función para actualizar el nivel evolutivo por defecto del juego
    * @returns la url de la api
    */
-    xuxemonFav(user_Id: number, xuxemon_id: number): Observable<any> {
+    xuxemonFav(userToken: string, xuxemon_id: number): Observable<any> {
       const authToken = this.tokenService.getToken();
       const headers = new HttpHeaders({
         Authorization: `Bearer ${authToken}`,
       });
   
       return this.http.post<any>(
-        `http://127.0.0.1:8000/api/xuxemons/${user_Id}/favorito/${xuxemon_id}`,
+        `http://127.0.0.1:8000/api/xuxemons/${userToken}/favorito/${xuxemon_id}`,
         headers
       );
     }
@@ -226,26 +226,26 @@ export class XuxemonsService {
    * @returns la url de la api
    */
   evolucionarXuxemon(xuxemonId: number, cumpleEvo1: boolean): Observable<any> {
-    const user_Id = this.tokenService.getRole();
+    const userToken = this.tokenService.getRole();
     const authToken = this.tokenService.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${authToken}`,
     });
 
     return this.http.put(
-      `http://127.0.0.1:8000/api/xuxemons/${user_Id}/evolucionar/${xuxemonId}`,
+      `http://127.0.0.1:8000/api/xuxemons/${userToken}/evolucionar/${xuxemonId}`,
       { cumpleEvo1, headers }
     );
   }
   evolucionarXuxemon2(xuxemonId: number, cumpleEvo2: boolean): Observable<any> {
-    const user_Id = this.tokenService.getRole();
+    const userToken = this.tokenService.getRole();
     const authToken = this.tokenService.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${authToken}`,
     });
 
     return this.http.put(
-      `http://127.0.0.1:8000/api/xuxemons/${user_Id}/evolucionar2/${xuxemonId}`,
+      `http://127.0.0.1:8000/api/xuxemons/${userToken}/evolucionar2/${xuxemonId}`,
       { cumpleEvo2, headers }
     );
   }

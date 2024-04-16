@@ -61,13 +61,17 @@ Route::delete('/xuxemons/{xuxemons}', [XuxemonsController::class, 'destroy']);
 // Mostrar todos los xuxemons //
 Route::get('/xuxemons', [XuxemonsController::class, 'show']);
 // Mostrar todos los xuxemons del usuario //
-Route::get('/xuxemonsUser/{userId}', [XuxemonsUserController::class, 'show']);
+Route::get('/xuxemonsUser/{userToken}', [XuxemonsUserController::class, 'show']);
 // Mostrar todos los xuxemons del usuario //
 Route::get('/xuxemonsUserActivos/{userId}', [XuxemonsUserController::class, 'showActivos']);
 // ---------------------- //
 // ---------------------- //
 
 // Rutas para las chuches //
+Route::get('/activar/horario/{userId}', [ChuchesUserController::class, 'ReclamarHorario']);
+Route::get('/horario/show/{userId}', [ChuchesUserController::class, 'showHorario']);
+// Crear chuches aleatorias //
+Route::post('/chuches/horario/{userId}', [ChuchesUserController::class, 'horario']);
 // Crear chuches aleatorias //
 Route::post('/chuches/random/{userId}', [ChuchesUserController::class, 'debug']);
 // Mostrar todas las xuxes del usuario //
