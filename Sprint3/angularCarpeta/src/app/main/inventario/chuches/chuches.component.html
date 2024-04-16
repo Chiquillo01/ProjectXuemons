@@ -6,15 +6,21 @@
 <body>
   <div class="container">
     <!-- Solo para usuario administrador -->
-    <div class="adminButons">
+    <div class="adminButons" *ngIf="horario[0]?.debug == undefined || horario[0]?.debug || userRol == 1">
       <button (click)="debug()">
         Debug
       </button>
+      <!-- <h3 *ngIf="horario[0].debug">Horario: {{horario[0].debug}}</h3> -->
     </div>
     <!-- //////////////////////////////////////// -->
 
     <div class="list-container">
       <div class="card-flex" *ngFor="let chuche of chucheUser">
+        <div class="stackZone" *ngIf="chuche.stack > 1">
+          <h2 class="card-title">
+            {{chuche.stack}}
+          </h2>
+        </div>
         <h2 class="card-title">
           {{chuche.nombre}}
         </h2>

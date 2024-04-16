@@ -5,14 +5,13 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class ChuchesUser extends Model
+class Horario extends Model
 {
     use HasFactory;
-
-    protected $primaryKey = 'chuche_id';
+    protected $table = 'horario';
     protected $fillable = [
-        'chuche_id',
-        'user_id',
-        'stack'
+        'chuche_maximas',
+        'debug',
+        'id_users'
     ];
 }
