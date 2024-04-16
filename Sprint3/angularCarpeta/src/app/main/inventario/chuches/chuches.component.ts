@@ -32,11 +32,11 @@ export class ChuchesComponent implements OnInit {
    * Función: obtiene todas las chuches que son del usuario que esta en sessión
    */
   getChuches() {
-    const userId = this.tokenService.getRole();
-    console.log('UserId getChuches: ' + userId);
+    const userToken = this.tokenService.getToken();
+    console.log('userToken getChuches: ' + userToken);
 
-    if (userId !== null) {
-      this.chuchesService.getAllChuchesUser(userId).subscribe({
+    if (userToken !== null) {
+      this.chuchesService.getAllChuchesUser(userToken).subscribe({
         next: (chuchesUser: any) => {
           this.chucheUser = chuchesUser[0];
         },
@@ -54,11 +54,11 @@ export class ChuchesComponent implements OnInit {
    * Función: obtiene la info del horario del usuario
    */
   getHorario() {
-    const userId = this.tokenService.getRole();
-    console.log('UserId getHorario: ' + userId);
+    const userToken = this.tokenService.getToken();
+    console.log('userToken getHorario: ' + userToken);
 
-    if (userId !== null) {
-      this.chuchesService.getHorario(userId).subscribe({
+    if (userToken !== null) {
+      this.chuchesService.getHorario(userToken).subscribe({
         next: (Horario: any) => {
           this.horario = Horario[0];
         },
@@ -76,10 +76,10 @@ export class ChuchesComponent implements OnInit {
    * Función: obtiene todas las chuches que son del usuario que esta en sessión
    */
   activarHorario() {
-    // const userId = this.tokenService.getRole();
-    // console.log('UserId: ' + userId);
-    // if (userId !== null) {
-    //   this.chuchesService.activarHorario(userId).subscribe({
+    // const userToken = this.tokenService.getRole();
+    // console.log('userToken: ' + userToken);
+    // if (userToken !== null) {
+    //   this.chuchesService.activarHorario(userToken).subscribe({
     //     next: (Horario: any) => {
     //       console.log("debug activado ?");
     //     },
@@ -98,12 +98,12 @@ export class ChuchesComponent implements OnInit {
    * Despues actualizara la lista de chuches del Usuario
    */
   debug(): void {
-    const userId = this.tokenService.getRole();
+    const userToken = this.tokenService.getToken();
 
-    console.log('UserId debug: ' + userId);
+    console.log('userToken debug: ' + userToken);
 
     // crea o actualiza el horario del usuario
-    this.chuchesService.horario(userId!).subscribe({
+    this.chuchesService.horario(userToken!).subscribe({
       next: () => {
         console.log('Horario creado');
       },
@@ -115,7 +115,7 @@ export class ChuchesComponent implements OnInit {
 
     if (this.horario[0].debug || this.userRol == 1) {
       // crea o añade al stack las chuches
-      this.chuchesService.createChuchesAleatorios(userId!).subscribe({
+      this.chuchesService.createChuchesAleatorios(userToken!).subscribe({
         next: () => {
           console.log('Chuche añadida');
           this.getChuches();

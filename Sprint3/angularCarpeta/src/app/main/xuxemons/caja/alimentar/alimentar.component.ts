@@ -116,10 +116,10 @@ export class AlimentarComponent {
    * Función: obtiene todas las chuches que son del usuario que esta en sessión
    */
   getChuches() {
-    const userId = this.tokenService.getRole();
+    const userToken = this.tokenService.getToken();
 
-    if (userId !== null) {
-      this.chuchesService.getAllChuchesUser(userId).subscribe({
+    if (userToken !== null) {
+      this.chuchesService.getAllChuchesUser(userToken).subscribe({
         next: (chuchesUser: any) => {
           this.chuchesList = chuchesUser[0];
         },

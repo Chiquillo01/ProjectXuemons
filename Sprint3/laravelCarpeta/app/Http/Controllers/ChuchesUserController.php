@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 // Imports //
 use App\Models\ChuchesUser;
 use App\Models\Chuches;
+use App\Models\User;
 use App\Models\Horario;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -25,10 +26,18 @@ class ChuchesUserController extends Controller
         return $chucheAleatoria ? $chucheAleatoria->id : null;
     }
 
-    public function horario(Request $request, $userId)
+    public function horario(Request $request, $userToken)
     {
 
-        $existeHorario = Horario::where('id_users', $userId)
+        $user = User::where('remember_token', $userToken)
+            ->first();
+
+            if (!$user) {
+                // Manejar el caso donde no se encontró ningún usuario con el token proporcionado
+                return response()->json(['message' => 'Usuario no encontrado', $user, $userToken], 404);
+            }
+
+        $existeHorario = Horario::where('id_users', $user->id)
             ->exists();
 
         if (!$existeHorario) {
@@ -36,10 +45,10 @@ class ChuchesUserController extends Controller
             $nuevoHorario->chuche_maximas;
             $nuevoHorario->debug;
             $nuevoHorario->date_debug = now();
-            $nuevoHorario->id_users = $userId;
+            $nuevoHorario->id_users = $user->id;
             $nuevoHorario->save();
         } else {
-            $actualizarHorario = Horario::where('id_users', $userId)
+            $actualizarHorario = Horario::where('id_users', $user->id)
                 ->first();
 
             $actualizarHorario->date_debug = now();
@@ -84,16 +93,25 @@ class ChuchesUserController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\JsonResponse
      */
-    public function debug(Request $request, $userId)
+    public function debug(Request $request, $userToken)
     {
         try {
+
+            $user = User::where('remember_token', $userToken)
+            ->first();
+
+            if (!$user) {
+                // Manejar el caso donde no se encontró ningún usuario con el token proporcionado
+                return response()->json(['message' => 'Usuario no encontrado', $user, $userToken], 404);
+            }
+
             $chuchesCreadas = [];
             // Obtener una chuche aleatoria
             $chucheAleatoria = self::obtenerChucheAleatoria();
 
 
             //Verifica si puede dar las chuches
-            $darChuchesUser = Horario::where('id_users', $userId)
+            $darChuchesUser = Horario::where('id_users', $user->id)
                 ->where('debug', true)
                 ->first();
 
@@ -113,7 +131,7 @@ class ChuchesUserController extends Controller
                 }
 
                 // Verificar si el usuario ya tiene esta chuche
-                $chucheExistente = ChuchesUser::where('user_id', $userId)
+                $chucheExistente = ChuchesUser::where('user_id', $user->id)
                     ->where('chuche_id', $chucheAleatoria)
                     ->first();
 
@@ -125,7 +143,7 @@ class ChuchesUserController extends Controller
                     // Crear un nuevo ChuchesUser
                     $nuevaChucheUsuario = new ChuchesUser();
                     $nuevaChucheUsuario->chuche_id = $chucheAleatoria;
-                    $nuevaChucheUsuario->user_id = $userId;
+                    $nuevaChucheUsuario->user_id = $user->id;
                     $nuevaChucheUsuario->stack = 1; // Establecer el valor inicial de stack
                     $nuevaChucheUsuario->save();
                 }
@@ -182,11 +200,21 @@ class ChuchesUserController extends Controller
      * Nombre: show
      * Función: Enviar los datos para que se muestren en el frontend
      */
-    public function show(Request $request, $userId)
+    public function show(Request $request, $userToken)
     {
         try {
+
+            $user = User::where('remember_token', $userToken)
+            ->first();
+
+            if (!$user) {
+                // Manejar el caso donde no se encontró ningún usuario con el token proporcionado
+                return response()->json(['message' => 'Usuario no encontrado', $user, $userToken], 404);
+            }
+
+
             // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
-            $chuches = ChuchesUser::where('user_id', $userId)
+            $chuches = ChuchesUser::where('user_id', $user->id)
                 ->join('chuches', 'chuches_users.chuche_id', '=', 'chuches.id')
                 ->select('chuches_users.*', 'chuches.nombre', 'chuches.dinero', 'chuches.modificador', 'chuches.archivo')
                 ->get();
@@ -203,11 +231,20 @@ class ChuchesUserController extends Controller
      * Nombre: showHorario
      * Función: Enviar los datos para que se muestren en el frontend
      */
-    public function showHorario(Request $request, $userId)
+    public function showHorario(Request $request, $userToken)
     {
         try {
+
+            $user = User::where('remember_token', $userToken)
+            ->first();
+
+            if (!$user) {
+                // Manejar el caso donde no se encontró ningún usuario con el token proporcionado
+                return response()->json(['message' => 'Usuario no encontrado', $user, $userToken], 404);
+            }
+
             // Realizar la consulta con un join para obtener los Xuxemons asociados al usuario
-            $horario = Horario::where('id_users', $userId)->get();
+            $horario = Horario::where('id_users', $user->id)->get();
 
             // Retorna todos los xuxemons en forma json
             return response()->json([$horario, 200]);

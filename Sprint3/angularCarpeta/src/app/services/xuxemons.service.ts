@@ -169,7 +169,7 @@ export class XuxemonsService {
    * @returns la url de la api
    */
   alimentar(xuxemon_id: number, chuche_id: number): Observable<any> {
-    const userToken = this.tokenService.getRole();
+    const userToken = this.tokenService.getToken();
     const authToken = this.tokenService.getToken();
     const headers = new HttpHeaders({
       Authorization: `Bearer ${authToken}`,

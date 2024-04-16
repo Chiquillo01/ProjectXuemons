@@ -16,9 +16,9 @@ export class ChuchesService {
    * Función: Obtener todas las chuches que tiene un usuario
    * @returns la url de la api
    */
-  getAllChuchesUser(userId: number): Observable<ChuchesUser[]> {
+  getAllChuchesUser(userToken: string): Observable<ChuchesUser[]> {
     return this.http.get<ChuchesUser[]>(
-      `http://127.0.0.1:8000/api/chuchesUser/${userId}`
+      `http://127.0.0.1:8000/api/chuchesUser/${userToken}`
     );
   }
 
@@ -27,14 +27,14 @@ export class ChuchesService {
    * Función: Obtener todas las chuches que tiene un usuario
    * @returns la url de la api
    */
-  activarHorario(userId: number): Observable<Horario[]> {
+  activarHorario(userToken: string): Observable<Horario[]> {
     const authToken = this.tokenService.getToken();
     const headers = {
       headers: { Authorization: `Bearer ${authToken}` },
     };
 
     return this.http.put<Horario[]>(
-      `http://127.0.0.1:8000/api/activar/horario/${userId}`,
+      `http://127.0.0.1:8000/api/activar/horario/${userToken}`,
       headers
     );
   }
@@ -44,9 +44,9 @@ export class ChuchesService {
    * Función: Obtener todas las chuches que tiene un usuario
    * @returns la url de la api
    */
-  getHorario(userId: number): Observable<Horario[]> {
+  getHorario(userToken: string): Observable<Horario[]> {
     return this.http.get<Horario[]>(
-      `http://127.0.0.1:8000/api/horario/show/${userId}`
+      `http://127.0.0.1:8000/api/horario/show/${userToken}`
     );
   }
 
@@ -55,26 +55,26 @@ export class ChuchesService {
    * Función: Crear una nueva chuche para el usuario que esta la sesión
    * @returns la url de la api
    */
-  createChuchesAleatorios(userId: number): Observable<any> {
+  createChuchesAleatorios(userToken: string): Observable<any> {
     const authToken = this.tokenService.getToken();
     const headers = {
       headers: { Authorization: `Bearer ${authToken}` },
     };
 
     return this.http.post<any>(
-      `http://127.0.0.1:8000/api/chuches/random/${userId}`,
+      `http://127.0.0.1:8000/api/chuches/random/${userToken}`,
       headers
     );
   }
 
-  horario(userId: number): Observable<any> {
+  horario(userToken: string): Observable<any> {
     const authToken = this.tokenService.getToken();
     const headers = {
       headers: { Authorization: `Bearer ${authToken}` },
     };
 
     return this.http.post<any>(
-      `http://127.0.0.1:8000/api/chuches/horario/${userId}`,
+      `http://127.0.0.1:8000/api/chuches/horario/${userToken}`,
       headers
     );
   }
