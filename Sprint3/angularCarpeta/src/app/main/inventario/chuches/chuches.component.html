@@ -6,7 +6,7 @@
 <body>
   <div class="container">
     <!-- Solo para usuario administrador -->
-    <div class="adminButons" *ngIf="horario[0] === undefined || horario[0].debug">
+    <div class="adminButons" *ngIf="horario[0]?.debug == undefined || horario[0]?.debug || userRol == 1">
       <button (click)="debug()">
         Debug
       </button>

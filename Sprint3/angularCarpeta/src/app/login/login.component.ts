@@ -35,6 +35,7 @@ export class LoginComponent implements OnInit {
       next: (data: any) => {
         this.router.navigate(['/home/home']);
         const token = data.access_token;
+        console.log(data);
         this.tokenService.setToken(data);
       },
       error: (error) => {

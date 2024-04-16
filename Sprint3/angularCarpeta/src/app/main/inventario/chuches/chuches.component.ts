@@ -13,6 +13,7 @@ import { Horario } from '../../../models/horario/horario.model';
 export class ChuchesComponent implements OnInit {
   chucheUser: ChuchesUser[] = [];
   horario: Horario[] = [];
+  userRol!: number;
 
   constructor(
     private tokenService: TokenService,
@@ -21,8 +22,9 @@ export class ChuchesComponent implements OnInit {
 
   ngOnInit(): void {
     // this.activarHorario();
-    this.getChuches();
     this.getHorario();
+    this.getChuches();
+    this.userRol = this.tokenService.getRole()!;
   }
 
   /**
@@ -31,7 +33,7 @@ export class ChuchesComponent implements OnInit {
    */
   getChuches() {
     const userId = this.tokenService.getRole();
-    console.log('UserId: ' + userId);
+    console.log('UserId getChuches: ' + userId);
 
     if (userId !== null) {
       this.chuchesService.getAllChuchesUser(userId).subscribe({
@@ -49,11 +51,11 @@ export class ChuchesComponent implements OnInit {
 
   /**
    * Nombre: getHorario
-   * Función: obtiene todas las chuches que son del usuario que esta en sessión
+   * Función: obtiene la info del horario del usuario
    */
   getHorario() {
     const userId = this.tokenService.getRole();
-    console.log('UserId: ' + userId);
+    console.log('UserId getHorario: ' + userId);
 
     if (userId !== null) {
       this.chuchesService.getHorario(userId).subscribe({
@@ -76,7 +78,6 @@ export class ChuchesComponent implements OnInit {
   activarHorario() {
     // const userId = this.tokenService.getRole();
     // console.log('UserId: ' + userId);
-
     // if (userId !== null) {
     //   this.chuchesService.activarHorario(userId).subscribe({
     //     next: (Horario: any) => {
@@ -99,8 +100,9 @@ export class ChuchesComponent implements OnInit {
   debug(): void {
     const userId = this.tokenService.getRole();
 
-    console.log('UserId: ' + userId);
+    console.log('UserId debug: ' + userId);
 
+    // crea o actualiza el horario del usuario
     this.chuchesService.horario(userId!).subscribe({
       next: () => {
         console.log('Horario creado');
@@ -111,16 +113,19 @@ export class ChuchesComponent implements OnInit {
       },
     });
 
-    this.chuchesService.createChuchesAleatorios(userId!).subscribe({
-      next: () => {
-        console.log('Chuche añadida');
-        this.getChuches();
-        this.getHorario();
-      },
-      error: (error) => {
-        alert('Chuche fallida.');
-        console.log(error);
-      },
-    });
+    if (this.horario[0].debug || this.userRol == 1) {
+      // crea o añade al stack las chuches
+      this.chuchesService.createChuchesAleatorios(userId!).subscribe({
+        next: () => {
+          console.log('Chuche añadida');
+          this.getChuches();
+          this.getHorario();
+        },
+        error: (error) => {
+          alert('Chuche fallida.');
+          console.log(error);
+        },
+      });
+    }
   }
 }

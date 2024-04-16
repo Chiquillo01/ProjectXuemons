@@ -42,55 +42,40 @@ class ChuchesUserController extends Controller
             $actualizarHorario = Horario::where('id_users', $userId)
                 ->first();
 
-            // Obtener la fecha actual en formato 'Y-m-d'
-            $fechaActual = date('Y-m-d');
-            // Obtener la fecha almacenada en la base de datos en formato 'Y-m-d'
-            $fechaGuardada = date('Y-m-d', strtotime($actualizarHorario->date_debug));
-
-            // Verificar si la fecha guardada es el día siguiente a la fecha actual
-            if ($fechaGuardada == date('Y-m-d', strtotime('+1 day', strtotime($fechaActual)))) {
-                // Obtener la hora actual en formato 'H:i'
-                $horaActual = date('H:i');
-                // Verificar si la hora actual es a las 9:00 a.m. o más tarde
-                if ($horaActual >= '09:00') {
-                    // La fecha es el día siguiente y la hora es 9:00 a.m. o más tarde
-                    // Realizar las acciones necesarias aquí
-                    $actualizarHorario->date_debug = now();
-                    $actualizarHorario->debug = true;
-                    $actualizarHorario->save();
-                }
-            }
+            $actualizarHorario->date_debug = now();
+            $actualizarHorario->debug = true;
+            $actualizarHorario->save();
         }
     }
 
     public function ReclamarHorario(Request $request, $userId)
     {
 
-        $Horarios = Horario::where('id_users', $userId)
-            ->exists();
+        // $Horarios = Horario::where('id_users', $userId)
+        //     ->exists();
 
-        if (!$Horarios) {
-            $actualizarHorario = Horario::where('id_users', $userId)
-                ->first();
+        // if (!$Horarios) {
+        //     $actualizarHorario = Horario::where('id_users', $userId)
+        //         ->first();
 
-            // Obtener la fecha actual en formato 'Y-m-d'
-            $fechaActual = date('Y-m-d');
-            // Obtener la fecha almacenada en la base de datos en formato 'Y-m-d'
-            $fechaGuardada = date('Y-m-d', strtotime($actualizarHorario->date_debug));
+        //     // Obtener la fecha actual en formato 'Y-m-d'
+        //     $fechaActual = date('Y-m-d');
+        //     // Obtener la fecha almacenada en la base de datos en formato 'Y-m-d'
+        //     $fechaGuardada = date('Y-m-d', strtotime($actualizarHorario->date_debug));
 
-            // Verificar si la fecha guardada es el día siguiente a la fecha actual
-            if ($fechaGuardada == date('Y-m-d', strtotime('+1 day', strtotime($fechaActual)))) {
-                // Obtener la hora actual en formato 'H:i'
-                $horaActual = date('H:i');
-                // Verificar si la hora actual es a las 9:00 a.m. o más tarde
-                if ($horaActual >= '09:00') {
-                    // La fecha es el día siguiente y la hora es 9:00 a.m. o más tarde
-                    // Realizar las acciones necesarias aquí
-                    $actualizarHorario->debug = true;
-                    $actualizarHorario->save();
-                }
-            }
-        }
+        //     // Verificar si la fecha guardada es el día siguiente a la fecha actual
+        //     if ($fechaGuardada == date('Y-m-d', strtotime('+1 day', strtotime($fechaActual)))) {
+        //         // Obtener la hora actual en formato 'H:i'
+        //         $horaActual = date('H:i');
+        //         // Verificar si la hora actual es a las 9:00 a.m. o más tarde
+        //         if ($horaActual >= '09:00') {
+        //             // La fecha es el día siguiente y la hora es 9:00 a.m. o más tarde
+        //             // Realizar las acciones necesarias aquí
+        //             $actualizarHorario->debug = true;
+        //             $actualizarHorario->save();
+        //         }
+        //     }
+        // }
     }
 
     /**
@@ -151,6 +136,8 @@ class ChuchesUserController extends Controller
                 // Agregar la chuche creada al array
                 $chuchesCreadas[] = $chucheAleatoria;
             }
+
+            //codigo antiguo
 
             // if ($darChuchesUser) {
 
