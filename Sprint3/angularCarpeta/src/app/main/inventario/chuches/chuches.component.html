@@ -6,10 +6,11 @@
 <body>
   <div class="container">
     <!-- Solo para usuario administrador -->
-    <div class="adminButons">
+    <div class="adminButons" *ngIf="horario[0] === undefined || horario[0].debug">
       <button (click)="debug()">
         Debug
       </button>
+      <!-- <h3 *ngIf="horario[0].debug">Horario: {{horario[0].debug}}</h3> -->
     </div>
     <!-- //////////////////////////////////////// -->
 
