@@ -1,1 +1,32 @@
-<p>objetos works!</p>
+<!-- <body> -->
+    <h1>Poner las vacunas aqui: </h1>
+    <div class="list-container-activos">
+        <div class="card-flex-activos" *ngFor="let vacunas of chucheUser">
+            <h3 class="card-title">
+                {{vacunas.nombre}}
+            </h3>
+
+            <div class="imgFormat">
+                <img [src]="'../../../../assets/home/chuches/' + vacunas.archivo" [attr.alt]="vacunas.nombre">
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <div class="list-container">
+            <div class="card-flex" *ngFor="let chuche of chucheUser">
+                <div class="stackZone" *ngIf="chuche.stack > 1">
+                    <h2 class="card-title-chuches">
+                        {{chuche.stack}}
+                    </h2>
+                </div>
+                <h2 class="card-title-chuches">
+                    {{chuche.nombre}}
+                </h2>
+                <div class="imgFormat">
+                    <img [src]="'../../../../assets/home/chuches/' + chuche.archivo" alt="{{ chuche.nombre }}">
+                </div>
+            </div>
+        </div>
+    </div>
+<!-- </body> -->

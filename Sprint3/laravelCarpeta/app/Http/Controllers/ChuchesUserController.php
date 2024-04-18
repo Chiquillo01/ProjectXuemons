@@ -33,10 +33,10 @@ class ChuchesUserController extends Controller
         $user = User::where('remember_token', $userToken)
             ->first();
 
-            if (!$user) {
-                // Manejar el caso donde no se encontró ningún usuario con el token proporcionado
-                return response()->json(['message' => 'Usuario no encontrado', $user, $userToken], 404);
-            }
+        if (!$user) {
+            // Manejar el caso donde no se encontró ningún usuario con el token proporcionado
+            return response()->json(['message' => 'Usuario no encontrado', $user, $userToken], 404);
+        }
 
         $existeHorario = Horario::where('id_users', $user->id)
             ->exists();
@@ -45,47 +45,46 @@ class ChuchesUserController extends Controller
             $nuevoHorario = new Horario();
             $nuevoHorario->chuche_maximas;
             $nuevoHorario->debug;
-            $nuevoHorario->date_debug = Carbon::now()->format('Y-m-d H:i:s');
+            $nuevoHorario->date_debug = Carbon::now();
             $nuevoHorario->id_users = $user->id;
             $nuevoHorario->save();
         } else {
             $actualizarHorario = Horario::where('id_users', $user->id)
                 ->first();
 
-            $actualizarHorario->date_debug = Carbon::now()->format('Y-m-d H:i:s');
+            $actualizarHorario->date_debug = Carbon::now();
             $actualizarHorario->debug = true;
             $actualizarHorario->save();
         }
     }
 
-    public function ReclamarHorario(Request $request, $userId)
+    public function ReclamarHorario(Request $request, $userToken)
     {
-        // $date = new Carbon('tomorrow');
+        $user = User::where('remember_token', $userToken)->first();
 
-        $Horarios = Horario::where('id_users', $userId)
-            ->exists();
+        if (!$user) {
+            return response()->json(['message' => 'Usuario no encontrado'], 404);
+        }
 
-        if (!$Horarios) {
-            $actualizarHorario = Horario::where('id_users', $userId)
-                ->first();
+        $horario = Horario::where('id_users', $user->id)->first();
 
-            // Obtener la fecha actual en formato 'Y-m-d'
-            $fechaActual = date('Y-m-d');
-            // Obtener la fecha almacenada en la base de datos en formato 'Y-m-d'
-            $fechaGuardada = date('Y-m-d', strtotime($actualizarHorario->date_debug));
+        if ($horario && is_string($horario->date_debug)) {
+            $horario->date_debug = Carbon::parse($horario->date_debug); // Convertir a instancia de Carbon
+        }
 
-            // Verificar si la fecha guardada es el día siguiente a la fecha actual
-            if ($fechaGuardada == date('Y-m-d', strtotime('+1 day', strtotime($fechaActual)))) {
-                // Obtener la hora actual en formato 'H:i'
-                $horaActual = date('H:i');
-                // Verificar si la hora actual es a las 9:00 a.m. o más tarde
-                if ($horaActual >= '09:00') {
-                    // La fecha es el día siguiente y la hora es 9:00 a.m. o más tarde
-                    // Realizar las acciones necesarias aquí
-                    $actualizarHorario->debug = true;
-                    $actualizarHorario->save();
-                }
-            }22
+        $diaGuardado = intval($horario->date_debug->format('d'));
+        $diaActual = intval(Carbon::now()->format('d'));
+        $horaActual = intval(Carbon::now()->format('H'));
+
+        if ($horario) {
+         // if ($diaGuardado < $diaActual) {
+            if ($horaActual > 9 && $diaGuardado < $diaActual) {
+                $horario->debug = true;
+                $horario->save();
+                return response()->json(['message' => 'Debug es true', $horario, $diaActual, $diaGuardado], 200);
+            }
+        } else {
+            return response()->json(['message' => 'Debug sigue false', $horario, $diaActual, $diaGuardado], 404);
         }
     }
 
@@ -100,7 +99,7 @@ class ChuchesUserController extends Controller
         try {
 
             $user = User::where('remember_token', $userToken)
-            ->first();
+                ->first();
 
             if (!$user) {
                 // Manejar el caso donde no se encontró ningún usuario con el token proporcionado
@@ -207,7 +206,7 @@ class ChuchesUserController extends Controller
         try {
 
             $user = User::where('remember_token', $userToken)
-            ->first();
+                ->first();
 
             if (!$user) {
                 // Manejar el caso donde no se encontró ningún usuario con el token proporcionado
@@ -238,7 +237,7 @@ class ChuchesUserController extends Controller
         try {
 
             $user = User::where('remember_token', $userToken)
-            ->first();
+                ->first();
 
             if (!$user) {
                 // Manejar el caso donde no se encontró ningún usuario con el token proporcionado

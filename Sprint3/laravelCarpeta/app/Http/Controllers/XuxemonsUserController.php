@@ -6,6 +6,7 @@ namespace App\Http\Controllers;
 use App\Models\XuxemonsUser;
 use App\Models\ChuchesUser;
 use App\Models\User;
+use App\Models\Xuxemons;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 
@@ -43,11 +44,17 @@ class XuxemonsUserController extends Controller
 
             $xuxemonAleatorio = self::obtenerXuxemonAleatorio();
 
+            $xuxemon = Xuxemons::where('id', $xuxemonAleatorio)
+            ->first();
+
             if ($xuxemonAleatorio) {
                 // Crear un nuevo xuxemon asociado al usuario en sesión
                 $nuevoXuxemonUsuario = new XuxemonsUser();
                 $nuevoXuxemonUsuario->xuxemon_id = $xuxemonAleatorio;
                 $nuevoXuxemonUsuario->user_id = $user->id;
+                $nuevoXuxemonUsuario->tamano = $xuxemon->tamano;
+                $nuevoXuxemonUsuario->evo1 = $xuxemon->evo1;
+                $nuevoXuxemonUsuario->evo2 = $xuxemon->evo2;
                 $nuevoXuxemonUsuario->save();
 
                 // Retornar la respuesta con éxito

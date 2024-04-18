@@ -6,7 +6,8 @@
 <body>
   <div class="container">
     <!-- Solo para usuario administrador -->
-    <div class="adminButons" *ngIf="horario[0]?.debug == undefined || horario[0]?.debug || userRol == 1">
+    <div class="adminButons" *ngIf="horario[0]?.debug == undefined || horario[0]?.debug">
+      <!-- || userRol == 1 -->
       <button (click)="debug()">
         Debug
       </button>
@@ -24,9 +25,6 @@
         <h2 class="card-title">
           {{chuche.nombre}}
         </h2>
-        <!-- <h1  *ngIf="chuche.stack > 1" class="stack">
-            {{chuche.stack}}
-          </h1> -->
         <div class="imgFormat">
           <img [src]="'../../../../assets/home/chuches/' + chuche.archivo" alt="{{ chuche.nombre }}">
         </div>

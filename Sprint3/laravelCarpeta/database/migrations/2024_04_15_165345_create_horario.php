@@ -16,7 +16,7 @@ return new class extends Migration
             $table->string('chuche_maximas', 3)->default(10);
             $table->boolean('debug')->default(true);
             $table->unsignedBigInteger('id_users');
-            $table->date('date_debug');
+            $table->dateTime('date_debug');
             $table->timestamps();
 
             // Definir las claves foráneas
