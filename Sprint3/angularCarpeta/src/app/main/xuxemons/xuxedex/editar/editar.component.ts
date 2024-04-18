@@ -61,7 +61,6 @@ export class EditarComponent {
           this.router.navigate(['home/home/xuxemons/xuxedex']);
         },
         error: (error) => {
-          console.log(error);
           alert('No se pudo editar el Xuxemon');
           throw new Error(error);
         },
