@@ -123,10 +123,6 @@ body {
   border-radius: 0 0 8px 0;
 }
 
-.alimentar-btn:hover,
-.eliminar-btn:hover,
-.alimentar-btn-fav:hover {
-  /* background: linear-gradient(to top, #95baff, #cce6ff); */
 .eliminar-btn:hover,
 .alimentar-btn-fav:hover {
   background: linear-gradient(to top, #95baff, #cce6ff);
