@@ -17,9 +17,6 @@ return new class extends Migration
             $table->integer('comida')->nullable()->default(0);
             $table->integer('activo')->nullable()->default(false);
             $table->integer('favorito')->nullable()->default(false);
-            $table->string('tamano')->default('pequeno');
-            $table->integer('evo1')->nullable();
-            $table->integer('evo2')->nullable();
             $table->timestamps();
 
             // Definir las claves foráneas

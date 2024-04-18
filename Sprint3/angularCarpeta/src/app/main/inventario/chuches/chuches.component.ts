@@ -77,20 +77,20 @@ export class ChuchesComponent implements OnInit {
    * Función: obtiene todas las chuches que son del usuario que esta en sessión
    */
   activarHorario() {
-    const userToken = this.tokenService.getToken();
-    console.log('userToken: ' + userToken);
-    if (userToken !== null) {
-      this.chuchesService.activarHorario(userToken).subscribe({
-        next: (Horario: any) => {
-          console.log("debug activado ?");
-        },
-        error: (error) => {
-          console.error('Error activando el debug:', error);
-        },
-      });
-    } else {
-      console.error('User ID is null');
-    }
+    // const userToken = this.tokenService.getRole();
+    // console.log('userToken: ' + userToken);
+    // if (userToken !== null) {
+    //   this.chuchesService.activarHorario(userToken).subscribe({
+    //     next: (Horario: any) => {
+    //       console.log("debug activado ?");
+    //     },
+    //     error: (error) => {
+    //       console.error('Error activando el debug:', error);
+    //     },
+    //   });
+    // } else {
+    //   console.error('User ID is null');
+    // }
   }
 
   /**
@@ -114,9 +114,6 @@ export class ChuchesComponent implements OnInit {
       },
     });
 
-    console.log(this.horario);
-    console.log(this.horario[0].debug);
-
     if (this.horario[0].debug || this.userRol == 1) {
       // crea o añade al stack las chuches
       this.chuchesService.createChuchesAleatorios(userToken!).subscribe({
@@ -124,7 +121,6 @@ export class ChuchesComponent implements OnInit {
           console.log('Chuche añadida');
           this.getChuches();
           this.getHorario();
-          this.activarHorario();
         },
         error: (error) => {
           alert('Chuche fallida.');
