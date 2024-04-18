@@ -41,11 +41,24 @@ body {
 }
 
 .card-flex {
+  color: white;
+  border-radius: 10px;
+  margin-top: 5px;
+  width: 250px;
+  height: 250px;
+  background-image: url("../../../../assets/home/otros/fondo.png");
+  background-size:cover; 
+  background-position: center; 
+  background-repeat: no-repeat; 
+}
+
+.card-flex-activos {
   background-color: rgb(29, 29, 29);
   color: white;
   border: 2px solid rgb(255, 133, 249);
   border-radius: 10px;
   margin-top: 5px;
+  padding-top: 10px;
 }
 
 .card-title {
@@ -62,11 +75,20 @@ body {
 
 .alimentar-btn,
 .eliminar-btn {
-  background-color: pink;
+  background-color: transparent;
   color: rgb(0, 0, 0);
   border: none;
   text-align: center;
   padding: 10px 20px;
+  margin-top: 8px;
+}
+
+.alimentar-btn-fav{
+  /* background-color: pink; */
+  color: rgb(0, 0, 0);
+  border: none;
+  text-align: center;
+  padding: 10px 60px;
   margin-top: 8px;
 }
 
@@ -79,6 +101,7 @@ body {
 }
 
 .alimentar-btn:hover,
-.eliminar-btn:hover {
-  background: linear-gradient(to top, #95baff, #cce6ff);
+.eliminar-btn:hover,
+.alimentar-btn-fav:hover {
+  /* background: linear-gradient(to top, #95baff, #cce6ff); */
 }
