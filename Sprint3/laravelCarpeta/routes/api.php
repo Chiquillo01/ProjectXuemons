@@ -78,6 +78,7 @@ Route::post('/chuches/random/{userId}', [ChuchesUserController::class, 'debug'])
 Route::get('/chuchesUser/{userId}', [ChuchesUserController::class, 'show']);
 
 
+
 // // Alimentar xuxemons //
 // Route::put('/xuxemons/users/comer/{xuxemons}', [XuxemonsUserController::class, 'alimentar']);
 
